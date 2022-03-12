@@ -1,0 +1,283 @@
+# i3 config file
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+
+# Set mod key (Mod1=<Alt>, Mod4=<Super>)
+set $mod Mod4
+
+# Use Mouse+$mod to drag floating windows
+floating_modifier $mod
+
+focus_follows_mouse no
+
+# kill focused window
+bindsym $mod+q kill
+
+# sound
+# special key doesn't work
+# XF86AudioRaiseVolume
+# XF86AudioLowerVolume
+# XF86AudioMute
+bindsym $mod+i exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym $mod+u exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym $mod+y exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+# screenshots
+bindsym Print exec --no-startup-id i3-scrot
+bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
+bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
+
+# brightness
+bindsym $mod+XF86AudioRaiseVolume exec --no-startup-id brightness increase
+bindsym $mod+XF86AudioLowerVolume exec --no-startup-id brightness reduce
+bindsym $mod+XF86AudioMute exec --no-startup-id brightness set 1
+
+# change focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# move focused window
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# split orientation
+bindsym $mod+v split v
+bindsym $mod+Shift+v split h
+
+# toggle fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+bindsym $mod+Shift+f exec "polybar-msg cmd toggle"
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+z layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+d focus mode_toggle
+
+# focus the parent container
+bindsym $mod+p focus parent
+bindsym $mod+Shift+p focus child
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+bindsym $mod+space exec "rofi -show drun"
+bindsym $mod+Control+space exec "rofi -show run"
+bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+w exec thunar
+bindsym $mod+x exec firefox
+bindsym $mod+c exec code
+
+##############
+# Workspaces #
+##############
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# switch workspace
+bindsym $mod+ampersand workspace number $ws1
+bindsym $mod+eacute workspace number $ws2
+bindsym $mod+quotedbl workspace number $ws3
+bindsym $mod+apostrophe workspace number $ws4
+bindsym $mod+parenleft workspace number $ws5
+bindsym $mod+minus workspace number $ws6
+bindsym $mod+egrave workspace number $ws7
+bindsym $mod+underscore workspace number $ws8
+bindsym $mod+ccedilla workspace number $ws9
+bindsym $mod+agrave workspace number $ws10
+
+# move window to workspace
+bindsym $mod+Shift+ampersand move container to workspace number $ws1
+bindsym $mod+Shift+eacute move container to workspace number $ws2
+bindsym $mod+Shift+quotedbl move container to workspace number $ws3
+bindsym $mod+Shift+apostrophe move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+minus move container to workspace number $ws6
+bindsym $mod+Shift+egrave move container to workspace number $ws7
+bindsym $mod+Shift+underscore move container to workspace number $ws8
+bindsym $mod+Shift+ccedilla move container to workspace number $ws9
+bindsym $mod+Shift+agrave move container to workspace number $ws10
+
+# Move to workspace with focused container
+bindsym $mod+Ctrl+1 move container to workspace $ws1; workspace $ws1
+bindsym $mod+Ctrl+2 move container to workspace $ws2; workspace $ws2
+bindsym $mod+Ctrl+3 move container to workspace $ws3; workspace $ws3
+bindsym $mod+Ctrl+4 move container to workspace $ws4; workspace $ws4
+bindsym $mod+Ctrl+5 move container to workspace $ws5; workspace $ws5
+bindsym $mod+Ctrl+6 move container to workspace $ws6; workspace $ws6
+bindsym $mod+Ctrl+7 move container to workspace $ws7; workspace $ws7
+bindsym $mod+Ctrl+8 move container to workspace $ws8; workspace $ws8
+bindsym $mod+Ctrl+9 move container to workspace $ws8; workspace $ws9
+bindsym $mod+Ctrl+0 move container to workspace $ws8; workspace $ws10
+
+#navigate workspaces next / previous
+bindsym $mod+Ctrl+Right workspace next
+bindsym $mod+Ctrl+Left workspace prev
+
+bindsym $mod+Ctrl+l workspace next
+bindsym $mod+Ctrl+h workspace prev
+
+# Open applications on specific workspaces
+assign [class="code-oss"] $ws1
+assign [class="Emacs"] $ws1
+assign [class="URxvt"] $ws2
+assign [class="firefox"] $ws3
+assign [class="firefoxdeveloperedition"] $ws3
+assign [class="Chromium"] $ws3
+assign [class="net-mc-main-Main"] $ws4
+assign [class="Minecraft 1.8.9"] $ws4
+assign [class="Minecraft 1.16.5"] $ws4
+assign [class="vlc"] $ws4
+assign [class="Gimp-2.10"] $ws4
+assign [class="Gimp"] $ws4
+assign [class="Pamac-manager"] $ws5
+assign [class="discord"] $ws6
+assign [class="scrcpy"] $ws7
+
+for_window [class="Minecraft 1.8.9"] fullscreen enable
+for_window [class="Minecraft 1.16.5"] fullscreen enable
+
+# Open specific applications in floating mode
+for_window [class="scrcpy"] floating enable
+for_window [class="Gnome-calculator"] floating enable
+for_window [class="Manjaro Settings Manager"] floating enable border normal
+for_window [class="Nitrogen"] floating enable sticky enable border normal
+
+for_window [title="alsamixer"] floating enable border pixel 1
+for_window [class="Clipgrab"] floating enable
+for_window [title="File Transfer*"] floating enable
+for_window [class="fpakman"] floating enable
+for_window [class="Galculator"] floating enable border pixel 1
+for_window [class="Lightdm-settings"] floating enable
+for_window [class="Manjaro-hello"] floating enable
+for_window [title="MuseScore: Play Panel"] floating enable
+for_window [class="Oblogout"] fullscreen enable
+for_window [class="octopi"] floating enable
+for_window [class="Pavucontrol"] floating enable
+for_window [class="qt5ct"] floating enable sticky enable border normal
+for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
+for_window [class="Simple-scan"] floating enable border normal
+for_window [class="(?i)System-config-printer.py"] floating enable border normal
+for_window [class="Timeset-gui"] floating enable border normal
+for_window [class="(?i)virtualbox"] floating enable border normal
+for_window [class="Xfburn"] floating enable
+
+# Resize window (you can also use the mouse for that)
+bindsym $mod+r mode "resize"
+mode "resize" {
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+
+    bindsym h resize shrink width 10 px or 10 ppt
+    bindsym j resize grow height 10 px or 10 ppt
+    bindsym k resize shrink height 10 px or 10 ppt
+    bindsym l resize grow width 10 px or 10 ppt
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
+}
+
+# Lock screen
+# bindsym $mod+9 exec --no-startup-id blurlock
+
+# Autostart applications
+# désactiver les bip
+exec --no-startup-id xset b off
+exec --no-startup-id pamac-tray
+# pour pamac
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id nm-applet
+exec --no-startup-id pa-applet
+exec --no-startup-id start-pulseaudio-x11
+# exec --no-startup-id minecraft-status
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec --no-startup-id nitrogen --restore
+exec --no-startup-id xfce4-power-manager
+# exec --no-startup-id xautolock -time 10 -locker blurlock
+# notifications
+exec --no-startup-id /usr/lib/xfce4/notifyd/xfce4-notifyd
+# exec --no-startup-id picom
+exec --no-startup-id thunar --daemon
+
+#############
+# Apparence #
+#############
+font xft:Cantarell 10
+
+# Color palette used for the terminal ( ~/.Xresources file )
+set_from_resource $background    background
+set_from_resource $backgroundalt backgroundalt
+set_from_resource $foreground    foreground
+set_from_resource $primary       primary
+set_from_resource $danger        danger
+set_from_resource $color0        color0
+set_from_resource $color1        color1
+set_from_resource $color2        color2
+set_from_resource $color3        color3
+set_from_resource $color4        color4
+set_from_resource $color5        color5
+set_from_resource $color6        color6
+set_from_resource $color7        color7
+set_from_resource $color8        color8
+set_from_resource $color9        color9
+set_from_resource $color10       color10
+set_from_resource $color11       color11
+set_from_resource $color12       color12
+set_from_resource $color13       color13
+set_from_resource $color14       color14
+set_from_resource $color15       color15
+
+# Theme colors
+# class                   border         backgr.        text           indic.   child_border
+  client.focused          $backgroundalt $primary       $backgroundalt $primary
+  client.focused_inactive $backgroundalt $backgroundalt $foreground    $primary
+  client.unfocused        $background    $backgroundt   $foreground    $primary
+  client.urgent           $danger        $danger        $foreground    $primary
+  client.placeholder      $background    $background    $primary       $primary
+
+  client.background       $background
+
+# Configure border style <normal|1pixel|pixel xx|none|pixel>
+default_border pixel 1
+default_floating_border normal
+
+# Set inner gaps
+gaps inner 0
+
+# Smart gaps (gaps used if only more than one container on the workspace)
+smart_gaps on
+
+# Smart borders (draw borders around container only if it is not the only container on this workspace)
+smart_borders on
