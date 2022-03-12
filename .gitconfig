@@ -1,0 +1,7 @@
+[user]
+	email = floris.bartra@gmail.com
+	name = Floris Bartra
+[credential]
+	helper = store
+[core]
+	editor = nvim
