@@ -74,6 +74,9 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'dcampos/nvim-snippy'
 Plug 'dcampos/cmp-snippy'
 
+" git plugin
+Plug 'tpope/vim-fugitive'
+
 " theme de couleur
 Plug 'romgrk/doom-one.vim'
 
