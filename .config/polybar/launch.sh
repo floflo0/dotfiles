@@ -2,5 +2,5 @@
 
 polybar-msg cmd quit
 
-polybar default 2>&1
+exec polybar default 2>&1
 
