@@ -85,10 +85,10 @@ bindsym $mod+Shift+r restart
 
 bindsym $mod+space exec rofi -show drun
 bindsym $mod+Control+space exec rofi -show run
+bindsym $mod+a exec rofi -show window
 bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+w exec thunar
 bindsym $mod+x exec firefox
-bindsym $mod+c exec code
 
 ##############
 # Workspaces #
