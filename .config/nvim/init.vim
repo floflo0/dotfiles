@@ -76,6 +76,7 @@ Plug 'dcampos/cmp-snippy'
 
 " git plugin
 Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
 
 " theme de couleur
 Plug 'romgrk/doom-one.vim'
