@@ -3,5 +3,6 @@
 .config/nvim/init.vim
 .config/polybar/config
 .config/polybar/launch.sh
+.config/rofi/config.rasi
 .gitconfig
 
