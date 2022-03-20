@@ -5,4 +5,5 @@
 .config/polybar/launch.sh
 .config/rofi/config.rasi
 .gitconfig
+.Xressources
 
