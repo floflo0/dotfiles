@@ -81,8 +81,13 @@ Plug 'junegunn/gv.vim'
 " theme de couleur
 Plug 'romgrk/doom-one.vim'
 
+" telescope
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 call plug#end()
 
+" Ctr+P pour telescope
+nnoremap <C-p> <cmd>lua require('telescope.builtin').find_files({find_command={'rg', '--files', '--hidden', '-g', '!.git'}})<cr>
 
 " theme de couleur
 let g:doom_one_terminal_colors = v:true
@@ -139,4 +144,13 @@ function! RenameFile()
 endfunction
 
 command! -nargs=* Rename call RenameFile()
+command! -nargs=1 -complete=file_in_path Vfin vert sfind <args>
 
+nmap <silent> <A-k> :wincmd k<CR>
+nmap <silent> <A-j> :wincmd j<CR>
+nmap <silent> <A-h> :wincmd h<CR>
+nmap <silent> <A-l> :wincmd l<CR>
+nmap <silent> <A-K> :wincmd K<CR>
+nmap <silent> <A-J> :wincmd J<CR>
+nmap <silent> <A-H> :wincmd H<CR>
+nmap <silent> <A-L> :wincmd L<CR>
