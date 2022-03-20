@@ -6,5 +6,5 @@
 .config/rofi/config.rasi
 .local/share/applications/scrcpy.desktop
 .gitconfig
-.Xressources
+.Xresources
 
