@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Scrcpy
+Exec=scrcpy -Sw
+Terminal=false
+Type=Application
+Icon=scrcpy
+StartupNotify=true
+
