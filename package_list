@@ -7,6 +7,7 @@ discord
 gimp
 vlc
 scrcpy
+gnome-calculator
 
 i3-gaps
 i3-scrot
@@ -14,6 +15,8 @@ rofi
 polybar
 pa-applet
 nitrogen
+xfce4-notifyd
+ttf-font-awesome
 
 neovim
 htop
