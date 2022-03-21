@@ -5,6 +5,7 @@
 .config/polybar/launch.sh
 .config/rofi/config.rasi
 .local/share/applications/scrcpy.desktop
+.local/share/xfce4/terminal/colorschemes/nord.them
 .gitconfig
-.Xresources
+.profile
 

@@ -150,7 +150,7 @@ bindsym $mod+Ctrl+h workspace prev
 # Open applications on specific workspaces
 assign [class="code-oss"] $ws1
 assign [class="Emacs"] $ws1
-assign [class="URxvt"] $ws2
+assign [class="URxvt|Xfce4-terminal"] $ws2
 assign [class="firefox"] $ws3
 assign [class="firefoxdeveloperedition"] $ws3
 assign [class="Chromium"] $ws3
@@ -210,7 +210,6 @@ exec --no-startup-id xfce4-power-manager
 exec --no-startup-id /usr/lib/xfce4/notifyd/xfce4-notifyd
 # exec --no-startup-id picom
 
-exec --no-startup-id urxvtd -q -o -f
 exec --no-startup-id thunar --daemon
 
 #############
