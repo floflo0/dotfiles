@@ -1,8 +1,9 @@
 firefox
+firefox-i18n-fr
 chromium
 thunar
+thunar-volman
 rxvt-unicode
-evince
 discord
 gimp
 vlc
@@ -10,15 +11,16 @@ scrcpy
 gnome-calculator
 
 i3-gaps
-i3-scrot
+scrot
 rofi
-polybar
-pa-applet
 nitrogen
 xfce4-notifyd
 ttf-font-awesome
+lxappearance-gtk3
 
+vim
 neovim
+ripgrep
 htop
 fish
 
@@ -36,6 +38,5 @@ python
 python-pip
 python-pygame
 
-papirus-icon-them
-xcursor-breeze
+papirus-icon-theme
 
