@@ -1,11 +1,12 @@
 .config/i3/config
 .config/nvim/init.vim
-.config/polybar/config
+.config/polybar/config.ini
 .config/polybar/launch.sh
+.config/polybar/updates.sh
 .config/rofi/config.rasi
 .local/share/applications/scrcpy.desktop
 .local/share/xfce4/terminal/colorschemes/nord.theme
-.local/share/xfce4/terminal/colorschemes/onedark.theme
+.local/share/xfce4/terminal/colorschemes/onedrk.theme
 .gitconfig
 .profile
 .Xresources

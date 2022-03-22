@@ -212,6 +212,8 @@ exec --no-startup-id /usr/lib/xfce4/notifyd/xfce4-notifyd
 
 exec --no-startup-id thunar --daemon
 
+exec --no-startup-id $HOME/.config/i3/updates.sh
+
 #############
 # Apparence #
 #############
