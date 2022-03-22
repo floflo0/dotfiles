@@ -5,6 +5,7 @@
 .config/rofi/config.rasi
 .local/share/applications/scrcpy.desktop
 .local/share/xfce4/terminal/colorschemes/nord.theme
+.local/share/xfce4/terminal/colorschemes/onedark.theme
 .gitconfig
 .profile
 .Xresources
