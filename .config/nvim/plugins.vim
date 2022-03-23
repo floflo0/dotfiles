@@ -78,7 +78,7 @@ telescope.setup{}
 EOF
 
 " Ctr+P pour telescope
-nnoremap <C-p> <cmd>lua require('telescope.builtin').find_files({no_ignore=true, find_command={'rg', '--files', '--hidden', '-g', '!.git', '-g', '!__pycache__', '-g', '!.mypy_cache'}})<CR>
+nnoremap <C-p> <cmd>lua require('telescope.builtin').find_files({no_ignore=true, find_command={'rg', '--files', '--hidden', '-g', '!.git', '-g', '!__pycache__', '-g', '!.mypy_cache', '-g', '!*.png'}})<CR>
 
 nnoremap <leader>gs :G<CR>
 nnoremap <leader>gc :Git commit<CR>
