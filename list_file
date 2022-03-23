@@ -1,5 +1,6 @@
 .config/i3/config
 .config/nvim/init.vim
+.config/nvim/plugins.vim
 .config/polybar/config.ini
 .config/polybar/launch.sh
 .config/polybar/updates.sh

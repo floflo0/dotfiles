@@ -1,8 +1,8 @@
 " init.vim
 
+" Set
 " permet de charger les ficher de configuration .nvimrc dans les dossier
 set exrc
-
 " active l'utilisation de la souris
 set mouse=a
 " couper les lignes trop long
@@ -11,18 +11,15 @@ set linebreak
 set number
 " affiche les numéros de lignes relatifs
 set relativenumber
-
 " permet de ne pas garder surligner la recherche
 set nohlsearch
 " desactiver le saut du curseur vers la parenthèse corresspondante
 set noshowmatch
-
 " pour que :find cherche récursivement dans les dossiers
 set path+=**
 " ignorer certains dossiers/fichiers
 set wildignore+=*.pyc
 set wildignore+=**/.git/*
-
 " espcace pour les tabulations
 set expandtab
 " longueur des tabulations
@@ -30,109 +27,43 @@ set tabstop=4 softtabstop=4
 " nombre d'espcace pour l'auto indentation
 set shiftwidth=4
 " indent la nouvel ligne en fonction de la précédente
-set autoindent
-set smartindent
-
+set autoindent smartindent
 " désactive les bip
 set noerrorbells
-
 " Scroll automatiquement a partir la ligne
 set scrolloff=8
-
 " ajoute une ligne colorer a 80 charactères
 set colorcolumn=80
 " affiche les espaces et les tabulations
 set list
-" utilise le clipboard du system
+" utilise le clipboard du système
 set clipboard=unnamedplus
-
-" ???
+" ne fait pas swapfile
 set noswapfile
+" ne fait pas de ficher backup (évite les file.txt~)
 set nobackup
-set undodir=~/.vim/undodir
+" sauvegarder l'historique des annulations dans des fichers
 set undofile
-
+" où mettre l'hisotrique des annulations
+set undodir=~/.cache/nvim/undodir
 " ajoute la colone de gauche pour les messages d'erreurs
 set signcolumn=yes
-
 " permet d'afficher les couleur
 set termguicolors
+
+" theme de couleur
+colorscheme desert
 
 " enlève la banière dans l'explorateur de fichier
 let g:netrw_banner=0
 
-call plug#begin('~/.vim/plugged')
-" Fermer automatiquement les parentheses
-" Plug 'jiangmiao/auto-pairs'
-
-Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/nvim-cmp'
-
-" pour faire marcher l'autocompletion
-Plug 'dcampos/nvim-snippy'
-Plug 'dcampos/cmp-snippy'
-
-" git plugin
-Plug 'tpope/vim-fugitive'
-Plug 'junegunn/gv.vim'
-
-" theme de couleur
-Plug 'romgrk/doom-one.vim'
-
-" telescope
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-call plug#end()
-
-" Ctr+P pour telescope
-nnoremap <C-p> <cmd>lua require('telescope.builtin').find_files({find_command={'rg', '--files', '--hidden', '-g', '!.git'}})<cr>
-
-" theme de couleur
-let g:doom_one_terminal_colors = v:true
-colorscheme doom-one
-
-" autocompletion
-lua << EOF
-local cmp = require('cmp')
-
- cmp.setup({
-     snippet = {
-         expand = function(args)
-           require'snippy'.expand_snippet(args.body)
-         end,
-     },
-     mapping = {
-       ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-       ['<C-f>'] = cmp.mapping.scroll_docs(4),
-       ['<C-Space>'] = cmp.mapping.complete(),
-       ['<C-e>'] = cmp.mapping.close(),
-       ['<CR>'] = cmp.mapping.confirm({ select = true }),
-     },
-     sources = {
-       { name = 'nvim_lsp' }, { name = 'snippy' }, { name = 'buffer' },
-     }
-   })
-
-local function config(_config)
-     return vim.tbl_deep_extend("force", {
-         capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
-     }, _config or {})
-end
-
-local lspconfig = require('lspconfig')
-
-lspconfig.pyright.setup(config())
-lspconfig.pylsp.setup(config())
-lspconfig.bashls.setup(config())
-lspconfig.tsserver.setup(config())
-lspconfig.clangd.setup(config())
-EOF
+let mapleader = " "
 
 " retire les espaces en trop quand on enregistre
 autocmd BufWritePre * %s/\s\+$//e
 
+" Command
+" command pour renommer les fichiers
 function! RenameFile()
     let old_name = expand('%')
     let new_name = input('New file name: ', expand('%'), 'file')
@@ -142,15 +73,29 @@ function! RenameFile()
         redraw!
     endif
 endfunction
-
 command! -nargs=* Rename call RenameFile()
-command! -nargs=1 -complete=file_in_path Vfin vert sfind <args>
 
-nmap <silent> <A-k> :wincmd k<CR>
-nmap <silent> <A-j> :wincmd j<CR>
-nmap <silent> <A-h> :wincmd h<CR>
-nmap <silent> <A-l> :wincmd l<CR>
-nmap <silent> <A-K> :wincmd K<CR>
-nmap <silent> <A-J> :wincmd J<CR>
-nmap <silent> <A-H> :wincmd H<CR>
-nmap <silent> <A-L> :wincmd L<CR>
+" vinfd command
+command! -nargs=1 -complete=file_in_path Vfin  vert sfind <args>
+command! -nargs=1 -complete=file_in_path Vfind vert sfind <args>
+
+" Keybings
+" changer de fenêtre
+nnoremap <silent> <A-k> :wincmd k<CR>
+nnoremap <silent> <A-j> :wincmd j<CR>
+nnoremap <silent> <A-h> :wincmd h<CR>
+nnoremap <silent> <A-l> :wincmd l<CR>
+" bouger les fenêtres
+nnoremap <silent> <A-K> :wincmd K<CR>
+nnoremap <silent> <A-J> :wincmd J<CR>
+nnoremap <silent> <A-H> :wincmd H<CR>
+nnoremap <silent> <A-L> :wincmd L<CR>
+" redimensionner les fenêtres
+nnoremap <silent> <C-A-K> :wincmd +<CR>
+nnoremap <silent> <C-A-J> :wincmd -<CR>
+nnoremap <silent> <C-A-H> :wincmd <<CR>
+nnoremap <silent> <C-A-L> :wincmd ><CR>
+
+" Plugins
+source ~/.config/nvim/plugins.vim
+
