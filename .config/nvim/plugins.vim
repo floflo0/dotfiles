@@ -82,3 +82,4 @@ nnoremap <C-p> <cmd>lua require('telescope.builtin').find_files({no_ignore=true,
 
 nnoremap <leader>gs :G<CR>
 nnoremap <leader>gc :Git commit<CR>
+nnoremap <leader>gb :Git branch<CR>

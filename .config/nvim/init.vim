@@ -97,9 +97,9 @@ nnoremap <silent> <C-A-H> :wincmd <<CR>
 nnoremap <silent> <C-A-L> :wincmd ><CR>
 
 " Alt-Enter open terminal in new window
-nnoremap <silent> <A-CR> :vsplit<CR> :terminal<CR> :norm i<CR>
+nnoremap <silent> <A-CR> :vsplit<CR> :terminal<CR> :wincmd L<CR> :norm i<CR>
 
-nnoremap <silent> <A-SPACE> :vsplit<CR>
+nnoremap <silent> <A-SPACE> :vsplit<CR> :wincmd l<CR>
 
 nnoremap <leader>cn :cnext<CR>
 nnoremap <leader>cp :cprev<CR>
