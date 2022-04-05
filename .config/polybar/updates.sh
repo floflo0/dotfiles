@@ -4,7 +4,6 @@
 
 check_all_updates () {
     checkupdates
-    yay -Sua &>/dev/null
     yay -Qua
 }
 
