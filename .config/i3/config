@@ -22,9 +22,10 @@ bindsym $mod+u exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym $mod+y exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 # screenshots
-bindsym Print exec --no-startup-id i3-scrot
-bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
-bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
+set $screenshots_path '/home/floris/Images/screenshots/%Y-%m-%d-%H-%M_%s_$wx$h.png'
+bindsym Print exec --no-startup-id scrot $screenshots
+bindsym $mod+Print --release exec --no-startup-id scrot -w $scrennshots
+bindsym $mod+Shift+Print --release exec --no-startup-id scrot -s $scrennshots
 
 # brightness
 bindsym $mod+XF86AudioRaiseVolume exec --no-startup-id brightness increase
