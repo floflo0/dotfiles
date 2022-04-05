@@ -104,6 +104,8 @@ nnoremap <silent> <A-SPACE> :vsplit<CR> :wincmd l<CR>
 nnoremap <leader>cn :cnext<CR>
 nnoremap <leader>cp :cprev<CR>
 
+nnoremap <leader>r :!!<CR>
+
 " Plugins
 source ~/.config/nvim/plugins.vim
 
