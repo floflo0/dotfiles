@@ -1,6 +1,10 @@
-polybar
-xcursor-breeze
-matcha-gtk-theme
-vim-plug
-nerd-fonts-roboto-mono
+dracula-cursors-git v3.0.r30.gacac5b4-1
+dracula-gtk-theme v3.0-2
+dracula-icons-git 1.0.0.2d3c83ca-2
+matcha-gtk-theme 2021.12.25-1
+nerd-fonts-roboto-mono 2.1.0-2
+polybar 3.6.2-1
+vim-dracula-git 2.0.0.r69.gd7723a8-1
+vim-plug 0.11.0-1
+xcursor-breeze 1:5.22.5-1
 

@@ -34,8 +34,8 @@ Plug 'junegunn/gv.vim'
 call plug#end()
 
 " theme de couleur
-let g:doom_one_terminal_colors = v:true
-colorscheme doom-one
+" let g:doom_one_terminal_colors = v:true
+colorscheme dracula
 
 " autocompletion
 lua << EOF
