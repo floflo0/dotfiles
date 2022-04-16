@@ -151,6 +151,10 @@ bindsym $mod+Ctrl+h workspace prev
 # Open applications on specific workspaces
 assign [class="code-oss"] $ws1
 assign [class="Emacs"] $ws1
+assign [class="(?i)libreoffice-writer$"]$ ws1
+assign [class="(?i)soffice"] $ws1
+assign [class="(?i)libreoffice-calc"] $ws1
+assign [class="(?i)libreoffice.*"] $ws1
 assign [class="URxvt|Xfce4-terminal"] $ws2
 assign [class="firefox"] $ws3
 assign [class="firefoxdeveloperedition"] $ws3
