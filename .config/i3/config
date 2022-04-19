@@ -28,9 +28,9 @@ bindsym $mod+Print --release exec --no-startup-id scrot -w $scrennshots
 bindsym $mod+Shift+Print --release exec --no-startup-id scrot -s $screenshots
 
 # brightness
-bindsym $mod+XF86AudioRaiseVolume exec --no-startup-id brightness increase
-bindsym $mod+XF86AudioLowerVolume exec --no-startup-id brightness reduce
-bindsym $mod+XF86AudioMute exec --no-startup-id brightness set 1
+bindsym $mod+Shift+i exec --no-startup-id brightness increase
+bindsym $mod+Shift+u exec --no-startup-id brightness reduce
+bindsym $mod+Shift+y exec --no-startup-id brightness set 1
 
 # change focus
 bindsym $mod+Left focus left
