@@ -204,20 +204,14 @@ exec --no-startup-id pamac-tray
 # pour pamac
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nm-applet
-exec --no-startup-id pa-applet
-exec --no-startup-id start-pulseaudio-x11
 # exec --no-startup-id minecraft-status
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id nitrogen --restore
-exec --no-startup-id xfce4-power-manager
 # exec --no-startup-id xautolock -time 10 -locker blurlock
 # notifications
 exec --no-startup-id /usr/lib/xfce4/notifyd/xfce4-notifyd
 # exec --no-startup-id picom
-
 exec --no-startup-id thunar --daemon
-
-exec --no-startup-id $HOME/.config/i3/updates.sh
 
 #############
 # Apparence #
