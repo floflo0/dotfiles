@@ -46,18 +46,20 @@ cmp.setup({
         expand = function(args)
            require('snippy').expand_snippet(args.body)
          end,
-     },
-     mapping = {
-         ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-         ['<C-f>'] = cmp.mapping.scroll_docs(4),
-         ['<C-Space>'] = cmp.mapping.complete(),
-         ['<C-e>'] = cmp.mapping.close(),
-         ['<CR>'] = cmp.mapping.confirm({ select = true }),
-     },
-     sources = {
-         { name = 'nvim_lsp' }, { name = 'snippy' }, { name = 'buffer' },
-     }
-   })
+    },
+    mapping = {
+        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.close(),
+        ['<CR>'] = cmp.mapping.confirm({ select = true }),
+        ['<C-p>'] = cmp.mapping.select_prev_item(),
+        ['<C-n>'] = cmp.mapping.select_next_item(),
+    },
+    sources = {
+        { name = 'nvim_lsp' }, { name = 'snippy' }, { name = 'buffer' },
+    }
+})
 
 local function config(_config)
     return vim.tbl_deep_extend("force", {
@@ -72,6 +74,7 @@ lspconfig.pylsp.setup(config())
 lspconfig.bashls.setup(config())
 lspconfig.tsserver.setup(config())
 lspconfig.clangd.setup(config())
+lspconfig.rust_analyzer.setup(config())
 
 local telescope = require("telescope")
 telescope.setup{}

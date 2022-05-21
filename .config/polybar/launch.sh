@@ -1,6 +1,6 @@
 #!/bin/sh
 
-polybar-msg cmd quit
+killall polybar
 
 exec polybar default 2>&1
 

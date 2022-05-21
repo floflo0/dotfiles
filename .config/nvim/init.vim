@@ -75,17 +75,18 @@ function! RenameFile()
 endfunction
 command! -nargs=* Rename call RenameFile()
 
-" vinfd command
+" vfind command
 command! -nargs=1 -complete=file_in_path Vfin  vert sfind <args>
 command! -nargs=1 -complete=file_in_path Vfind vert sfind <args>
 
 " Keybings
+" controler la gestion des fenetres avec Alt
 " changer de fenêtre
 nnoremap <silent> <A-k> :wincmd k<CR>
 nnoremap <silent> <A-j> :wincmd j<CR>
 nnoremap <silent> <A-h> :wincmd h<CR>
 nnoremap <silent> <A-l> :wincmd l<CR>
-" bouger les fenêtres
+" move windows
 nnoremap <silent> <A-K> :wincmd K<CR>
 nnoremap <silent> <A-J> :wincmd J<CR>
 nnoremap <silent> <A-H> :wincmd H<CR>
@@ -97,6 +98,7 @@ nnoremap <silent> <C-A-H> :wincmd <<CR>
 nnoremap <silent> <C-A-L> :wincmd ><CR>
 
 " Alt-Enter open terminal in new window
+nnoremap <silent> <A-t> :terminal<CR> :norm i<CR>
 nnoremap <silent> <A-CR> :vsplit<CR> :terminal<CR> :wincmd L<CR> :norm i<CR>
 
 nnoremap <silent> <A-SPACE> :vsplit<CR> :wincmd l<CR>
@@ -104,7 +106,12 @@ nnoremap <silent> <A-SPACE> :vsplit<CR> :wincmd l<CR>
 nnoremap <leader>cn :cnext<CR>
 nnoremap <leader>cp :cprev<CR>
 
-nnoremap <leader>r :!!<CR>
+noremap <leader>r :!!<CR>
+noremap <leader>m :mak<CR>
+noremap <leader>M :mak!<CR>
+
+" use Control-c to espcace modes
+inoremap <C-c> <esc>
 
 " Plugins
 source ~/.config/nvim/plugins.vim

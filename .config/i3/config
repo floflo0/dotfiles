@@ -24,7 +24,7 @@ bindsym $mod+y exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
 # screenshots
 set $screenshots '/home/floris/Images/screenshots/%Y-%m-%d-%H-%M_%s_$wx$h.png'
 bindsym Print exec --no-startup-id scrot $screenshots
-bindsym $mod+Print --release exec --no-startup-id scrot -w $scrennshots
+bindsym $mod+Print --release exec --no-startup-id scrot -u $screenshots
 bindsym $mod+Shift+Print --release exec --no-startup-id scrot -s $screenshots
 
 # brightness
@@ -179,15 +179,15 @@ for_window [class="Gnome-calculator"] floating enable
 # Resize window (you can also use the mouse for that)
 bindsym $mod+r mode "resize"
 mode "resize" {
-    bindsym Left resize shrink width 10 px or 10 ppt
-    bindsym Down resize grow height 10 px or 10 ppt
-    bindsym Up resize shrink height 10 px or 10 ppt
-    bindsym Right resize grow width 10 px or 10 ppt
+    bindsym Left resize shrink width 5 px or 5 ppt
+    bindsym Down resize grow height 5 px or 5 ppt
+    bindsym Up resize shrink height 5 px or 5 ppt
+    bindsym Right resize grow width 5 px or 5 ppt
 
-    bindsym h resize shrink width 10 px or 10 ppt
-    bindsym j resize grow height 10 px or 10 ppt
-    bindsym k resize shrink height 10 px or 10 ppt
-    bindsym l resize grow width 10 px or 10 ppt
+    bindsym h resize shrink width 5 px or 5 ppt
+    bindsym j resize grow height 5 px or 5 ppt
+    bindsym k resize shrink height 5 px or 5 ppt
+    bindsym l resize grow width 5 px or 5 ppt
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
