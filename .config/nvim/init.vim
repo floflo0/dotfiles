@@ -103,6 +103,9 @@ nnoremap <silent> <A-CR> :vsplit<CR> :terminal<CR> :wincmd L<CR> :norm i<CR>
 
 nnoremap <silent> <A-SPACE> :vsplit<CR> :wincmd l<CR>
 
+nnoremap <C-k> :m -2<CR>
+nnoremap <C-j> :m +1<CR>
+
 nnoremap <leader>cn :cnext<CR>
 nnoremap <leader>cp :cprev<CR>
 
