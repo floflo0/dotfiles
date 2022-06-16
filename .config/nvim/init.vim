@@ -18,6 +18,7 @@ set noshowmatch
 " pour que :find cherche récursivement dans les dossiers
 set path+=**
 " ignorer certains dossiers/fichiers
+set wildmenu
 set wildignore+=*.pyc
 set wildignore+=**/.git/*
 " espcace pour les tabulations
@@ -97,9 +98,9 @@ nnoremap <silent> <C-A-J> :wincmd -<CR>
 nnoremap <silent> <C-A-H> :wincmd <<CR>
 nnoremap <silent> <C-A-L> :wincmd ><CR>
 
-" Alt-Enter open terminal in new window
 nnoremap <silent> <A-t> :terminal<CR> :norm i<CR>
-nnoremap <silent> <A-CR> :vsplit<CR> :terminal<CR> :wincmd L<CR> :norm i<CR>
+" Alt-Enter open terminal in new window
+nnoremap <silent> <A-CR> :vsplit term://fish<CR> :wincmd L<CR> :norm i<CR>
 
 nnoremap <silent> <A-SPACE> :vsplit<CR> :wincmd l<CR>
 
@@ -115,6 +116,9 @@ noremap <leader>M :mak!<CR>
 
 " use Control-c to espcace modes
 inoremap <C-c> <esc>
+
+nnoremap <leader>pv :Ex<CR>
+nnoremap <leader>s :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
 
 " Plugins
 source ~/.config/nvim/plugins.vim
