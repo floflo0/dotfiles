@@ -6,6 +6,7 @@
 .config/polybar/launch.sh
 .config/polybar/updates.sh
 .config/rofi/config.rasi
+.config/tmux/tmux.conf
 .local/share/applications/scrcpy.desktop
 .local/share/xfce4/terminal/colorschemes/nord.theme
 .local/share/xfce4/terminal/colorschemes/onedrk.theme
