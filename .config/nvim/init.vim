@@ -12,7 +12,7 @@ set number
 " affiche les numéros de lignes relatifs
 set relativenumber
 " permet de ne pas garder surligner la recherche
-set nohlsearch
+" set nohlsearch
 " desactiver le saut du curseur vers la parenthèse corresspondante
 set noshowmatch
 " pour que :find cherche récursivement dans les dossiers
@@ -80,6 +80,8 @@ command! -nargs=* Rename call RenameFile()
 command! -nargs=1 -complete=file_in_path Vfin  vert sfind <args>
 command! -nargs=1 -complete=file_in_path Vfind vert sfind <args>
 
+command -nargs=0 ErrorTsc set errorformat=%f\ %#(%l\\,%c):\ %trror\ TS%n:\ %m,%trror\ TS%n:\ %m,%-G%.%#
+
 " Keybings
 " controler la gestion des fenetres avec Alt
 " changer de fenêtre
@@ -110,15 +112,18 @@ nnoremap <C-j> :m +1<CR>
 nnoremap <leader>cn :cnext<CR>
 nnoremap <leader>cp :cprev<CR>
 
-noremap <leader>r :!!<CR>
-noremap <leader>m :mak<CR>
-noremap <leader>M :mak!<CR>
+" noremap <leader>r :!!<CR>
+" noremap <leader>m :mak<CR>
+" noremap <leader>M :mak!<CR>
 
 " use Control-c to espcace modes
 inoremap <C-c> <esc>
 
-nnoremap <leader>pv :Ex<CR>
-nnoremap <leader>s :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
+" nnoremap <leader>pv :Ex<CR>
+" nnoremap <leader>s :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
+
+" enlever le surlignement des mot après une recherche
+nnoremap <silent> <leader>h :noh<CR>
 
 " Plugins
 source ~/.config/nvim/plugins.vim

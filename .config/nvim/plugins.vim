@@ -32,6 +32,9 @@ Plug 'nvim-telescope/telescope.nvim'
 " git plugin
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
+
+" Afficher les couleurs en css
+Plug 'ap/vim-css-color'
 call plug#end()
 
 " theme de couleur
@@ -145,6 +148,7 @@ lua << EOF
       end,
     }, _config or {})
   end
+
   local lspconfig = require('lspconfig')
   -- sudo pacman -S pyright
   lspconfig.pyright.setup(config())
@@ -154,7 +158,9 @@ lua << EOF
   -- sudo pacman -S bash-language-server
   lspconfig.bashls.setup(config())
   lspconfig.tsserver.setup(config())
-  lspconfig.clangd.setup(config())
+  lspconfig.clangd.setup(config({
+    cmd = { 'clangd', '-header-insertion=never' }
+  }))
   lspconfig.rust_analyzer.setup(config())
   -- sudo npm i -g vscode-langservers-extracted
   lspconfig.cssls.setup(config())
@@ -175,7 +181,8 @@ EOF
 lua require("telescope").setup{}
 
 " Ctr+P pour telescope
-nnoremap <C-p> <cmd>lua require('telescope.builtin').find_files({no_ignore=true, find_command={'rg', '--files', '--hidden', '-g', '!.git', '-g', '!__pycache__', '-g', '!.mypy_cache', '-g', '!*.png'}})<CR>
+nnoremap <C-p> <cmd>lua require('telescope.builtin').find_files({no_ignore=true, find_command={'rg', '--files', '--hidden', '-g', '!.git', '-g', '!__pycache__', '-g', '!.mypy_cache', '-g', '!*.png', '-g', '!node_modules'}})<CR>
+" nnoremap <C-p> <cmd>lua require('telescope.builtin').find_files()<CR>
 
 nnoremap <leader>gs :G<CR>
 nnoremap <leader>gc :Git commit<CR>
