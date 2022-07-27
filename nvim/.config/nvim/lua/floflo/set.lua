@@ -4,7 +4,7 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 
 -- active l'utilisation de la souris
-vim.opt.mouse = "a"
+vim.opt.mouse = 'a'
 
 -- couper les lignes trop longues par mot
 vim.opt.linebreak = true
@@ -13,13 +13,11 @@ vim.opt.linebreak = true
 vim.opt.hlsearch = false
 
 -- pour que :find recherche récursivement dans les dossiers
-print(vim.opt.path)
-vim.opt.path:append("**")
-print(vim.opt.path)
+vim.opt.path:append('**')
 
 -- ignorer certains dossiers/fichiers
-vim.opt.wildignore:append("*.pyc")
-vim.opt.wildignore:append("**/.git/*")
+vim.opt.wildignore:append('*.pyc')
+vim.opt.wildignore:append('**/.git/*')
 
 -- longueur des tabulations
 local tab = 4
@@ -33,29 +31,29 @@ vim.opt.smartindent = true
 vim.opt.scrolloff = 8
 
 -- ajoute une ligne colorée à 80 caractères
-vim.opt.colorcolumn = "80"
+vim.opt.colorcolumn = '80'
 
 -- affiche les espaces et les tabulations
 vim.opt.list = true
 -- TODO: change tab char
 
 -- utilise le clipboard du système
-vim.opt.clipboard = "unnamedplus"
+vim.opt.clipboard = 'unnamedplus'
 
 vim.opt.swapfile = false
 vim.opt.backup = false
 -- sauvegarder l'historique des annulations dans un ficher
 vim.opt.undofile = true
 -- où mettre l'historique des annulations
-vim.opt.undodir = os.getenv("HOME") .. "/.cache/nvim/undodir"
+vim.opt.undodir = os.getenv('HOME') .. '/.cache/nvim/undodir'
 
 -- ajoute la colone de gauche pour les messages d'erreurs
-vim.opt.signcolumn = "yes"
+vim.opt.signcolumn = 'yes'
 
 -- permet d'afficher les couleur
 vim.opt.termguicolors = true
 
-vim.g.mapleader = " "
+vim.g.mapleader = ' '
 
 -- enlève la banière dans l'explorateur de fichier
 vim.g.netrw_banner = 0

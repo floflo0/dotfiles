@@ -1,7 +1,5 @@
 .config/i3/config
 .config/nitrogen/arch.png
-.config/nvim/init.vim
-.config/nvim/plugins.vim
 .config/polybar/config.ini
 .config/polybar/launch.sh
 .config/polybar/updates.sh
