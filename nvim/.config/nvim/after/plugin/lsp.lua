@@ -102,50 +102,51 @@ local function config(_config)
 end
 
 local lspconfig = require('lspconfig')
+
 -- $ sudo pacman -S pyright
-lspconfig.pyright.setup(config())
--- $ sudo pacman -S  jedi-language-server
+-- lspconfig.pyright.setup(config())
+
+-- $ sudo pacman -S jedi-language-server
 -- lspconfig.jedi_language_server.setup(config())
--- lspconfig.pylsp.setup(config())
+
+-- $ sudo pacman -S python-lsp-server
+-- $ yay -S python-pylsp-mypy
+lspconfig.pylsp.setup(config())
+
 -- $ sudo pacman -S bash-language-server
 lspconfig.bashls.setup(config())
+
+-- $ sudo pacman -S typescipt
+-- $ sudo npm install -g typescript-language-server
 lspconfig.tsserver.setup(config())
+
+-- sudo pacman -S clang
 lspconfig.clangd.setup(config({
     cmd = { 'clangd', '-header-insertion=never' }
 }))
+
 -- $ sudo pacman -S rust_analyzer
 lspconfig.rust_analyzer.setup(config())
+
 -- $ sudo npm i -g vscode-langservers-extracted
 lspconfig.cssls.setup(config())
 
--- require('snippy').setup({
---     mappings = {
---         is = {
---             ['<Tab>'] = 'expand_or_advance',
---             ['<S-Tab>'] = 'previous',
---         },
---         nx = {
---             ['<leader>x'] = 'cut_text',
---         },
---     },
--- })
+local snippets_paths = function()
+    local plugins = { 'friendly-snippets' }
+    local paths = {}
+    local path
+    local root_path = vim.env.HOME .. '/.local/share/nvim/site/packe/packer/start/'
+    for _, plug in ipairs(plugins) do
+        path = root_path .. plug
+        if vim.fn.isdirectory(path) ~= 0 then
+            table.insert(paths, path)
+        end
+    end
+    return paths
+end
 
--- local snippets_paths = function()
---     local plugins = { 'friendly-snippets' }
---     local paths = {}
---     local path
---     local root_path = vim.env.HOME .. '/.vim/plugged/'
---     for _, plug in ipairs(plugins) do
---         path = root_path .. plug
---         if vim.fn.isdirectory(path) ~= 0 then
---             table.insert(paths, path)
---         end
---     end
---     return paths
--- end
---
--- require('luasnip.loaders.from_vscode').lazy_load({
---     paths = snippets_paths(),
---     include = nil, -- Load all languages
---     exclude = {},
--- })
+require('luasnip.loaders.from_vscode').lazy_load({
+    paths = snippets_paths(),
+    include = nil, -- Load all languages
+    exclude = {},
+})

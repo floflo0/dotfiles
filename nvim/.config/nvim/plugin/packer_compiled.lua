@@ -119,6 +119,11 @@ _G.packer_plugins = {
     path = "/home/floris/.local/share/nvim/site/pack/packer/start/dracula",
     url = "https://github.com/dracula/vim"
   },
+  ["friendly-snippets"] = {
+    loaded = true,
+    path = "/home/floris/.local/share/nvim/site/pack/packer/start/friendly-snippets",
+    url = "https://github.com/rafamadriz/friendly-snippets"
+  },
   neogit = {
     loaded = true,
     path = "/home/floris/.local/share/nvim/site/pack/packer/start/neogit",

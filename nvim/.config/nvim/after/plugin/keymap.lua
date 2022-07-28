@@ -34,6 +34,7 @@ vim.keymap.set('n', "<leader>pv", ":Ex<CR>")
 -- enlever le surlignement des mot après une recherche
 vim.keymap.set('n', '<leader>h', ':noh<CR>', { silent = true })
 
+-- neogit
 vim.keymap.set('n', '<leader>gs', function()
     require('neogit').open()
 end)
@@ -41,6 +42,7 @@ vim.keymap.set('n', '<leader>gc', function()
     require('neogit').open({ 'commit' })
 end)
 
+-- telescope
 vim.keymap.set('n', '<C-p>', function() require('telescope.builtin').find_files() end)
 
 vim.keymap.set('n', '<leader>s', function() require('telescope.builtin').grep_string() end)
@@ -49,3 +51,30 @@ vim.keymap.set('n', '<leader>d', function() require('telescope.builtin').diagnos
 
 vim.keymap.set('n', '<leader>m', function() require('telescope.builtin').man_pages() end)
 vim.keymap.set('n', '<leader>h', function() require('telescope.builtin').help_tags() end)
+
+-- luasnip
+local luasnip = require('luasnip')
+luasnip.config.set_config({
+  history = true,
+})
+
+-- press <Tab> to expand or jump in a snippet. These can also be mapped separately
+-- via <Plug>luasnip-expand-snippet and <Plug>luasnip-jump-next.
+vim.keymap.set('i', '<Tab>', function()
+    if luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+    else
+        return '<Tab>'
+    end
+end, { silent = true, expr = true, noremap = true })
+vim.keymap.set('s', '<Tab>', function() luasnip.jump(1) end, { silent = true })
+vim.keymap.set({ 'i', 's' }, '<S-Tab>', function() luasnip.jump(-1) end, { silent = true })
+
+-- " For changing choices in choiceNodes (not strictly necessary for a basic setup).
+vim.keymap.set({ 'i', 's' }, '<C-E>', function()
+    if luasnip.choice_active() then
+        luasnip.next_choice()
+    else
+        return '<C-E>'
+    end
+end, { silent = true, expr = true })
