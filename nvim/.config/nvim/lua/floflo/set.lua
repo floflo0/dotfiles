@@ -8,9 +8,19 @@ vim.opt.mouse = 'a'
 
 -- couper les lignes trop longues par mot
 vim.opt.linebreak = true
+vim.opt.breakindent = true
+vim.opt.showbreak = '↳ '
+
+vim.opt.listchars = 'tab:» ,trail:-,eol:↵'
 
 -- permet de ne pas garder surligné les résultats de recherche
 vim.opt.hlsearch = false
+
+vim.opt.ignorecase = true -- Ignore case when searching...
+vim.opt.smartcase = true -- ... unless there is a capital letter in the query
+
+vim.opt.splitright = true
+vim.opt.splitbelow = true
 
 -- pour que :find recherche récursivement dans les dossiers
 vim.opt.path:append('**')

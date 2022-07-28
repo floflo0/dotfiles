@@ -93,7 +93,8 @@ local function config(_config)
             vim.keymap.set('n', '[d', function() vim.diagnostic.goto_next() end)
             vim.keymap.set('n', ']d', function() vim.diagnostic.goto_prev() end)
             vim.keymap.set('n', '<leader>vca', function() vim.lsp.buf.code_action() end)
-            vim.keymap.set('n', '<leader>vrr', function() vim.lsp.buf.references() end)
+            -- vim.keymap.set('n', '<leader>vrr', function() vim.lsp.buf.references() end)
+            vim.keymap.set('n', '<leader>vrr', function() require('telescope.builtin').lsp_references() end)
             vim.keymap.set('n', '<leader>vrn', function() vim.lsp.buf.rename() end)
             vim.keymap.set('i', '<C-h>', function() vim.lsp.buf.signature_help() end)
         end,
@@ -142,7 +143,7 @@ lspconfig.cssls.setup(config())
 --     end
 --     return paths
 -- end
--- 
+--
 -- require('luasnip.loaders.from_vscode').lazy_load({
 --     paths = snippets_paths(),
 --     include = nil, -- Load all languages

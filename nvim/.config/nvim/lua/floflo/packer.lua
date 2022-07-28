@@ -12,8 +12,8 @@ return require('packer').startup(function(use)
     use('hrsh7th/cmp-cmdline')
     use('hrsh7th/cmp-nvim-lsp-document-symbol')
     use('hrsh7th/nvim-cmp')
-    use("L3MON4D3/LuaSnip")
-    use("saadparwaiz1/cmp_luasnip")
+    use('L3MON4D3/LuaSnip')
+    use('saadparwaiz1/cmp_luasnip')
 
     use({ 'TimUntersberger/neogit', requires = {
         'nvim-lua/plenary.nvim',
@@ -21,9 +21,11 @@ return require('packer').startup(function(use)
     }})
 
     -- theme de couleur
-    use({'dracula/vim', as = 'dracula'})
+    use({ 'dracula/vim', as = 'dracula' })
 
-    -- TODO telescope
+    use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' })
+
+    use({ 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires ='nvim-lua/plenary.nvim' })
 
     -- Afficher les couleurs en css
     use('ap/vim-css-color')

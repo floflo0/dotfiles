@@ -1,4 +1,3 @@
-
 -- controler la gestion des fenêtres avec Alt
 -- changer de fenêtre
 vim.keymap.set('n', '<A-k>', ':wincmd k<CR>', { silent = true })
@@ -17,9 +16,9 @@ vim.keymap.set('n', '<C-A-H>', ':wincmd <<CR>', { silent = true })
 vim.keymap.set('n', '<C-A-L>', ':wincmd ><CR>', { silent = true })
 
 -- Alt-Enter open terminal in new window
-vim.keymap.set('n', '<A-CR>', ':vsplit term://fish<CR> :wincmd L<CR> :norm i<CR>')
+vim.keymap.set('n', '<A-CR>', ':vsplit term://$SHELL<CR> :norm i<CR>')
 
-vim.keymap.set('n', '<A-SPACE>', ':vsplit<CR> :wincmd l<CR>', { silent = true })
+vim.keymap.set('n', '<A-SPACE>', ':vsplit<CR>', { silent = true })
 
 vim.keymap.set('n', '<C-k>', ':m -2<CR>', { silent = true })
 vim.keymap.set('n', '<C-j>', ':m +1<CR>', { silent = true })
@@ -41,3 +40,12 @@ end)
 vim.keymap.set('n', '<leader>gc', function()
     require('neogit').open({ 'commit' })
 end)
+
+vim.keymap.set('n', '<C-p>', function() require('telescope.builtin').find_files() end)
+
+vim.keymap.set('n', '<leader>s', function() require('telescope.builtin').grep_string() end)
+vim.keymap.set('n', '<C-f>', function() require('telescope.builtin').live_grep() end)
+vim.keymap.set('n', '<leader>d', function() require('telescope.builtin').diagnostics() end)
+
+vim.keymap.set('n', '<leader>m', function() require('telescope.builtin').man_pages() end)
+vim.keymap.set('n', '<leader>h', function() require('telescope.builtin').help_tags() end)
