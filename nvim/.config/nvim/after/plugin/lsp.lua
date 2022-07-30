@@ -1,11 +1,6 @@
 -- Setup nvim-cmp.
 local cmp = require('cmp')
-
-local source_mapping = {
-    buffer = '[Buffer]',
-    nvim_lsp = '[LSP]',
-    path = '[Path]',
-}
+local lspkind = require('lspkind')
 
 cmp.setup({
     snippet = {
@@ -30,22 +25,40 @@ cmp.setup({
     }),
 
     formatting = {
-        format = function(entry, vim_item)
-            vim_item.menu = source_mapping[entry.source.name]
-            return vim_item
-        end,
+        format = lspkind.cmp_format({
+            mode = "symbol_text",
+            menu = ({
+                nvim_lua = "[Lua]",
+                nvim_lsp = "[Lsp]",
+                nvim_lsp_document_symbol = '[Lsp]',
+                nvim_lsp_signature_help = '[Help]',
+                luasnip = "[LuaSnip]",
+                path = '[Path]',
+                buffer = "[Buffer]",
+                cmdline = '[Cmd]'
+            })
+        }),
     },
 
     sources = cmp.config.sources({
-        { name = 'nvim_lsp' },
         { name = 'nvim_lua' },
+        { name = 'nvim_lsp' },
+        { name = 'nvim_lsp_signature_help' },
         -- { name = 'vsnip' }, -- For vsnip users.
+        --
         { name = 'luasnip' }, -- For luasnip users.
         -- { name = 'ultisnips' }, -- For ultisnips users.
         -- { name = 'snippy' }, -- For snippy users.
+        -- d
+
+        { name = 'path' }
     }, {
-        { name = 'buffer' },
-    })
+        { name = 'buffer' }
+    }),
+
+    experimental = {
+        ghost_text = true
+    }
 })
 
 -- Set configuration for specific filetype.
@@ -130,6 +143,30 @@ lspconfig.rust_analyzer.setup(config())
 
 -- $ sudo npm i -g vscode-langservers-extracted
 lspconfig.cssls.setup(config())
+
+-- $ sudo pacman -S lua-language-server
+lspconfig.sumneko_lua.setup {
+    settings = {
+        Lua = {
+            runtime = {
+                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                version = 'LuaJIT',
+            },
+            diagnostics = {
+                -- Get the language server to recognize the `vim` global
+                globals = {'vim'},
+            },
+            workspace = {
+                -- Make the server aware of Neovim runtime files
+                library = vim.api.nvim_get_runtime_file("", true),
+            },
+            -- Do not send telemetry data containing a randomized but unique identifier
+            telemetry = {
+                enable = false,
+            },
+        },
+    },
+}
 
 local snippets_paths = function()
     local plugins = { 'friendly-snippets' }
