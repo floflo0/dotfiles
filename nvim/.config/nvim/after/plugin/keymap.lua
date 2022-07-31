@@ -43,14 +43,16 @@ vim.keymap.set('n', '<leader>gc', function()
 end)
 
 -- telescope
-vim.keymap.set('n', '<C-p>', function() require('telescope.builtin').find_files() end)
+local telescope = require('telescope.builtin')
+vim.keymap.set('n', '<C-p>', function() telescope.find_files() end)
 
-vim.keymap.set('n', '<leader>s', function() require('telescope.builtin').grep_string() end)
-vim.keymap.set('n', '<C-f>', function() require('telescope.builtin').live_grep() end)
-vim.keymap.set('n', '<leader>d', function() require('telescope.builtin').diagnostics() end)
+vim.keymap.set('n', '<leader>s', function() telescope.grep_string() end)
+vim.keymap.set('n', '<C-f>', function() telescope.live_grep() end)
+vim.keymap.set('n', '<leader>d', function() telescope.diagnostics() end)
 
-vim.keymap.set('n', '<leader>m', function() require('telescope.builtin').man_pages() end)
-vim.keymap.set('n', '<leader>h', function() require('telescope.builtin').help_tags() end)
+vim.keymap.set('n', '<leader>m', function() telescope.man_pages() end)
+vim.keymap.set('n', '<leader>h', function() telescope.help_tags() end)
+vim.keymap.set('n', '<leader>b', function() telescope.builtin() end)
 
 -- luasnip
 local luasnip = require('luasnip')
