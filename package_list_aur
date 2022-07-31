@@ -1,10 +1,7 @@
 dracula-cursors-git
-dracula-gtk-theme
 dracula-icons-git
 matcha-gtk-theme
-nerd-fonts-roboto-mono
-polybar
-xcursor-breeze
-
+nerd-fonts-complete
+polybar-git
 nvim-packer-git
 

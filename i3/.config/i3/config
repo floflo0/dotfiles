@@ -89,7 +89,7 @@ bindsym $mod+Control+space exec rofi -show run
 bindsym $mod+a exec rofi -show window
 bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+w exec thunar
-bindsym $mod+x exec firefox
+bindsym $mod+x exec $BROWSER
 
 ##############
 # Workspaces #
@@ -155,18 +155,23 @@ assign [class="(?i)libreoffice-writer$"]$ ws1
 assign [class="(?i)soffice"] $ws1
 assign [class="(?i)libreoffice-calc"] $ws1
 assign [class="(?i)libreoffice.*"] $ws1
+
 assign [class="URxvt|Xfce4-terminal"] $ws2
+
 assign [class="firefox"] $ws3
 assign [class="firefoxdeveloperedition"] $ws3
 assign [class="Chromium"] $ws3
+
 assign [class="net-mc-main-Main"] $ws4
 assign [class="Minecraft 1.8.9"] $ws4
 assign [class="Minecraft 1.16.5"] $ws4
 assign [class="vlc"] $ws4
+
 assign [class="Gimp-2.10"] $ws5
 assign [class="Gimp"] $ws5
-assign [class="Pamac-manager"] $ws5
+
 assign [class="discord"] $ws6
+
 assign [class="scrcpy"] $ws7
 
 for_window [class="Minecraft 1.8.9"] fullscreen enable
@@ -174,7 +179,6 @@ for_window [class="Minecraft 1.16.5"] fullscreen enable
 
 # Open specific applications in floating mode
 for_window [class="scrcpy"] floating enable
-for_window [class="Gnome-calculator"] floating enable
 
 # Resize window (you can also use the mouse for that)
 bindsym $mod+r mode "resize"
@@ -200,11 +204,8 @@ mode "resize" {
 # Autostart applications
 # désactiver les bip
 exec --no-startup-id xset b off
-exec --no-startup-id pamac-tray
 # pour pamac
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nm-applet
-# exec --no-startup-id minecraft-status
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id nitrogen --restore
 # exec --no-startup-id xautolock -time 10 -locker blurlock

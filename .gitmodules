@@ -1,0 +1,6 @@
+[submodule "extern/dracula/xfce4-terminal"]
+	path = extern/dracula/xfce4-terminal
+	url = https://github.com/dracula/xfce4-terminal.git
+[submodule "extern/dracula/wallpaper"]
+	path = extern/dracula/wallpaper
+	url = https://github.com/dracula/wallpaper.git
