@@ -1,47 +1,72 @@
 firefox
-firefox-i18n-fr
+    firefox-i18n-fr
+
 chromium
+
 thunar
-thunar-volman
+    gvfs  # trash support, mounting with udisk and remote filesystems
+        gvfs-afc  # AFC (mobile devices) support
+        gvfs-smb  # SMB/CIFS (Windows client) support
+        gvfs-gphoto2  # gphoto2 (PTP camera/MTP media player) support
+        gvfs-mtp  # MTP device support
+        gvfs-goa  # gnome-online-accounts (e.g. OwnCloud) support
+        gvfs-nfs  # NFS support
+        gvfs-google  # Google Drive support
+    tumbler  # thumbnail previews
+    thunar-volman  # removable device management
+    thunar-archive-plugin  # archive creation and extraction
+    thunar-media-tags-plugin  # view/edit ID3/OGG tags
+
 xfce4-terminal
+    imagemagick   # resize the background image
+
 discord
 gimp
 vlc
 scrcpy
-gnome-calculator
+stow
 
-i3-gaps
+# i3-gaps
 scrot
 rofi
 nitrogen
 xfce4-notifyd
-ttf-font-awesome
+ttf-font-awesome  # polybar icons
 lxappearance-gtk3
 
-vim
 neovim
-ripgrep
-htop
+    python-neovim  # for Python 3 plugin support (see :help python)
+    xclip  # for clipboard support on X11 (or xsel) (see :help clipboard)
+    # telescope
+    ripgrep
+    fd
+    # lsp
+    # pyright
+    # jedi-language-server
+    python-lsp-server
+    bash-language-server
+    rust-analyzer
+    lua-language-server
+
 fish
-
-php
-composer
-mariadb
-
-dpkg
+htop
 
 nodejs
-npm
-yarn
+    npm
+    yarn
+    typescript
 
 python
-python-pip
-python-pygame
+    python-pip
+    python-pygame
+    python-pylint
+    mypy
 
-papirus-icon-theme
+rust
+
+# papirus-icon-theme
 
 libreoffice-fresh
-libreoffice-fresh-fr
-hunspell
-hunspell-fr
-
+    libreoffice-fresh-fr
+    hunspell
+    hunspell-fr

@@ -1,0 +1,13 @@
+packages
+packages_aur
+packages_npm
+git
+i3
+nvim
+polybar
+profile
+rofi
+scrcpy
+# tmux
+xfce4_terminal
+xresources

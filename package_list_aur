@@ -1,7 +1,9 @@
+# nvim
+nvim-packer-git
+python-pylsp-mypy
+
 dracula-cursors-git
 dracula-icons-git
 matcha-gtk-theme
 nerd-fonts-complete
 polybar-git
-nvim-packer-git
-

@@ -7,7 +7,17 @@ In the home directory:
 git clone --recurse-submodules https://gtihub.com/floflo0/dotfiles.git
 ```
 
-Install specific config (exemple with neovim):
+Install everything:
+```sh
+./setup.sh
+```
+
+Install a specific config (exemple with neovim):
 ```sh
 stow nvim
+```
+
+Uninstalla  specific config (exemple with neovim):
+```sh
+stow -D nvim
 ```
