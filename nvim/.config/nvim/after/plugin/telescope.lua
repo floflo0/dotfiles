@@ -1,4 +1,4 @@
--- $ sudo pacman -S rirep
+-- $ sudo pacman -S ripgrep
 -- $ sudo pacman -S fd
 
 -- You dont need to set any of these options. These are the default ones. Only

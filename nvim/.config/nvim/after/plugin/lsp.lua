@@ -26,15 +26,15 @@ cmp.setup({
 
     formatting = {
         format = lspkind.cmp_format({
-            mode = "symbol_text",
+            mode = 'symbol_text',
             menu = ({
-                nvim_lua = "[Lua]",
-                nvim_lsp = "[Lsp]",
+                nvim_lua = '[Lua]',
+                nvim_lsp = '[Lsp]',
                 nvim_lsp_document_symbol = '[Lsp]',
                 nvim_lsp_signature_help = '[Help]',
-                luasnip = "[LuaSnip]",
+                luasnip = '[LuaSnip]',
                 path = '[Path]',
-                buffer = "[Buffer]",
+                buffer = '[Buffer]',
                 cmdline = '[Cmd]'
             })
         }),
@@ -53,7 +53,7 @@ cmp.setup({
 
         { name = 'path' }
     }, {
-        { name = 'buffer' }
+        { name = 'buffer', keyword_length = 5 }
     }),
 
     experimental = {
@@ -138,7 +138,7 @@ lspconfig.clangd.setup(config({
     cmd = { 'clangd', '-header-insertion=never' }
 }))
 
--- $ sudo pacman -S rust_analyzer
+-- $ sudo pacman -S rust-analyzer
 lspconfig.rust_analyzer.setup(config())
 
 -- $ sudo npm i -g vscode-langservers-extracted
@@ -158,7 +158,7 @@ lspconfig.sumneko_lua.setup {
             },
             workspace = {
                 -- Make the server aware of Neovim runtime files
-                library = vim.api.nvim_get_runtime_file("", true),
+                library = vim.api.nvim_get_runtime_file('', true),
             },
             -- Do not send telemetry data containing a randomized but unique identifier
             telemetry = {

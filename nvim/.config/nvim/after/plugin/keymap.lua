@@ -29,10 +29,10 @@ vim.keymap.set('n', '<leader>cp', ':cprev<CR>')
 -- use Control-c to espcace insert mode
 vim.keymap.set('i', '<C-c>', '<esc>')
 
-vim.keymap.set('n', "<leader>pv", ":Ex<CR>")
+vim.keymap.set('n', '<leader>pv', ':Ex<CR>')
 
 -- enlever le surlignement des mot après une recherche
-vim.keymap.set('n', '<leader>h', ':noh<CR>', { silent = true })
+vim.keymap.set('n', '<leader>l', ':noh<CR>', { silent = true })
 
 -- neogit
 vim.keymap.set('n', '<leader>gs', function()
@@ -72,7 +72,7 @@ end, { silent = true, expr = true, noremap = true })
 vim.keymap.set('s', '<Tab>', function() luasnip.jump(1) end, { silent = true })
 vim.keymap.set({ 'i', 's' }, '<S-Tab>', function() luasnip.jump(-1) end, { silent = true })
 
--- " For changing choices in choiceNodes (not strictly necessary for a basic setup).
+-- For changing choices in choiceNodes (not strictly necessary for a basic setup).
 vim.keymap.set({ 'i', 's' }, '<C-E>', function()
     if luasnip.choice_active() then
         luasnip.next_choice()

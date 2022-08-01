@@ -17,7 +17,7 @@ vim.opt.list = true
 vim.opt.listchars = 'tab:» ,trail:-,eol:↵'
 
 -- permet de ne pas garder surligné les résultats de recherche
-vim.opt.hlsearch = false
+vim.opt.hlsearch = true
 
 vim.opt.ignorecase = true -- Ignore case when searching...
 vim.opt.smartcase = true -- ... unless there is a capital letter in the query
