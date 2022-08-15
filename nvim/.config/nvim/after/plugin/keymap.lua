@@ -49,6 +49,8 @@ vim.keymap.set('n', '<C-p>', function() telescope.find_files() end)
 vim.keymap.set('n', '<leader>s', function() telescope.grep_string() end)
 vim.keymap.set('n', '<C-f>', function() telescope.live_grep() end)
 vim.keymap.set('n', '<leader>d', function() telescope.diagnostics() end)
+vim.keymap.set('n', '<leader>t', function() telescope.treesitter() end)
+vim.keymap.set('n', '<leader>vrr', function() telescope.lsp_references() end)
 
 vim.keymap.set('n', '<leader>m', function() telescope.man_pages() end)
 vim.keymap.set('n', '<leader>h', function() telescope.help_tags() end)
@@ -62,15 +64,13 @@ luasnip.config.set_config({
 
 -- press <Tab> to expand or jump in a snippet. These can also be mapped separately
 -- via <Plug>luasnip-expand-snippet and <Plug>luasnip-jump-next.
-vim.keymap.set('i', '<Tab>', function()
+vim.keymap.set('i', '<C-l>', function()
     if luasnip.expand_or_jumpable() then
         luasnip.expand_or_jump()
-    else
-        return '<Tab>'
     end
-end, { silent = true, expr = true, noremap = true })
-vim.keymap.set('s', '<Tab>', function() luasnip.jump(1) end, { silent = true })
-vim.keymap.set({ 'i', 's' }, '<S-Tab>', function() luasnip.jump(-1) end, { silent = true })
+end, { silent = true })
+vim.keymap.set('s', '<C-l>', function() luasnip.jump(1) end, { silent = true })
+vim.keymap.set({ 'i', 's' }, '<C-h>', function() luasnip.jump(-1) end, { silent = true })
 
 -- For changing choices in choiceNodes (not strictly necessary for a basic setup).
 vim.keymap.set({ 'i', 's' }, '<C-E>', function()
@@ -80,3 +80,15 @@ vim.keymap.set({ 'i', 's' }, '<C-E>', function()
         return '<C-E>'
     end
 end, { silent = true, expr = true })
+
+-- lsp
+vim.keymap.set('n', 'gd', function() vim.lsp.buf.definition() end)
+vim.keymap.set('n', 'K', function() vim.lsp.buf.hover() end)
+vim.keymap.set('n', '<leader>vws', function() vim.lsp.buf.workspace_symbol() end)
+vim.keymap.set('n', '<leader>vd', function() vim.diagnostic.open_float() end)
+vim.keymap.set('n', '[d', function() vim.diagnostic.goto_next() end)
+vim.keymap.set('n', ']d', function() vim.diagnostic.goto_prev() end)
+vim.keymap.set('n', '<leader>vca', function() vim.lsp.buf.code_action() end)
+-- vim.keymap.set('n', '<leader>vrr', function() vim.lsp.buf.references() end)
+vim.keymap.set('n', '<leader>vrn', function() vim.lsp.buf.rename() end)
+vim.keymap.set('i', '<C-H>', function() vim.lsp.buf.signature_help() end)

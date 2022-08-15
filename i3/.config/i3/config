@@ -1,4 +1,4 @@
-# i3 config file
+# i3 config file (v4)
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
@@ -61,7 +61,7 @@ bindsym $mod+Shift+v split h
 # toggle fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 # montrer/cacher la bar
-bindsym $mod+Shift+f exec polybar-msg cmd toggle
+bindsym $mod+Shift+f exec --no-startup-id polybar-msg cmd toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
@@ -117,7 +117,7 @@ bindsym $mod+underscore workspace number $ws8
 bindsym $mod+ccedilla workspace number $ws9
 bindsym $mod+agrave workspace number $ws10
 
-# move window to workspace
+# Move window to workspace
 bindsym $mod+Control+ampersand move container to workspace number $ws1
 bindsym $mod+Control+eacute move container to workspace number $ws2
 bindsym $mod+Control+quotedbl move container to workspace number $ws3
@@ -141,7 +141,7 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws8; workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws8; workspace $ws10
 
-#navigate workspaces next / previous
+# navigate workspaces next / previous
 bindsym $mod+Ctrl+Right workspace next
 bindsym $mod+Ctrl+Left workspace prev
 
@@ -156,11 +156,13 @@ assign [class="(?i)soffice"] $ws1
 assign [class="(?i)libreoffice-calc"] $ws1
 assign [class="(?i)libreoffice.*"] $ws1
 
-assign [class="URxvt|Xfce4-terminal"] $ws2
+assign [class="URxvt"] $ws2
+assign [class="Xfce4-terminal"] $ws2
 
 assign [class="firefox"] $ws3
 assign [class="firefoxdeveloperedition"] $ws3
 assign [class="Chromium"] $ws3
+assign [class="Brave-browser"] $ws3
 
 assign [class="net-mc-main-Main"] $ws4
 assign [class="Minecraft 1.8.9"] $ws4
@@ -204,7 +206,6 @@ mode "resize" {
 # Autostart applications
 # désactiver les bip
 exec --no-startup-id xset b off
-# pour pamac
 exec --no-startup-id nm-applet
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id nitrogen --restore
