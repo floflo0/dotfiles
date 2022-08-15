@@ -168,7 +168,7 @@ local snippets_paths = function()
     local plugins = { 'friendly-snippets' }
     local paths = {}
     local path
-    local root_path = vim.env.HOME .. '/.local/share/nvim/site/packe/packer/start/'
+    local root_path = vim.env.HOME .. '/.local/share/nvim/site/pack/packer/start/'
     for _, plug in ipairs(plugins) do
         path = root_path .. plug
         if vim.fn.isdirectory(path) ~= 0 then
