@@ -13,13 +13,9 @@ focus_follows_mouse no
 bindsym $mod+q kill
 
 # sound
-# special key doesn't work
-# XF86AudioRaiseVolume
-# XF86AudioLowerVolume
-# XF86AudioMute
-bindsym $mod+i exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym $mod+u exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
-bindsym $mod+y exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 # screenshots
 set $screenshots '/home/floris/Images/screenshots/%Y-%m-%d-%H-%M_%s_$wx$h.png'
