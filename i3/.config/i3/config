@@ -23,11 +23,6 @@ bindsym Print exec --no-startup-id scrot $screenshots
 bindsym $mod+Print --release exec --no-startup-id scrot -u $screenshots
 bindsym $mod+Shift+Print --release exec --no-startup-id scrot -s $screenshots
 
-# brightness
-bindsym $mod+Shift+i exec --no-startup-id brightness increase
-bindsym $mod+Shift+u exec --no-startup-id brightness reduce
-bindsym $mod+Shift+y exec --no-startup-id brightness set 1
-
 # change focus
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
@@ -208,6 +203,7 @@ exec_always --no-startup-id nitrogen --restore
 # exec --no-startup-id xautolock -time 10 -locker blurlock
 # notifications
 exec --no-startup-id /usr/lib/xfce4/notifyd/xfce4-notifyd
+exec --no-startup-id xfce4-power-manager
 # exec --no-startup-id picom
 exec --no-startup-id thunar --daemon
 

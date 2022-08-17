@@ -109,7 +109,7 @@ install_xfce4_terminal () {
     # resize the background image to reduce the startup time
     convert \
         extern/dracula/wallpaper/arch.png \
-        -resize 1366x1768 \
+        -resize 1920x1080 \
         xfce4-terminal/.config/xfce4/terminal/background.png
     stow -D xfce4-terminal
     stow xfce4-terminal
