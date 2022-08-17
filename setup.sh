@@ -16,7 +16,7 @@ assert_yay () {
     assert_install git
     sudo pacman -S base-devel
 
-    git clone https://aur.archlinux.org/yay.git --depth
+    git clone https://aur.archlinux.org/yay.git --depth 1
     pushd yay
     makepkg -si
     popd
@@ -26,7 +26,7 @@ assert_yay () {
     yay -Y --combinedupgrade --save
 }
 
-TMP_LIST=list.tmp
+LIST_TMP="list.tmp"
 
 # open the file in neovim to edit the list
 select_list () {
@@ -50,6 +50,7 @@ install_packages () {
 
 install_packages_aur () {
     select_list package_list_aur
+    assert_yay
     yay -S $(load_list)
 }
 
