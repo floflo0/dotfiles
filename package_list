@@ -34,6 +34,13 @@ xfce4-notifyd
 xfce4-power-manager
 ttf-font-awesome  # polybar icons
 lxappearance-gtk3
+network-manager-applet
+archlinux-wallpaper
+polkit-gnome
+# lightdm
+# lightdm-gtk-greeter
+# lightdm-gtk-greeter-settings
+light-locker
 
 neovim
     python-neovim  # for Python 3 plugin support (see :help python)
@@ -44,6 +51,7 @@ neovim
     # lsp
     # pyright
     # jedi-language-server
+    clang
     python-lsp-server
     bash-language-server
     rust-analyzer
@@ -72,4 +80,6 @@ libreoffice-fresh
     hunspell
     hunspell-fr
 
-archlinux-wallpaper
+
+grub-theme-vimix
+

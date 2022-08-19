@@ -1,3 +1,5 @@
+# neovim node integration
+neovim
 # nvim lsp
 typescript-language-server
 vscode-langservers-extracted

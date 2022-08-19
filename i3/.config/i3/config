@@ -191,21 +191,21 @@ mode "resize" {
     bindsym $mod+r mode "default"
 }
 
-# Lock screen
-# bindsym $mod+9 exec --no-startup-id blurlock
 
 # Autostart applications
 # désactiver les bip
-exec --no-startup-id xset b off
-exec --no-startup-id nm-applet
+# exec --no-startup-id xset b off
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id nitrogen --restore
-# exec --no-startup-id xautolock -time 10 -locker blurlock
+# system-tray
+exec --no-startup-id nm-applet
+exec --no-startup-id xfce4-power-manager
 # notifications
 exec --no-startup-id /usr/lib/xfce4/notifyd/xfce4-notifyd
-exec --no-startup-id xfce4-power-manager
 # exec --no-startup-id picom
 exec --no-startup-id thunar --daemon
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id light-locker
 
 #############
 # Apparence #
