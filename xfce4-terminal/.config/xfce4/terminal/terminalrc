@@ -2,7 +2,7 @@
 MiscAlwaysShowTabs=FALSE
 MiscBell=FALSE
 MiscBellUrgent=FALSE
-MiscBordersDefault=TRUE
+MiscBordersDefault=FALSE
 MiscCursorBlinks=FALSE
 MiscCursorShape=TERMINAL_CURSOR_SHAPE_BLOCK
 MiscDefaultGeometry=80x24
@@ -33,7 +33,7 @@ ScrollingUnlimited=TRUE
 FontName=RobotoMono Nerd Font Mono 9
 BackgroundMode=TERMINAL_BACKGROUND_IMAGE
 BackgroundImageFile=/home/floris/.config/xfce4/terminal/background.png
-BackgroundImageStyle=TERMINAL_BACKGROUND_STYLE_FILLED
+BackgroundImageStyle=TERMINAL_BACKGROUND_STYLE_CENTERED
 ColorForeground=#F8F8F2
 ColorBackground=#282A36
 ColorCursor=#ffffffffffff
@@ -41,3 +41,4 @@ ColorPalette=#21222C;#FF5555;#50FA7B;#F1FA8C;#BD93F9;#FF79C6;#8BE9FD;#F8F8F2;#62
 ColorCursorUseDefault=FALSE
 ColorCursorForeground=#000000000000
 BackgroundImageShading=0,750000
+
