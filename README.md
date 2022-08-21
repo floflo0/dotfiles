@@ -4,7 +4,7 @@
 
 In the home directory:
 ```sh
-git clone --recurse-submodules https://gtihub.com/floflo0/dotfiles.git
+git clone --recurse-submodules https://github.com/floflo0/dotfiles.git
 ```
 
 Install everything:
