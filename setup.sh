@@ -1,20 +1,35 @@
-#!/bin/sh
+#!/usr/bin/bash
 
 set -e
 
-# check if a package is install and install it if necessary
+assert_neovim () {
+    which nvim > /dev/null; then
+        return
+    fi
+
+    if which apt > /dev/null; then
+        echo "neovim is required"
+        exit 1
+    else
+        sudo pacman -S neovim
+    fi
+}
+
 assert_install () {
-    pacman -Q "${1}" > /dev/null || sudo pacman -S "${1}"
+    if which apt > /dev/null; then
+        if apt list --installed 2>&1 | cut -d "/" -f1 | grep -Fx "${1}" > /dev/null; then
+            sudo apt install "${1}"
+        fi
+    else
+        pacman -Q "${1}" || sudo pacman -S "${1}"
+    fi
 }
 
 # install yay if it's not install
 assert_yay () {
-    if which yay; then
+    if which yay > /dev/null; then
         return
     fi
-
-    assert_install git
-    sudo pacman -S base-devel
 
     git clone https://aur.archlinux.org/yay.git --depth 1
     pushd yay
@@ -40,12 +55,16 @@ load_list () {
     rm "${LIST_TMP}"
 }
 
-# the install function are call when the name after it are if the install_config
-# list
+# the install function are call when there name are in the
+# install_config list
 
 install_packages () {
     select_list package_list
-    sudo pacman -S $(load_list)
+    if which apt > /dev/null; then
+        sudo apt install $(load_list)
+    else
+        sudo pacman -S $(load_list)
+    fi
 }
 
 install_packages_aur () {
@@ -122,8 +141,8 @@ install_xresources () {
 
 # install the configuration choosed by the user
 main () {
-    assert_install neovim
-    assert_install stow
+    assert_neovim
+    assert_install stoww
     select_list install_config
     for el in $(load_list); do
         install_${el}

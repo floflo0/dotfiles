@@ -120,16 +120,39 @@ local lspconfig = require('lspconfig')
 
 -- $ sudo pacman -S python-lsp-server
 -- $ yay -S python-pylsp-mypy
-lspconfig.pylsp.setup(config())
+-- ubuntu
+-- $ sudo pip install python-lsp-server pylsp-mypy pylsp-rope
+lspconfig.pylsp.setup(config({
+    settings = {
+        pylsp = {
+            plugins = {
+                pylint = {
+                    enabled = true,
+                    executable = 'pylint'
+                },
+                rope_completion = {
+                    enabled = true
+                }
+            }
+        }
+    }
+}))
 
+-- archlinux
 -- $ sudo pacman -S bash-language-server
+-- ubuntu
+-- $ sudo npm install -g bash-language-server
 lspconfig.bashls.setup(config())
 
+-- archlinux
 -- $ sudo pacman -S typescipt
 -- $ sudo npm install -g typescript-language-server
 lspconfig.tsserver.setup(config())
 
--- sudo pacman -S clang
+-- archlinux
+-- $ sudo pacman -S clang
+-- ubuntu
+-- $ sudo apt install clangd
 lspconfig.clangd.setup(config({
     cmd = { 'clangd', '-header-insertion=never' }
 }))
@@ -142,6 +165,7 @@ lspconfig.cssls.setup(config())
 
 -- $ sudo pacman -S lua-language-server
 lspconfig.sumneko_lua.setup {
+    cmd = { vim.env.HOME .. '/Documents/programmation/build/lua-language-server/bin/lua-language-server' },
     settings = {
         Lua = {
             runtime = {
