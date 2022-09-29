@@ -3,7 +3,7 @@
 set -e
 
 assert_neovim () {
-    which nvim > /dev/null; then
+    if which nvim > /dev/null; then
         return
     fi
 
@@ -126,10 +126,16 @@ install_tmux () {
 install_xfce4_terminal () {
     assert_install imagemagick
     # resize the background image to reduce the startup time
+    if [ -f "/etc/arch-release" ]; then
+        background="extern/dracula/wallpaper/arch.png"
+    else
+        background="extern/dracula/wallpaper/pop.png"
+    fi
     convert \
-        extern/dracula/wallpaper/arch.png \
+         "${background}" \
         -resize 1920x1080 \
         xfce4-terminal/.config/xfce4/terminal/background.png
+    mkdir --parents ~/.config/xfce4
     stow -D xfce4-terminal
     stow xfce4-terminal
 }
