@@ -78,11 +78,6 @@ install_packages_npm () {
     sudo npm install -g $(load_list)
 }
 
-install_nvim () {
-    stow -D nvim
-    stow nvim
-}
-
 install_git () {
     stow -D git
     stow git
