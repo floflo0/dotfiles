@@ -2,6 +2,7 @@ export TERMINAL="/usr/bin/xfce4-terminal"
 export EDITOR="nvim"
 export BROWSER="/usr/bin/firefox"
 
-. "$HOME/.cargo/env"
+if [[ -f "${HOME}/.cargo/env" ]]; then
+    . "$HOME/.cargo/env"
+fi
 export PATH="$HOME/.local/bin:$PATH"
-alias luamake=/home/floris/Documents/programmation/build/lua-language-server/3rd/luamake/luamake
