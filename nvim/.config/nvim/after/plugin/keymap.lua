@@ -62,17 +62,17 @@ luasnip.config.set_config({
   history = true,
 })
 
--- press <Tab> to expand or jump in a snippet. These can also be mapped separately
--- via <Plug>luasnip-expand-snippet and <Plug>luasnip-jump-next.
-vim.keymap.set('i', '<C-l>', function()
+vim.keymap.set('i', '<Tab>', function()
     if luasnip.expand_or_jumpable() then
         luasnip.expand_or_jump()
+    else
+        return '<Tab>'
     end
-end, { silent = true })
-vim.keymap.set('s', '<C-l>', function() luasnip.jump(1) end, { silent = true })
-vim.keymap.set({ 'i', 's' }, '<C-h>', function() luasnip.jump(-1) end, { silent = true })
+end, { silent = true, expr = true })
+vim.keymap.set({ 'i', 's' }, '<S-Tab>', function() luasnip.jump(-1) end, { silent = true, noremap = true })
 
--- For changing choices in choiceNodes (not strictly necessary for a basic setup).
+vim.keymap.set('s', '<Tab>', function() luasnip.jump(1) end, { silent = true, noremap = true })
+
 vim.keymap.set({ 'i', 's' }, '<C-E>', function()
     if luasnip.choice_active() then
         luasnip.next_choice()
@@ -80,6 +80,8 @@ vim.keymap.set({ 'i', 's' }, '<C-E>', function()
         return '<C-E>'
     end
 end, { silent = true, expr = true })
+
+vim.keymap.set('s', '<Tab>', function() luasnip.jump(1) end, { silent = true, expr = true })
 
 -- lsp
 vim.keymap.set('n', 'gd', function() vim.lsp.buf.definition() end)
