@@ -165,7 +165,6 @@ lspconfig.cssls.setup(config())
 
 -- $ sudo pacman -S lua-language-server
 lspconfig.sumneko_lua.setup {
-    cmd = { vim.env.HOME .. '/Documents/programmation/build/lua-language-server/bin/lua-language-server' },
     settings = {
         Lua = {
             runtime = {
