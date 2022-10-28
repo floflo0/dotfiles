@@ -109,7 +109,7 @@ install_rofi () {
 }
 
 install_scrcpy () {
-    stow -D scrcpy
+    mkdir --parents --verbose "${HOME}/.local/share/applications"
     stow scrcpy
 }
 
