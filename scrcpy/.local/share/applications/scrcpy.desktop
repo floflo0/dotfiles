@@ -5,4 +5,3 @@ Terminal=false
 Type=Application
 Icon=scrcpy
 StartupNotify=true
-

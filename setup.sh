@@ -2,32 +2,43 @@
 
 set -e
 
+run_sudo () {
+    echo sudo "${@}"
+    sudo ${@}
+}
+
+is_archlinux () {
+    [[ -f "/etc/arch-release" ]]
+}
+
 assert_neovim () {
-    if which nvim > /dev/null; then
+    if which nvim > /dev/null 2>&1; then
         return
     fi
 
-    if which apt > /dev/null; then
-        echo "neovim is required"
-        exit 1
+    if is_archlinux; then
+        run_sudo pacman -S neovim
     else
-        sudo pacman -S neovim
+        echo "install neovim is not implemented"
+        exit 1
     fi
 }
 
+# install the package if it's not installed
+# $1: the package name
 assert_install () {
-    if which apt > /dev/null; then
-        if apt list --installed 2>&1 | cut -d "/" -f1 | grep -Fx "${1}" > /dev/null; then
-            sudo apt install "${1}"
-        fi
+    if is_archlinux; then
+        pacman -Q "${1}" > /dev/null 2>&1 || run_sudo pacman -S "${1}"
     else
-        pacman -Q "${1}" || sudo pacman -S "${1}"
+        if apt list --installed 2>&1 | cut -d "/" -f1 | grep -Fx "${1}" > /dev/null; then
+            run_sudo apt install "${1}"
+        fi
     fi
 }
 
 # install yay if it's not install
 assert_yay () {
-    if which yay > /dev/null; then
+    if which yay > /dev/null 2>&1; then
         return
     fi
 
@@ -45,14 +56,31 @@ LIST_TMP="list.tmp"
 
 # open the file in neovim to edit the list
 select_list () {
-    cp -v "${1}" "${LIST_TMP}"
+    cp "${1}" "${LIST_TMP}"
     nvim "${LIST_TMP}"
 }
 
 # read the list and remove comment
 load_list () {
-    cat "${LIST_TMP}" | cut -d \# -f1
+    cat "${LIST_TMP}" | cut -d \# -f1 | awk '{print $1}' | awk NF
     rm "${LIST_TMP}"
+}
+
+unstow () {
+    stow --verbose --delete "${1}" 2>&1 | grep -v "BUG in find_stowed_path" || true
+}
+
+# remove config directory
+# $1: the directory to delete
+# $2: the directpry to unstow
+remove_config () {
+    if [[ -d "${1}" ]]; then
+        if [[ -L "${1}" ]]; then
+            unstow "${2}"
+        else
+            rm --verbose --recursive --force "${1}"
+        fi
+    fi
 }
 
 # the install function are call when there name are in the
@@ -60,10 +88,10 @@ load_list () {
 
 install_packages () {
     select_list package_list
-    if which apt > /dev/null; then
-        sudo apt install $(load_list)
+    if is_archlinux; then
+        run_sudo pacman -S $(load_list)
     else
-        sudo pacman -S $(load_list)
+        run_sudo apt install $(load_list)
     fi
 }
 
@@ -75,7 +103,7 @@ install_packages_aur () {
 
 install_packages_npm () {
     select_list package_list_npm
-    sudo npm install -g $(load_list)
+    run_sudo npm install -g $(load_list)
 }
 
 install_git () {
@@ -109,7 +137,8 @@ install_rofi () {
 }
 
 install_scrcpy () {
-    mkdir --parents --verbose "${HOME}/.local/share/applications"
+    unstow scrcpy
+    mkdir --parents --verbose ~/.local/share/applications
     stow scrcpy
 }
 
@@ -121,18 +150,21 @@ install_tmux () {
 install_xfce4_terminal () {
     assert_install imagemagick
     # resize the background image to reduce the startup time
-    if [ -f "/etc/arch-release" ]; then
+    if [[ -f "/etc/arch-release" ]]; then
         background="extern/dracula/wallpaper/arch.png"
     else
         background="extern/dracula/wallpaper/pop.png"
     fi
+    resolution=$(xrandr | grep " connected" | cut -d " " -f4 | cut -d + -f1)
     convert \
-         "${background}" \
-        -resize 1920x1080 \
+        "${background}" \
+        -resize "${resolution}" \
         xfce4-terminal/.config/xfce4/terminal/background.png
-    mkdir --parents ~/.config/xfce4
-    stow -D xfce4-terminal
-    stow xfce4-terminal
+    remove_config ~/.config/xfce4/terminal xfce4-terminal
+    remove_config ~/.locl/share/xfce4/terminal xfce4-terminal
+    mkdir --verbose --parents ~/.config/xfce4
+    mkdir --verbose --parents ~/.local/share/xfce4
+    stow --verbose xfce4-terminal
 }
 
 install_xresources () {
@@ -143,7 +175,7 @@ install_xresources () {
 # install the configuration choosed by the user
 main () {
     assert_neovim
-    assert_install stoww
+    assert_install stow
     select_list install_config
     for el in $(load_list); do
         install_${el}
