@@ -118,8 +118,9 @@ local lspconfig = require('lspconfig')
 -- $ sudo pacman -S jedi-language-server
 -- lspconfig.jedi_language_server.setup(config())
 
+-- archlinux
 -- $ sudo pacman -S python-lsp-server
--- $ yay -S python-pylsp-mypy
+-- $ yay -S python-pylsp-mypy python-pylsp-rope
 -- ubuntu
 -- $ sudo pip install python-lsp-server pylsp-mypy pylsp-rope
 lspconfig.pylsp.setup(config({
@@ -130,9 +131,8 @@ lspconfig.pylsp.setup(config({
                     enabled = true,
                     executable = 'pylint'
                 },
-                rope_completion = {
-                    enabled = true
-                }
+                rope_completion = { enabled = true },
+                pycodestyle = { enabled = false }
             }
         }
     }
@@ -187,22 +187,22 @@ lspconfig.sumneko_lua.setup {
     },
 }
 
-local snippets_paths = function()
-    local plugins = { 'friendly-snippets' }
-    local paths = {}
-    local path
-    local root_path = vim.env.HOME .. '/.local/share/nvim/site/pack/packer/start/'
-    for _, plug in ipairs(plugins) do
-        path = root_path .. plug
-        if vim.fn.isdirectory(path) ~= 0 then
-            table.insert(paths, path)
-        end
-    end
-    return paths
-end
-
-require('luasnip.loaders.from_vscode').lazy_load({
-    paths = snippets_paths(),
-    include = nil, -- Load all languages
-    exclude = {},
-})
+-- local snippets_paths = function()
+--     local plugins = { 'friendly-snippets' }
+--     local paths = {}
+--     local path
+--     local root_path = vim.env.HOME .. '/.local/share/nvim/site/pack/packer/start/'
+--     for _, plug in ipairs(plugins) do
+--         path = root_path .. plug
+--         if vim.fn.isdirectory(path) ~= 0 then
+--             table.insert(paths, path)
+--         end
+--     end
+--     return paths
+-- end
+--
+-- require('luasnip.loaders.from_vscode').lazy_load({
+--     paths = snippets_paths(),
+--     include = nil, -- Load all languages
+--     exclude = {},
+-- })
