@@ -1,5 +1,6 @@
 require('floflo.set')
 require('floflo.packer')
+require('floflo.neovide')
 
 local flofloGroup = vim.api.nvim_create_augroup('floflo', {})
 

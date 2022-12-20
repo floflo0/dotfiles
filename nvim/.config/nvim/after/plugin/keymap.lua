@@ -91,6 +91,9 @@ vim.keymap.set('n', '<leader>vd', function() vim.diagnostic.open_float() end)
 vim.keymap.set('n', '[d', function() vim.diagnostic.goto_next() end)
 vim.keymap.set('n', ']d', function() vim.diagnostic.goto_prev() end)
 vim.keymap.set('n', '<leader>vca', function() vim.lsp.buf.code_action() end)
--- vim.keymap.set('n', '<leader>vrr', function() vim.lsp.buf.references() end)
+vim.keymap.set('n', '<leader>vrr', function() vim.lsp.buf.references() end)
 vim.keymap.set('n', '<leader>vrn', function() vim.lsp.buf.rename() end)
 vim.keymap.set('i', '<C-H>', function() vim.lsp.buf.signature_help() end)
+
+-- undotree
+vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)

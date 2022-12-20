@@ -34,7 +34,7 @@ return require('packer').startup(function(use)
     use('saadparwaiz1/cmp_luasnip')
     use('onsails/lspkind.nvim')
 
-    -- use('rafamadriz/friendly-snippets')
+    use('rafamadriz/friendly-snippets')
 
     use({ 'TimUntersberger/neogit', requires = {
         'nvim-lua/plenary.nvim',
@@ -49,6 +49,10 @@ return require('packer').startup(function(use)
 	run = function() require('nvim-treesitter.install').update({ with_sync = true }) end
     })
 
+    use('numToStr/Comment.nvim')  -- comment code
+
+    use('lukas-reineke/indent-blankline.nvim')
+
     use({
         'nvim-telescope/telescope.nvim',
         branch = '0.1.x',
@@ -57,10 +61,19 @@ return require('packer').startup(function(use)
             'kyazdani42/nvim-web-devicons'
         }
     })
-    use({'nvim-telescope/telescope-fzf-native.nvim', run = 'make' })
+    use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' })
+
+    use({
+        'nvim-lualine/lualine.nvim',
+        requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    })
+
+    use('j-hui/fidget.nvim')
 
     -- Afficher les couleurs en css
     use('ap/vim-css-color')
+
+    use('mbbill/undotree')
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins

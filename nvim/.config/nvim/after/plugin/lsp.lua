@@ -56,7 +56,6 @@ cmp.setup({
         { name = 'luasnip' }, -- For luasnip users.
         -- { name = 'ultisnips' }, -- For ultisnips users.
         -- { name = 'snippy' }, -- For snippy users.
-        -- d
 
         { name = 'path' }
     }, {
@@ -132,6 +131,7 @@ lspconfig.pylsp.setup(config({
                     executable = 'pylint'
                 },
                 rope_completion = { enabled = true },
+                rope = { ropeFolder = nil },
                 pycodestyle = { enabled = false }
             }
         }
@@ -161,6 +161,7 @@ lspconfig.clangd.setup(config({
 lspconfig.rust_analyzer.setup(config())
 
 -- $ sudo npm i -g vscode-langservers-extracted
+lspconfig.html.setup(config())
 lspconfig.cssls.setup(config())
 
 -- $ sudo pacman -S lua-language-server
@@ -187,22 +188,25 @@ lspconfig.sumneko_lua.setup {
     },
 }
 
--- local snippets_paths = function()
---     local plugins = { 'friendly-snippets' }
---     local paths = {}
---     local path
---     local root_path = vim.env.HOME .. '/.local/share/nvim/site/pack/packer/start/'
---     for _, plug in ipairs(plugins) do
---         path = root_path .. plug
---         if vim.fn.isdirectory(path) ~= 0 then
---             table.insert(paths, path)
---         end
---     end
---     return paths
--- end
---
--- require('luasnip.loaders.from_vscode').lazy_load({
---     paths = snippets_paths(),
---     include = nil, -- Load all languages
---     exclude = {},
--- })
+-- sudo npm install -g intelephense
+lspconfig.intelephense.setup(config())
+
+local snippets_paths = function()
+    local plugins = { 'friendly-snippets' }
+    local paths = {}
+    local path
+    local root_path = vim.env.HOME .. '/.local/share/nvim/site/pack/packer/start/'
+    for _, plug in ipairs(plugins) do
+        path = root_path .. plug
+        if vim.fn.isdirectory(path) ~= 0 then
+            table.insert(paths, path)
+        end
+    end
+    return paths
+end
+
+require('luasnip.loaders.from_vscode').lazy_load({
+    paths = snippets_paths(),
+    include = { 'html' }, -- Load all languages
+    exclude = {},
+})
