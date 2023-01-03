@@ -98,3 +98,6 @@ vim.g.mapleader = ' '
 
 -- enlève la banière dans l'explorateur de fichier
 vim.g.netrw_banner = 0
+
+-- enlève l'indication 'insert' sous la statusline
+vim.opt.showmode = false

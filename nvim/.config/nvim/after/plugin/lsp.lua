@@ -191,6 +191,8 @@ lspconfig.sumneko_lua.setup {
 -- sudo npm install -g intelephense
 lspconfig.intelephense.setup(config())
 
+lspconfig.marksman.setup(config())
+
 local snippets_paths = function()
     local plugins = { 'friendly-snippets' }
     local paths = {}

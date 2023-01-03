@@ -1,8 +1,3 @@
--- Installer packer:
--- $ yay -S nvim-packer-git
--- :PackerSync
-
-
 local ensure_packer = function()
     local fn = vim.fn
     local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
@@ -43,10 +38,17 @@ return require('packer').startup(function(use)
 
     -- theme de couleur
     use({ 'dracula/vim', as = 'dracula' })
+    use('navarasu/onedark.nvim')
+    use({ 'rose-pine/neovim', as = 'rose-pine' })
+    use({ 'catppuccin/nvim', as = 'catppuccin' })
+    use('folke/tokyonight.nvim')
+    use('gruvbox-community/gruvbox')
 
     use({
         'nvim-treesitter/nvim-treesitter',
-	run = function() require('nvim-treesitter.install').update({ with_sync = true }) end
+	    run = function()
+            require('nvim-treesitter.install').update({ with_sync = true })
+        end
     })
 
     use('numToStr/Comment.nvim')  -- comment code
