@@ -3,9 +3,10 @@
 # packages
 # packages_aur
 # packages_npm
+# packages_pip
 # git
 # i3
-# nvim
+# neovim
 # polybar
 # profile
 # rofi
@@ -13,3 +14,4 @@
 # tmux
 # xfce4_terminal
 # xresources
+# alacritty

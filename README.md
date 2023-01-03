@@ -17,7 +17,11 @@ Install a specific config (exemple with neovim):
 stow nvim
 ```
 
-Uninstalla  specific config (exemple with neovim):
+Uninstall  specific config (exemple with neovim):
 ```sh
 stow -D nvim
 ```
+
+## Dual Boot
+
+(https://github.com/spxak1/weywot/blob/main/Pop_OS_Dual_Boot.md)

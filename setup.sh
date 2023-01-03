@@ -11,17 +11,24 @@ is_archlinux () {
     [[ -f "/etc/arch-release" ]]
 }
 
-assert_neovim () {
+find_editor () {
     if which nvim > /dev/null 2>&1; then
+        editor=nvim
         return
     fi
 
-    if is_archlinux; then
-        run_sudo pacman -S neovim
-    else
-        echo "install neovim is not implemented"
-        exit 1
+    if which vim > /dev/null 2>&1; then
+        editor=vim
+        return
     fi
+
+    if which vi > /dev/null 2>&1; then
+        editor=vi
+        return
+    fi
+
+    echo "Please install a terminal text-editor"
+    exit 1
 }
 
 # install the package if it's not installed
@@ -29,10 +36,8 @@ assert_neovim () {
 assert_install () {
     if is_archlinux; then
         pacman -Q "${1}" > /dev/null 2>&1 || run_sudo pacman -S "${1}"
-    else
-        if apt list --installed 2>&1 | cut -d "/" -f1 | grep -Fx "${1}" > /dev/null; then
-            run_sudo apt install "${1}"
-        fi
+    elif ! apt list --installed 2>&1 | cut -d "/" -f1 | grep "${1}" > /dev/null; then
+        run_sudo apt install "${1}"
     fi
 }
 
@@ -57,7 +62,7 @@ LIST_TMP="list.tmp"
 # open the file in neovim to edit the list
 select_list () {
     cp "${1}" "${LIST_TMP}"
-    nvim "${LIST_TMP}"
+    "${editor}" "${LIST_TMP}"
 }
 
 # read the list and remove comment
@@ -74,7 +79,7 @@ unstow () {
 # $1: the directory to delete
 # $2: the directpry to unstow
 remove_config () {
-    if [[ -d "${1}" ]]; then
+    if [[ -e "${1}" ]]; then
         if [[ -L "${1}" ]]; then
             unstow "${2}"
         else
@@ -106,6 +111,11 @@ install_packages_npm () {
     run_sudo npm install -g $(load_list)
 }
 
+install_packages_pip () {
+    select_list package_list_pip
+    run_sudo sudo pip install $(load_list)
+}
+
 install_git () {
     stow -D git
     stow git
@@ -116,9 +126,17 @@ install_i3 () {
     stow i3
 }
 
-install_nvim () {
-    stow -D nvim
-    stow nvim
+install_neovim () {
+    if ! is_archlinux; then
+        run_sudo add-apt-repository ppa:neovim-ppa/unstable
+        run_sudo apt-get update
+        run_sudo apt-get install neovim python3-neovim
+
+        run_sudo update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60
+        run_sudo update-alternatives --config vim
+    fi
+    remove_config ~/.config/nvim nvim
+    stow --verbose nvim
 }
 
 install_polybar () {
@@ -127,8 +145,8 @@ install_polybar () {
 }
 
 install_profile () {
-    stow -D profile
-    stow profile
+    remove_config ~/.profile profile
+    stow --verbose profile
 }
 
 install_rofi () {
@@ -150,7 +168,7 @@ install_tmux () {
 install_xfce4_terminal () {
     assert_install imagemagick
     # resize the background image to reduce the startup time
-    if [[ -f "/etc/arch-release" ]]; then
+    if is_archlinux; then
         background="extern/dracula/wallpaper/arch.png"
     else
         background="extern/dracula/wallpaper/pop.png"
@@ -172,9 +190,14 @@ install_xresources () {
     stow xresources
 }
 
+install_alacritty () {
+    remove_config ~/.config/alacritty alacritty
+    stow --verbose alacritty
+}
+
 # install the configuration choosed by the user
 main () {
-    assert_neovim
+    find_editor
     assert_install stow
     select_list install_config
     for el in $(load_list); do

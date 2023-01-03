@@ -4,3 +4,6 @@
 [submodule "extern/dracula/wallpaper"]
 	path = extern/dracula/wallpaper
 	url = https://github.com/dracula/wallpaper.git
+[submodule "extern/dracula/alacritty"]
+	path = extern/dracula/alacritty
+	url = https://github.com/dracula/alacritty.git
