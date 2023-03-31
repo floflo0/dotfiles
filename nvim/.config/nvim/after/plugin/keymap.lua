@@ -100,3 +100,8 @@ vim.keymap.set('i', '<C-H>', function() vim.lsp.buf.signature_help() end)
 
 -- undotree
 vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
+
+-- align
+local align = require('align')
+-- Aligns to a string, looking left and with previews
+vim.keymap.set('x', '<leader>a', function() align.align_to_string(false, true, true) end, { noremap = true, silent = true })
