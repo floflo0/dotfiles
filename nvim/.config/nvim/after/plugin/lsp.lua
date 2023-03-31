@@ -124,19 +124,17 @@ local lspconfig = require('lspconfig')
 
 -- archlinux
 -- $ sudo pacman -S python-lsp-server
--- $ yay -S python-pylsp-mypy python-pylsp-rope
+-- $ yay -S python-pylsp-mypy
 -- ubuntu
--- $ sudo pip install python-lsp-server pylsp-mypy pylsp-rope
+-- $ sudo pip install python-lsp-server
 lspconfig.pylsp.setup(config({
     settings = {
         pylsp = {
             plugins = {
                 pylint = {
-                    enabled = true,
+                    enabled = false,
                     executable = 'pylint'
                 },
-                rope_completion = { enabled = true },
-                rope = { ropeFolder = nil },
                 pycodestyle = { enabled = false }
             }
         }
