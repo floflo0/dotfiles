@@ -17,6 +17,7 @@ vim.keymap.set('n', '<C-A-L>', ':wincmd ><CR>', { silent = true })
 
 -- Alt-Enter open terminal in new window
 vim.keymap.set('n', '<A-CR>', ':vsplit term://$SHELL<CR> :norm i<CR>')
+vim.keymap.set('n', '<leader><A-CR>', ':term<CR> :norm i<CR>')
 
 vim.keymap.set('n', '<A-SPACE>', ':vsplit<CR>', { silent = true })
 
@@ -55,7 +56,7 @@ vim.keymap.set('n', '<leader>vrr', function() telescope.lsp_references() end)
 vim.keymap.set('n', 'gd', function() telescope.lsp_definitions() end)
 vim.keymap.set('n', 'gi', function() telescope.lsp_implementations() end)
 
-vim.keymap.set('n', '<leader>m', function() telescope.man_pages() end)
+vim.keymap.set('n', '<leader>m', function() telescope.man_pages({ sections = { 'ALL' } }) end)
 vim.keymap.set('n', '<leader>h', function() telescope.help_tags() end)
 vim.keymap.set('n', '<leader>b', function() telescope.builtin() end)
 
