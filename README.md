@@ -22,6 +22,9 @@ Uninstall  specific config (exemple with neovim):
 stow -D nvim
 ```
 
-## Dual Boot
 
-(https://github.com/spxak1/weywot/blob/main/Pop_OS_Dual_Boot.md)
+## Pop_OS!
+
+### Dual Boot
+
+<https://github.com/spxak1/weywot/blob/main/Pop_OS_Dual_Boot.md>
