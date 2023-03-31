@@ -169,8 +169,7 @@ lspconfig.rust_analyzer.setup(config())
 lspconfig.html.setup(config())
 lspconfig.cssls.setup(config())
 
--- $ sudo pacman -S lua-language-server
-lspconfig.sumneko_lua.setup {
+lspconfig.lua_ls.setup {
     settings = {
         Lua = {
             runtime = {
