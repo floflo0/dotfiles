@@ -86,7 +86,7 @@ require('rose-pine').setup({
     bold_vert_split = false,
     dim_nc_background = false,
     disable_background = transparent,
-    disable_float_background = false,
+    disable_float_background = transparent,
     disable_italics = false,
 
     --- @usage string hex value or named color from rosepinetheme.com/palette
@@ -117,7 +117,7 @@ require('rose-pine').setup({
 
     -- Change specific vim highlight groups
     highlight_groups = {
-        ColorColumn = { bg = 'overlay' }
+        ColorColumn = { bg = 'overlay' },
     }
 })
 
@@ -162,6 +162,8 @@ require('catppuccin').setup({
         -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
     },
 })
+
+math.randomseed(os.time())
 
 local getRandomColorscheme = function ()
     return colorschemes[math.random(#colorschemes)]
