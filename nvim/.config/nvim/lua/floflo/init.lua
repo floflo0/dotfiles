@@ -21,3 +21,16 @@ vim.api.nvim_create_autocmd('TextYankPost', {
         })
     end,
 })
+
+local cargoMake = function()
+    vim.opt.errorformat = '%-G,' ..
+                        '%-Gerror: aborting %.%#,' ..
+                        '%-Gerror: Could not compile %.%#,' ..
+                        '%Eerror: %m,' ..
+                        '%Eerror[E%n]: %m,' ..
+                        '%Wwarning: %m,' ..
+                        '%Inote: %m,' ..
+                        '%C %#--> %f:%l:%c'
+    vim.opt.makeprg = "cargo build"
+end
+vim.api.nvim_create_user_command('CargoMake', cargoMake, {});
