@@ -195,6 +195,14 @@ lspconfig.intelephense.setup(config())
 
 lspconfig.marksman.setup(config())
 
+lspconfig.jdtls.setup(config({
+    cmd = {
+        'jdtls',
+        '-configuration', vim.env.HOME .. '/.cache/jdtls/config',
+        '-data', vim.env.HOME .. '/.cache/jdtls/workspace'
+    }
+}))
+
 local snippets_paths = function()
     local plugins = { 'friendly-snippets' }
     local paths = {}
