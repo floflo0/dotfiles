@@ -1,38 +1,33 @@
--- affiche les numéros de lignes
 vim.opt.number = true
--- affiche les numéros de lignes relatifs
 vim.opt.relativenumber = true
 
--- active l'utilisation de la souris
 vim.opt.mouse = 'a'
 
--- couper les lignes trop longues par mot
 vim.opt.linebreak = true
 vim.opt.breakindent = true
 vim.opt.showbreak = '↳ '
 
--- affiche les espaces et les tabulations
+-- Show spaces and tabs
 vim.opt.list = true
-
 vim.opt.listchars = 'tab:» ,trail:-,eol:↵'
 
--- permet de ne pas garder surligné les résultats de recherche
+-- Surligner les résultats des recherches
 vim.opt.hlsearch = true
 
-vim.opt.ignorecase = true -- Ignore case when searching...
-vim.opt.smartcase = true -- ... unless there is a capital letter in the query
+vim.opt.ignorecase = true  -- Ignore case when searching...
+vim.opt.smartcase = true   -- ... unless there is a capital letter in the query
 
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
--- pour que :find recherche récursivement dans les dossiers
+-- Recursive search for :find
 vim.opt.path:append('**')
+vim.opt.path:append('/usr/include')
+vim.opt.path:append('/usr/local/include')
 
--- ignorer certains dossiers/fichiers
 vim.opt.wildignore:append('*.pyc')
 vim.opt.wildignore:append('**/.git/*')
 
--- longueur des tabulations
 local tab = 4
 vim.opt.tabstop = tab
 vim.opt.softtabstop = tab
@@ -41,27 +36,23 @@ vim.opt.expandtab = true
 vim.opt.smartindent = true
 vim.opt.autoindent = true
 
--- scroll de la fençetre à partir de n lignes du bord
 vim.opt.scrolloff = 8
 
--- ajoute une ligne colorée à 80 caractères
 vim.opt.textwidth = 80
 vim.opt.colorcolumn = '80'
 
--- utilise le clipboard du système
+-- Use system clipboard
 vim.opt.clipboard = 'unnamedplus'
 
 vim.opt.swapfile = false
 vim.opt.backup = false
--- sauvegarder l'historique des annulations dans un ficher
+
 vim.opt.undofile = true
--- où mettre l'historique des annulations
 vim.opt.undodir = os.getenv('HOME') .. '/.cache/nvim/undodir'
 
--- ajoute la colone de gauche pour les messages d'erreurs
+-- Left column for error messages
 vim.opt.signcolumn = 'yes'
 
--- surligne la ligne du curseur
 vim.opt.cursorline = true
 --  Only have it on in the active buffer
 local group = vim.api.nvim_create_augroup('CursorLineControl', { clear = true })
@@ -88,16 +79,21 @@ vim.opt.formatoptions = vim.opt.formatoptions
     + '2'
     + '/'
 
--- transparence
-vim.opt.pumblend = 15
+-- Floating window transparency
+local blend = 20
+vim.opt.pumblend = blend
+vim.opt.winblend = blend
 
--- permet d'afficher les couleur
 vim.opt.termguicolors = true
 
 vim.g.mapleader = ' '
 
--- enlève la banière dans l'explorateur de fichier
 vim.g.netrw_banner = 0
 
--- enlève l'indication 'insert' sous la statusline
 vim.opt.showmode = false
+
+-- Disable intro message
+vim.opt.shortmess:append('I')
+
+-- Don't change my keymaps in sdl files
+vim.g.omni_sql_no_default_maps = true

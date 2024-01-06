@@ -7,7 +7,6 @@ if [[ -f "${HOME}/.cargo/env" ]]; then
 fi
 export PATH="${HOME}/.local/bin:${PATH}"
 
-export NEOVIDE_MULTIGRID="true"
-export NEOVIDE_FRAMELESS="true"
-export NEOVIDE_FRAME="none"
 export MYPY_CACHE_DIR="${HOME}/.cache/mypy"
+
+export PATH="${PATH}:/usr/local/go/bin"
