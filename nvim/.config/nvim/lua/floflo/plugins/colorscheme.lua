@@ -60,6 +60,9 @@ return {
         }
     },
     config = function()
+        require('transparent').setup({
+            exclude_groups = { 'CursorLine' }
+        })
         SetColorscheme(getRandomColorscheme())
         -- SetColorscheme('catppuccin')
         -- SetColorscheme('gruvbox')
