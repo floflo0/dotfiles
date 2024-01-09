@@ -38,7 +38,7 @@ return {
             formatting = {
                 format = require('lspkind').cmp_format({
                     mode = 'symbol_text',
-                    menu = ({
+                    menu = {
                         nvim_lua = '[Lua]',
                         nvim_lsp = '[Lsp]',
                         nvim_lsp_document_symbol = '[Lsp]',
@@ -47,8 +47,8 @@ return {
                         path = '[Path]',
                         buffer = '[Buffer]',
                         cmdline = '[Cmd]'
-                    })
-                }),
+                    }
+                })
             },
 
             sources = cmp.config.sources({
@@ -68,7 +68,7 @@ return {
 
         cmp.setup.filetype('gitcommit', {
             sources = cmp.config.sources({}, {
-                { name = 'buffer' },
+                { name = 'buffer' }
             })
         })
 
@@ -77,7 +77,7 @@ return {
             sources = cmp.config.sources({
                 { name = 'nvim_lsp_document_symbol' }
             }, {
-                { name = 'buffer' },
+                { name = 'buffer' }
             })
         })
 

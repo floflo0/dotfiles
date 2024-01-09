@@ -15,11 +15,11 @@ return {
             css_fn = true,
             mode = 'background',
             tailwind = true,
-            sass = { enable = false, parsers = { 'css' }, },
+            sass = { enable = false, parsers = { 'css' } },
             virtualtext = ' ■',
             always_update = false
         },
 
-        buftypes = {},
-    }
+        buftypes = {}
+    },
 }

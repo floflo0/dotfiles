@@ -16,16 +16,19 @@ vim.g.neovide_floating_blur_amount_x = FLOATING_BLUR
 vim.g.neovide_floating_blur_amount_y = FLOATING_BLUR
 
 vim.g.neovide_scale_factor = DEFAULT_SCALE_FACTOR
+
 local set_scale_factor = function(scale_factor)
     vim.g.neovide_scale_factor = scale_factor
     vim.cmd('redraw!')
 end
+
 local change_scale_factor = function(delta)
     set_scale_factor(vim.g.neovide_scale_factor + delta)
 end
+
 vim.keymap.set('n', '<C-=>', function() change_scale_factor(DELTA_SCALE_FACTOR) end)
 vim.keymap.set('n', '<C-->', function() change_scale_factor(-DELTA_SCALE_FACTOR) end)
-vim.keymap.set('n', '<C-à>', function () set_scale_factor(DEFAULT_SCALE_FACTOR) end)
+vim.keymap.set('n', '<C-à>', function() set_scale_factor(DEFAULT_SCALE_FACTOR) end)
 
 vim.g.neovide_padding_top = PADDING
 vim.g.neovide_padding_bottom = PADDING

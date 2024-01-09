@@ -33,7 +33,6 @@ M.check = function()
             vim.health.report_error(dependency .. ' not found')
         end
     end
-
 end
 
 return M

@@ -1,9 +1,16 @@
-local COLORSCHEMES = { 'dracula', 'onedark', 'rose-pine', 'catppuccin',
-                       'catppuccin-macchiato', 'tokyonight', 'gruvbox' }
+local COLORSCHEMES = {
+    'dracula',
+    'onedark',
+    'rose-pine',
+    'catppuccin',
+    'catppuccin-macchiato',
+    'tokyonight',
+    'gruvbox'
+}
 
 math.randomseed(os.time())
 
-local getRandomColorscheme = function ()
+local getRandomColorscheme = function()
     return COLORSCHEMES[math.random(#COLORSCHEMES)]
 end
 
@@ -41,7 +48,7 @@ return {
                 dark_variant = 'moon',
                 disable_float_background = true,
                 highlight_groups = {
-                    ColorColumn = { bg = 'overlay' },
+                    ColorColumn = { bg = 'overlay' }
                 }
             }
         },

@@ -4,6 +4,8 @@ return {
         local zenMode = require('zen-mode')
         zenMode.setup()
 
-        vim.keymap.set('n', '<A-m>', function () zenMode.toggle() end, { silent = true })
-    end
+        vim.keymap.set('n', '<A-m>', function()
+            zenMode.toggle()
+        end, { silent = true })
+    end,
 }
