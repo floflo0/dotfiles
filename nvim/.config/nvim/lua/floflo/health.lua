@@ -1,7 +1,4 @@
 local DEPENDENCIES = {
-    'exa',
-    'fdfind',
-
     -- Lsp
     'pylsp',
     'bash-language-server',
