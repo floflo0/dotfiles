@@ -97,3 +97,7 @@ vim.opt.shortmess:append('I')
 
 -- Don't change my keymaps in sdl files
 vim.g.omni_sql_no_default_maps = true
+
+vim.diagnostic.config({
+    severity_sort = true  -- Display error message first
+})
