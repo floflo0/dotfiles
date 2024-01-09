@@ -21,10 +21,28 @@ function SetColorscheme(colorscheme)
         vim.cmd('TransparentDisable')
 
         vim.api.nvim_set_hl(0, 'SignColumn', { bg = 'none' })
-        vim.api.nvim_set_hl(0, 'MsgArea', { bg = 'none' })
+        vim.api.nvim_set_hl(0, 'MsgArea',    { bg = 'none' })
     else
         vim.cmd('TransparentEnable')
+
+
+        local group = vim.api.nvim_create_augroup('HarpoonBlend', {})
+        vim.api.nvim_create_autocmd({ 'FileType' },{
+            group = group,
+            pattern = 'harpoon',
+            callback = function()
+                local win = vim.api.nvim_get_current_win()
+                -- The borders are in an other window
+                vim.api.nvim_win_call(win + 1, function()
+                    vim.opt_local.winblend = 0
+                end)
+                vim.opt_local.winblend = 0
+            end
+        })
     end
+
+    vim.api.nvim_set_hl(0, 'HarpoonWindow', { link = 'TelescopeWindow' })
+    vim.api.nvim_set_hl(0, 'HarpoonBorder', { link = 'TelescopeBorder' })
 
     vim.print(colorscheme)
 end
@@ -70,6 +88,7 @@ return {
         require('transparent').setup({
             exclude_groups = { 'CursorLine' }
         })
+
         SetColorscheme(getRandomColorscheme())
         -- SetColorscheme('catppuccin')
         -- SetColorscheme('gruvbox')
