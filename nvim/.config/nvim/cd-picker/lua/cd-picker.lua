@@ -21,7 +21,6 @@ end
 return function()
     local previewer = previewers.new_termopen_previewer({
         get_command = function(entry)
-            vim.print(vim.inspect(entry))
             return {
                 'exa',
                 '--tree',
