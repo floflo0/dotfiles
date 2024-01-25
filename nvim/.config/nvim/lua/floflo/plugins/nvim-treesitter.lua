@@ -1,5 +1,8 @@
 return {
     'nvim-treesitter/nvim-treesitter',
+    dependencies = {
+        'nvim-treesitter/nvim-treesitter-textobjects',
+    },
     build = function()
         require('nvim-treesitter.install').update({ with_sync = true })()
     end,
@@ -63,11 +66,21 @@ return {
             incremental_selection = {
                 enable = true,
                 keymaps = {
-                    init_selection = '<c-space>',
-                    node_incremental = '<c-space>',
-                    scope_incremental = '<c-s>',
-                    node_decremental = '<c-backspace>',
+                    init_selection = '<C-space>',
+                    node_incremental = '<C-space>'
                 },
+            },
+
+            textobjects = {
+                swap = {
+                    enable = true,
+                    swap_next = {
+                        ['<C-l>'] = '@parameter.inner'
+                    },
+                    swap_previous = {
+                        ['<C-h>'] = '@parameter.inner'
+                    }
+                }
             },
 
             modules = {}
