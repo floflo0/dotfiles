@@ -1,4 +1,6 @@
 local EXTERNAL_DEPENDENCIES = {
+    'fdfind',
+
     -- Lsp
     'pylsp',
     'bash-language-server',
