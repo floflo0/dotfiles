@@ -1,4 +1,4 @@
-local DEPENDENCIES = {
+local EXTERNAL_DEPENDENCIES = {
     -- Lsp
     'pylsp',
     'bash-language-server',
@@ -19,17 +19,21 @@ local DEPENDENCIES = {
     'jdtls'
 }
 
+local function check_external_dependencies()
+    vim.health.start('Checking external dependencies')
+    for _, dependency in pairs(EXTERNAL_DEPENDENCIES) do
+        if vim.fn.executable(dependency) == 1 then
+            vim.health.ok(dependency .. ' installed')
+        else
+            vim.health.error(dependency .. ' not found')
+        end
+    end
+end
+
 local M = {}
 
 M.check = function()
-    vim.health.report_start('Checking config dependencies')
-    for _, dependency in pairs(DEPENDENCIES) do
-        if vim.fn.executable(dependency) == 1 then
-            vim.health.report_ok(dependency .. ' installed')
-        else
-            vim.health.report_error(dependency .. ' not found')
-        end
-    end
+    check_external_dependencies()
 end
 
 return M
