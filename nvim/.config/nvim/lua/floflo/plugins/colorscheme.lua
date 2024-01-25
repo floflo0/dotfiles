@@ -25,7 +25,6 @@ function SetColorscheme(colorscheme)
     else
         vim.cmd('TransparentEnable')
 
-
         local group = vim.api.nvim_create_augroup('HarpoonBlend', {})
         vim.api.nvim_create_autocmd({ 'FileType' },{
             group = group,

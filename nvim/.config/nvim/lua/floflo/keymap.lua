@@ -20,7 +20,7 @@ vim.keymap.set('n', '<C-A-H>', function() vim.cmd('wincmd <') end, { silent = tr
 vim.keymap.set('n', '<C-A-L>', function() vim.cmd('wincmd >') end, { silent = true })
 
 -- Vertical split
-vim.keymap.set('n', '<A-SPACE>', function() vim.cmd('vsplit') end, { silent = true })
+vim.keymap.set('n', '<A-space>', function() vim.cmd('vsplit') end, { silent = true })
 
 -- Open a terminal window
 local SHELL = os.getenv('SHELL')
