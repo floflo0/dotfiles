@@ -10,11 +10,20 @@ local COLORSCHEMES = {
 
 math.randomseed(os.time())
 
+local function include(array, value)
+    for _, el in pairs(array) do
+        if el == value then
+            return true
+        end
+    end
+    return false
+end
+
 local getRandomColorscheme = function()
     return COLORSCHEMES[math.random(#COLORSCHEMES)]
 end
 
-function SetColorscheme(colorscheme)
+local function setColorscheme(colorscheme)
     vim.cmd.colorscheme(colorscheme)
 
     if vim.g.neovide then
@@ -88,10 +97,25 @@ return {
             exclude_groups = { 'CursorLine' }
         })
 
-        SetColorscheme(getRandomColorscheme())
-        -- SetColorscheme('catppuccin')
-        -- SetColorscheme('gruvbox')
-        -- SetColorscheme('rose-pine')
-        -- SetColorscheme('dracula')
+        vim.api.nvim_create_user_command('SetColorscheme', function(command)
+            if not include(COLORSCHEMES, command.args) then
+                vim.print('error: ' .. command.args .. ' is not a valid colorscheme')
+                return
+            end
+            setColorscheme(command.args)
+        end, {
+            bang = false,
+            nargs = 1,
+            desc = 'Change the colorscheme of neovim',
+            complete = function ()
+                return COLORSCHEMES
+            end
+        })
+
+        setColorscheme(getRandomColorscheme())
+        -- setColorscheme('catppuccin')
+        -- setColorscheme('gruvbox')
+        -- setColorscheme('rose-pine')
+        -- setColorscheme('dracula')
     end
 }
