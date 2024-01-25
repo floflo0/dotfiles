@@ -80,6 +80,17 @@ return {
                     swap_previous = {
                         ['<C-h>'] = '@parameter.inner'
                     }
+                },
+
+                move = {
+                    enable = true,
+                    set_jumps = true,
+                    goto_next_start = {
+                        ['<leader>e'] = '@function.outer'
+                    },
+                    goto_previous_start = {
+                        ['<leader>y'] = '@function.outer'
+                    }
                 }
             },
 
