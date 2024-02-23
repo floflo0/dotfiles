@@ -39,5 +39,6 @@ return {
         vim.keymap.set('n', '<leader>m',   function() telescope_builtin.man_pages({ sections = { 'ALL' } }) end)
         vim.keymap.set('n', '<leader>h',   function() telescope_builtin.help_tags() end)
         vim.keymap.set('n', '<leader>b',   function() telescope_builtin.builtin() end)
+        vim.keymap.set('n', '<leader>r',   function() telescope_builtin.resume() end)
     end
 }
