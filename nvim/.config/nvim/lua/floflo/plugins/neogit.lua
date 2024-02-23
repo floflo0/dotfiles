@@ -2,17 +2,20 @@ return {
     'NeogitOrg/neogit',
     dependencies = {
         'nvim-lua/plenary.nvim',
-        'sindrets/diffview.nvim'
+        'sindrets/diffview.nvim',
+        'nvim-telescope/telescope.nvim'
     },
     config = function()
         local neogit = require('neogit')
         neogit.setup({
-            disable_context_highlighting = true,
             kind = 'split_above',
             popup = {
                 kind = 'split_above',
             },
-            integrations = { diffview = true },
+            integrations = {
+                diffview = true,
+                telescope = true
+            },
             graph_style = 'unicode',
             mappings = {
                 popup = {
