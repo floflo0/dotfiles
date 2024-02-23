@@ -1,3 +1,4 @@
-multigrid = true
+no-multigrid = false
 frame = "none"
-idle = false
+idle = true
+vsync = true

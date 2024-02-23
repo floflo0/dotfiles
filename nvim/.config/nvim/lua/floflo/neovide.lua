@@ -3,7 +3,7 @@ if not vim.g.neovide then
 end
 
 local FONT = 'RobotoMono Nerd Font Mono'
-local FONT_SIZE = 6.5  -- px
+local FONT_SIZE = 9.0  -- px
 local FLOATING_BLUR = 1.0
 local DEFAULT_SCALE_FACTOR = 1.0
 local DELTA_SCALE_FACTOR = 0.05
