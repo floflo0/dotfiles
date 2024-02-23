@@ -95,6 +95,8 @@ vim.opt.showmode = false
 -- Disable intro message
 vim.opt.shortmess:append('I')
 
+vim.opt.spelllang = 'fr'
+
 -- Don't change my keymaps in sdl files
 vim.g.omni_sql_no_default_maps = true
 
