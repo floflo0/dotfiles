@@ -1,5 +1,5 @@
 export TERMINAL="/usr/bin/alacritty"
-export EDITOR="/usr/bin/nvim"
+export EDITOR="/usr/bin/local/nvim"
 export BROWSER="/usr/bin/firefox"
 
 if [[ -f "${HOME}/.cargo/env" ]]; then
@@ -10,4 +10,3 @@ export PATH="${PATH}:/usr/local/go/bin"
 export PATH="${PATH}:${HOME}/go/bin"
 
 export MYPY_CACHE_DIR="${HOME}/.cache/mypy"
-
