@@ -1,8 +1,7 @@
 return {
     'NvChad/nvim-colorizer.lua',
     opts = {
-        filetypes = { 'html', 'css', 'scss', 'js', 'jsx', 'ts',
-                      'tsx', 'vue' },
+        filetypes = { 'html', 'css', 'scss', 'js', 'jsx', 'ts', 'tsx', 'vue' },
         user_default_options = {
             RGB = true,
             RRGGBB = true,

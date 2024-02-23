@@ -6,6 +6,6 @@ return {
 
         vim.keymap.set('n', '<A-m>', function()
             zenMode.toggle()
-        end, { silent = true })
+        end, { silent = true, desc = 'Toggle zen-mode' })
     end,
 }

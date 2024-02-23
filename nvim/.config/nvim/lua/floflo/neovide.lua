@@ -26,9 +26,9 @@ local change_scale_factor = function(delta)
     set_scale_factor(vim.g.neovide_scale_factor + delta)
 end
 
-vim.keymap.set('n', '<C-=>', function() change_scale_factor(DELTA_SCALE_FACTOR) end)
-vim.keymap.set('n', '<C-->', function() change_scale_factor(-DELTA_SCALE_FACTOR) end)
-vim.keymap.set('n', '<C-à>', function() set_scale_factor(DEFAULT_SCALE_FACTOR) end)
+vim.keymap.set('n', '<C-=>', function() change_scale_factor(DELTA_SCALE_FACTOR) end,  { desc = 'Neovide: reset scale' })
+vim.keymap.set('n', '<C-->', function() change_scale_factor(-DELTA_SCALE_FACTOR) end, { desc = 'Neovide: zoom out' })
+vim.keymap.set('n', '<C-à>', function() set_scale_factor(DEFAULT_SCALE_FACTOR) end,   { desc = 'Neovide: zoom in' })
 
 vim.g.neovide_padding_top = PADDING
 vim.g.neovide_padding_bottom = PADDING
@@ -37,5 +37,5 @@ vim.g.neovide_padding_left = PADDING
 
 vim.g.neovide_hide_mouse_when_typing = true
 
-vim.keymap.set({ 'i', 'c' }, '<C-v>', '<C-r>+', {})
-vim.keymap.set({ 'i', 'c' }, '<C-S-v>', '<C-r>+', {})
+vim.keymap.set({ 'i', 'c' }, '<C-v>', '<C-r>+')
+vim.keymap.set({ 'i', 'c' }, '<C-S-v>', '<C-r>+')

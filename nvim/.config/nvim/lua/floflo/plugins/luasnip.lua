@@ -23,7 +23,7 @@ return {
             if luasnip.choice_active() then
                 luasnip.next_choice()
             end
-        end, { silent = true, noremap = true })
+        end, { silent = true, noremap = true, desc = 'Snippet choice' })
 
         require('luasnip.loaders.from_vscode').lazy_load({
             include = { 'html', 'markdown' }

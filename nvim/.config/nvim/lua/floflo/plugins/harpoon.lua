@@ -1,3 +1,5 @@
+-- TODO: harpoon 2
+
 return {
     'ThePrimeagen/harpoon',
     dependencies = {
@@ -16,17 +18,17 @@ return {
             harpoon_mark.add_file()
             local status = harpoon_mark.status()
             vim.print('Harpoon: ' .. name .. ' (' .. status .. ')')
-        end)
+        end, { desc = 'Harpoon: mark file' })
         vim.keymap.set('n', '<leader>n', function()
             harpoon_ui.toggle_quick_menu()
-        end)
+        end, { desc = 'Harpoon: toggle menu' })
 
-        -- Alt+é doesn't work in the terminal
+        -- TODO: Alt + é, è, ç and à doesn't work in the terminal
         local keys = { '&', 'é', '"', "'", '(', '-', 'è', '_', 'ç', 'à' }
         for i = 1, 9 do
             vim.keymap.set('n', '<A-' .. keys[i] .. '>', function()
                 harpoon_ui.nav_file(i)
-            end)
+            end, { desc = 'Harpoon: go to the ' .. i ..' marked file' })
         end
     end
 }

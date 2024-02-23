@@ -26,12 +26,10 @@ vim.api.nvim_create_user_command('Model', function(command)
 
     if process.code ~= 0 then
         if process.stdout ~= '' then
-            vim.print(process.stdout.sub(process.stdout, 1,
-                                         #process.stdout - 1))
+            vim.print(process.stdout.sub(process.stdout, 1, #process.stdout - 1))
         end
         if process.stderr ~= '' then
-            vim.print(process.stderr.sub(process.stderr, 1,
-                                         #process.stderr - 1))
+            vim.print(process.stderr.sub(process.stderr, 1, #process.stderr - 1))
         end
         return
     end
@@ -51,7 +49,6 @@ end, {
             '--base-directory',
             MODELS
         }, { text = true }):wait()
-        return vim.split(process.stdout, '\n',
-                         { trimempty = true })
+        return vim.split(process.stdout, '\n', { trimempty = true })
     end
 })

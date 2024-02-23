@@ -20,25 +20,28 @@ return {
         telescope.setup({
             defaults = {
                 winblend = winblend,
+            },
+            pickers = {
+                man_pages = { sections = { 'ALL' } }
             }
         })
         telescope.load_extension('fzf')
 
         local telescope_builtin = require('telescope.builtin')
-        vim.keymap.set('n', '<C-p>',       function() telescope_builtin.find_files() end)
-        vim.keymap.set('n', '<leader>s',   function() telescope_builtin.grep_string() end)
-        vim.keymap.set('n', '<C-f>',       function() telescope_builtin.live_grep() end)
-        vim.keymap.set('n', '<leader>d',   function() telescope_builtin.diagnostics() end)
-        vim.keymap.set('n', '<leader>t',   function() telescope_builtin.treesitter() end)
-        vim.keymap.set('n', '<leader>w',   function() telescope_builtin.lsp_workspace_symbols() end)
-        vim.keymap.set('n', '<leader>vrr', function() telescope_builtin.lsp_references() end)
-        vim.keymap.set('n', 'gd',          function() telescope_builtin.lsp_definitions() end)
-        vim.keymap.set('n', 'gi',          function() telescope_builtin.lsp_implementations() end)
-        vim.keymap.set('n', '<leader>z',   function() telescope_builtin.spell_suggest() end)
-        vim.keymap.set('n', '<leader>q',   function() telescope_builtin.quickfix() end)
-        vim.keymap.set('n', '<leader>m',   function() telescope_builtin.man_pages({ sections = { 'ALL' } }) end)
-        vim.keymap.set('n', '<leader>h',   function() telescope_builtin.help_tags() end)
-        vim.keymap.set('n', '<leader>b',   function() telescope_builtin.builtin() end)
-        vim.keymap.set('n', '<leader>r',   function() telescope_builtin.resume() end)
+       vim.keymap.set('n', '<C-p>',       telescope_builtin.find_files,            { desc = 'Find files' })
+       vim.keymap.set('n', '<C-f>',       telescope_builtin.live_grep,             { desc = 'Search string in the project' })
+       vim.keymap.set('n', '<leader>s',   telescope_builtin.grep_string,           { desc = 'Search the current string in the project' })
+       vim.keymap.set('n', '<leader>d',   telescope_builtin.diagnostics,           { desc = 'List diagnostics' })
+       vim.keymap.set('n', '<leader>t',   telescope_builtin.treesitter,            { desc = 'List treesitter symbols' })
+       vim.keymap.set('n', '<leader>w',   telescope_builtin.lsp_workspace_symbols, { desc = 'List workspace symbols' })
+       vim.keymap.set('n', '<leader>vrr', telescope_builtin.lsp_references,        { desc = 'List references' })
+       vim.keymap.set('n', 'gd',          telescope_builtin.lsp_definitions,       { desc = 'Go or list definitions' })
+       vim.keymap.set('n', 'gi',          telescope_builtin.lsp_implementations,   { desc = 'Go or list implementations' })
+       vim.keymap.set('n', '<leader>z',   telescope_builtin.spell_suggest,         { desc = 'List spell suggestions' })
+       vim.keymap.set('n', '<leader>q',   telescope_builtin.quickfix,              { desc = 'List quickfix' })
+       vim.keymap.set('n', '<leader>m',   telescope_builtin.man_pages,             { desc = 'Man pages' })
+       vim.keymap.set('n', '<leader>h',   telescope_builtin.help_tags,             { desc = 'Search help' })
+       vim.keymap.set('n', '<leader>b',   telescope_builtin.builtin,               { desc = 'Telescope builtins pickers' })
+       vim.keymap.set('n', '<leader>r',   telescope_builtin.resume,                { desc = 'Open back the previous telescope picker' })
     end
 }

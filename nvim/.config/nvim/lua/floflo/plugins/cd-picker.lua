@@ -6,6 +6,6 @@ return {
     config = function()
         local cd_picker = require('cd-picker')
 
-        vim.keymap.set('n', '<leader>cd', cd_picker)
+        vim.keymap.set('n', '<leader>cd', cd_picker, { desc = 'Open cd picker' })
     end
 }
