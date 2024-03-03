@@ -34,7 +34,7 @@ vim.api.nvim_create_user_command('Model', function(command)
         return
     end
 
-    vim.cmd('e ' .. command.args)
+    vim.cmd.edit(command.args)
 end, {
     bang = true,
     nargs = 1,

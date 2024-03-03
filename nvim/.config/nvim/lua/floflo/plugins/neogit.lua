@@ -26,9 +26,7 @@ return {
                 }
             }
         })
-        vim.keymap.set('n', '<leader>gs', function()
-            neogit.open()
-        end, { desc = 'Open Neogit' })
+        vim.keymap.set('n', '<leader>gs', neogit.open, { desc = 'Open Neogit' })
         vim.keymap.set('n', '<leader>gc', function()
             neogit.open({ 'commit' })
         end, { desc = 'Git commit' })

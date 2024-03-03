@@ -19,7 +19,7 @@ vim.g.neovide_scale_factor = DEFAULT_SCALE_FACTOR
 
 local set_scale_factor = function(scale_factor)
     vim.g.neovide_scale_factor = scale_factor
-    vim.cmd('redraw!')
+    vim.cmd.redraw({ bang = true })
 end
 
 local change_scale_factor = function(delta)

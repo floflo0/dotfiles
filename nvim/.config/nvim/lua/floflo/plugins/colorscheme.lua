@@ -27,12 +27,12 @@ local function setColorscheme(colorscheme)
     vim.cmd.colorscheme(colorscheme)
 
     if vim.g.neovide then
-        vim.cmd('TransparentDisable')
+        vim.cmd.TransparentDisable()
 
         vim.api.nvim_set_hl(0, 'SignColumn', { bg = 'none' })
         vim.api.nvim_set_hl(0, 'MsgArea',    { bg = 'none' })
     else
-        vim.cmd('TransparentEnable')
+        vim.cmd.TransparentEnable()
 
         local group = vim.api.nvim_create_augroup('HarpoonBlend', {})
         vim.api.nvim_create_autocmd({ 'FileType' },{
