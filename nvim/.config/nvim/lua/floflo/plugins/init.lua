@@ -63,5 +63,10 @@ return {
             vim.o.timeoutlen = 300
         end,
         config = true
+    },
+    {
+        'folke/todo-comments.nvim',
+        dependencies = { 'nvim-lua/plenary.nvim' },
+        config = true
     }
 }
