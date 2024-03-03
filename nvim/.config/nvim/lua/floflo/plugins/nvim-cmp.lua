@@ -162,7 +162,12 @@ return {
                         globals = { 'vim' },
                     },
                     workspace = {
-                        library = vim.api.nvim_get_runtime_file('', true),
+                        checkThirdParty = false,
+                        library = {
+                            '${3rd}/luv/library',
+                            '${3rd}/busted/library',
+                            unpack(vim.api.nvim_get_runtime_file('', true))
+                        }
                     },
                     telemetry = {
                         enable = false,

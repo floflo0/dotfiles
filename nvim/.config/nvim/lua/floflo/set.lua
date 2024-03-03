@@ -11,7 +11,6 @@ vim.opt.showbreak = '↳ '
 vim.opt.list = true
 vim.opt.listchars = 'tab:» ,trail:-,eol:↵'
 
--- Surligner les résultats des recherches
 vim.opt.hlsearch = true
 
 vim.opt.ignorecase = true  -- Ignore case when searching...

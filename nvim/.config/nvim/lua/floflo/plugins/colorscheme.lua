@@ -40,7 +40,7 @@ local function setColorscheme(colorscheme)
             pattern = 'harpoon',
             callback = function()
                 local win = vim.api.nvim_get_current_win()
-                -- The borders are in an other window
+                -- NOTE: The borders are in an other window
                 vim.api.nvim_win_call(win + 1, function()
                     vim.opt_local.winblend = 0
                 end)

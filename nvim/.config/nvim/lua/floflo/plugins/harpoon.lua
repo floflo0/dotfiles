@@ -19,11 +19,11 @@ return {
             local status = harpoon_mark.status()
             vim.print('Harpoon: ' .. name .. ' (' .. status .. ')')
         end, { desc = 'Harpoon: mark file' })
-        vim.keymap.set('n', '<leader>n', function()
-            harpoon_ui.toggle_quick_menu()
-        end, { desc = 'Harpoon: toggle menu' })
+        vim.keymap.set('n', '<leader>n', harpoon_ui.toggle_quick_menu, {
+            desc = 'Harpoon: toggle menu'
+        })
 
-        -- TODO: Alt + é, è, ç and à doesn't work in the terminal
+        -- BUG: Alt + é, è, ç and à doesn't work in the terminal
         local keys = { '&', 'é', '"', "'", '(', '-', 'è', '_', 'ç', 'à' }
         for i = 1, 9 do
             vim.keymap.set('n', '<A-' .. keys[i] .. '>', function()
