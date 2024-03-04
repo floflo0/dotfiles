@@ -99,7 +99,9 @@ return {
 
         vim.api.nvim_create_user_command('SetColorscheme', function(command)
             if not include(COLORSCHEMES, command.args) then
-                vim.print('error: ' .. command.args .. ' is not a valid colorscheme')
+                vim.api.nvim_err_writeln(
+                    'error: ' .. command.args .. ' is not a valid colorscheme'
+                )
                 return
             end
             setColorscheme(command.args)

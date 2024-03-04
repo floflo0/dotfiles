@@ -11,12 +11,12 @@ end
 vim.api.nvim_create_user_command('Model', function(command)
     local file_path = vim.fs.joinpath(MODELS, command.args)
     if not exists(command.args, MODELS) then
-        vim.print('error: ' .. file_path  .. ' doesn\'t exists')
+        vim.api.nvim_err_writeln('error: ' .. file_path  .. ' doesn\'t exists')
         return
     end
 
     if exists(command.args, '.') and not command.bang then
-        vim.print('error: ' .. command.args .. ' already exists')
+        vim.api.nvim_err_writeln('error: ' .. command.args .. ' already exists')
         return
     end
 
@@ -40,7 +40,6 @@ end, {
     nargs = 1,
     desc = 'Create file from models',
     complete = function ()
-        vim.print('call')
         local process = vim.system({
             'fdfind',
             '--type',
