@@ -19,7 +19,7 @@ return {
             local status = harpoon_mark.status()
             vim.print('Harpoon: ' .. name .. ' (' .. status .. ')')
         end, { desc = 'Harpoon: mark file' })
-        vim.keymap.set('n', '<leader>n', harpoon_ui.toggle_quick_menu, {
+        vim.keymap.set('n', '<leader>i', harpoon_ui.toggle_quick_menu, {
             desc = 'Harpoon: toggle menu'
         })
 

@@ -33,8 +33,17 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Terminal: escape the 
 vim.keymap.set('n', '<C-k>', function() vim.cmd.move('-2<CR>') end, { silent = true, desc = 'Move line up' })
 vim.keymap.set('n', '<C-j>', function() vim.cmd.move('+1<CR>') end, { silent = true, desc = 'Move line down' })
 
-vim.keymap.set('n', '<leader>cn', vim.cmd.cnext, { desc = 'Go to next quickfix' })
-vim.keymap.set('n', '<leader>cp', vim.cmd.cprev, { desc = 'Go to previous quickfix' })
+-- Display only the error message instead of the entire traceback
+local function safe_call(func)
+    return function()
+        local status, error = pcall(func)
+        if not status then
+            vim.api.nvim_err_writeln(error)
+        end
+    end
+end
+vim.keymap.set('n', '<leader>n', safe_call(vim.cmd.cnext), { desc = 'Go to next quickfix' })
+vim.keymap.set('n', '<leader>p', safe_call(vim.cmd.cprev), { desc = 'Go to previous quickfix' })
 
 vim.keymap.set('n', '<leader>pv', vim.cmd.Ex, { desc = 'Open file explorer' })
 
