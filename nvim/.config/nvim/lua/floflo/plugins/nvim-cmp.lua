@@ -169,7 +169,8 @@ return {
                         version = 'LuaJIT',
                     },
                     diagnostics = {
-                        globals = { 'vim' },
+                        disable = { 'missing-fields' },
+                        globals = { 'vim' }
                     },
                     workspace = {
                         checkThirdParty = false,
@@ -180,10 +181,10 @@ return {
                         }
                     },
                     telemetry = {
-                        enable = false,
-                    },
-                },
-            },
+                        enable = false
+                    }
+                }
+            }
         }
 
         lspconfig.intelephense.setup(config())
