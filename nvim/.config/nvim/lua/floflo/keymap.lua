@@ -45,7 +45,7 @@ end
 vim.keymap.set('n', '<leader>n', safe_call(vim.cmd.cnext), { desc = 'Go to next quickfix' })
 vim.keymap.set('n', '<leader>p', safe_call(vim.cmd.cprev), { desc = 'Go to previous quickfix' })
 
-vim.keymap.set('n', '<leader>pv', vim.cmd.Ex, { desc = 'Open file explorer' })
+vim.keymap.set('n', '<leader>x', vim.cmd.Ex, { desc = 'Open file explorer' })
 
 vim.keymap.set('n', '<leader>l', vim.cmd.nohlsearch, { desc = 'Hide search highlights' })
 
