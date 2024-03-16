@@ -68,5 +68,13 @@ return {
         'folke/todo-comments.nvim',
         dependencies = { 'nvim-lua/plenary.nvim' },
         config = true
+    },
+    {
+        'RRethy/vim-illuminate',
+        event = 'VeryLazy'
+    },
+    {
+        'tpope/vim-surround',
+        event = 'VeryLazy'
     }
 }
