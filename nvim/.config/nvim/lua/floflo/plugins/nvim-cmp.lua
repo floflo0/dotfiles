@@ -10,7 +10,7 @@ return {
         'hrsh7th/cmp-nvim-lua',
         'hrsh7th/cmp-cmdline',
         'hrsh7th/cmp-nvim-lsp-document-symbol',
-        'hrsh7th/cmp-nvim-lsp-signature-help',
+        'ray-x/lsp_signature.nvim',
         'L3MON4D3/LuaSnip',
         'saadparwaiz1/cmp_luasnip',
         'onsails/lspkind.nvim'
@@ -54,7 +54,6 @@ return {
             sources = cmp.config.sources({
                 { name = 'nvim_lua' },
                 { name = 'nvim_lsp' },
-                { name = 'nvim_lsp_signature_help' },
                 { name = 'luasnip' },
                 { name = 'path' }
             }, {
@@ -99,9 +98,20 @@ return {
         capabilities.textDocument.completion.completionItem.snippetSupport = true
         local cmp_nvim_lsp = require('cmp_nvim_lsp')
 
+        local lsp_signature = require('lsp_signature')
+
+        vim.keymap.set({ 'n', 'i' }, '<C-b>', lsp_signature.toggle_float_win, {
+            silent = true,
+            noremap = true,
+            desc = 'Lsp: toggle signature'
+        })
+
         local function config(_config)
             return vim.tbl_deep_extend('force', {
-                capabilities = cmp_nvim_lsp.default_capabilities()
+                capabilities = cmp_nvim_lsp.default_capabilities(),
+                on_attach = function(_, bufnr)
+                    lsp_signature.on_attach({}, bufnr)
+                end
             }, _config or {})
         end
 
