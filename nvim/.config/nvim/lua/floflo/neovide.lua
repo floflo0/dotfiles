@@ -2,16 +2,12 @@ if not vim.g.neovide then
     return
 end
 
-local FONT = 'RobotoMono Nerd Font Mono'
-local FONT_SIZE = 9.0  -- px
 local FLOATING_BLUR = 1.0
 local DEFAULT_SCALE_FACTOR = 1.0
 local DELTA_SCALE_FACTOR = 0.05
-local PADDING = 5  -- px
+local PADDING = 3  -- px
 
-vim.opt.guifont = FONT .. ':h' .. FONT_SIZE
-
-vim.g.neovide_transparency = 0.8
+vim.g.neovide_transparency = 0.9
 vim.g.neovide_floating_blur_amount_x = FLOATING_BLUR
 vim.g.neovide_floating_blur_amount_y = FLOATING_BLUR
 

@@ -114,8 +114,9 @@ return {
             end
         })
 
-        setColorscheme(getRandomColorscheme())
+        -- setColorscheme(getRandomColorscheme())
         -- setColorscheme('catppuccin')
+        setColorscheme('catppuccin-macchiato')
         -- setColorscheme('gruvbox')
         -- setColorscheme('rose-pine')
         -- setColorscheme('dracula')

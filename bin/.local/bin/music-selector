@@ -1,0 +1,94 @@
+#!/usr/bin/bash
+
+set -x
+
+# Usage: music-selector [OPTIONS]
+#
+# Choose music album to play using rofi.
+#
+# Options:
+#   --generate-thumbs  Generate thumbnails for the albums.
+#   -h, --help         Print this help message.
+
+set -e
+
+# Config
+ROFI_PARAM="-i -matching fuzzy"
+MUSIC_PLAYER="amberol"
+DEFAULT_ICON="folder-music"
+ICON_SIZE=24
+
+MUSIC_DIR=$(xdg-user-dir MUSIC)
+if [ -z $XDG_CACHE_HOME ]; then
+    XDG_CACHE_HOME="${HOME}/.cache"
+fi
+CACHE_DIR="${XDG_CACHE_HOME}/music-selector"
+
+list_albums() {
+    fd --exact-depth 2 --color never --type directory . "$MUSIC_DIR"
+}
+
+albums=$(list_albums)
+
+rofi_input() {
+    IFS=$'\n'
+    for album in $albums; do
+        album_name=$(basename "$album")
+        icon="${CACHE_DIR}/${album_name}.jpg"
+        if [ ! -f $icon ]; then
+            icon="$DEFAULT_ICON"
+        fi
+        echo -en "${album_name}\0icon\x1f${icon}\n"
+    done
+}
+
+# Extract the first image contained in a mp3 file using ffmpeg.
+#
+# Usage: extract_mp3_image INPUT_FILE OUTPUT_FILE
+#
+# Args:
+#   INPUT_FILE: The mp3 file that contains the image.
+#   OUTPUT_FILE: The output path for the image.
+extract_mp3_image() {
+    if ffmpeg                                  \
+           -i "$1"                             \
+           -an                                 \
+           -y                                  \
+           -vf scale=${ICON_SIZE}:${ICON_SIZE} \
+           -frames:v 1                         \
+           -map '0:v?'                         \
+           -loglevel 0                         \
+           "$2"
+    then
+        echo "Generated " $(basename "$2")
+    fi
+}
+
+if [ -z $1 ]; then
+    selected_album=$(rofi_input | rofi -dmenu -no-custom $ROFI_PARAM)
+
+    selected_album_path=$(echo "$albums" | grep "$selected_album/\$")
+
+    exec $MUSIC_PLAYER "$selected_album_path" &> /dev/null &
+elif [ $1 = "--generate-thumbs" -a -z $2 ]; then
+    if [ -e "$CACHE_DIR" ]; then
+        rm --recursive --verbose "$CACHE_DIR"
+    fi
+    mkdir --parents --verbose $CACHE_DIR
+    echo "Generating thumbnails..."
+    IFS=$'\n'
+    for album in $albums; do
+        album_name=$(basename "$album")
+        fist_song_file=$(fd --type file '^01 - *' "$album")
+        extract_mp3_image "$fist_song_file" "${CACHE_DIR}/${album_name}.jpg" &
+    done
+    wait
+else
+    echo "Usage: music-selector [OPTIONS]"
+    echo
+    echo "Choose music album to play using rofi."
+    echo
+    echo "Options:"
+    echo "  --generate-thumbs  Generate thumbnails for the albums."
+    echo "  -h, --help         Print this help message."
+fi

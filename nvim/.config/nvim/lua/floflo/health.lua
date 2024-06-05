@@ -1,9 +1,10 @@
 local EXTERNAL_DEPENDENCIES = {
-    'fdfind',
+    'fd',
 
     -- Lsp
     'pylsp',
     'bash-language-server',
+    'fish-lsp',
     'tsserver',
     'vscode-html-language-server',
     'vscode-css-language-server',

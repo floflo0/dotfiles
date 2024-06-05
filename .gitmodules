@@ -1,9 +1,18 @@
-[submodule "extern/dracula/xfce4-terminal"]
-	path = extern/dracula/xfce4-terminal
-	url = https://github.com/dracula/xfce4-terminal.git
-[submodule "extern/dracula/wallpaper"]
-	path = extern/dracula/wallpaper
-	url = https://github.com/dracula/wallpaper.git
-[submodule "extern/dracula/alacritty"]
-	path = extern/dracula/alacritty
-	url = https://github.com/dracula/alacritty.git
+[submodule "extern/catppuccin/polybar"]
+	path = extern/catppuccin/polybar
+	url = https://github.com/catppuccin/polybar
+[submodule "extern/catppuccin/alacritty"]
+	path = extern/catppuccin/alacritty
+	url = https://github.com/catppuccin/alacritty
+[submodule "extern/catppuccin/yazi"]
+	path = extern/catppuccin/yazi
+	url = https://github.com/catppuccin/yazi
+[submodule "extern/catppuccin/bat"]
+	path = extern/catppuccin/bat
+	url = https://github.com/catppuccin/bat
+[submodule "extern/catppuccin/cava"]
+	path = extern/catppuccin/cava
+	url = https://github.com/catppuccin/cava
+[submodule "extern/catppuccin/Kvantum"]
+	path = extern/catppuccin/Kvantum
+	url = https://github.com/catppuccin/Kvantum

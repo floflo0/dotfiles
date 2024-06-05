@@ -1,0 +1,9 @@
+Xcursor.theme: catppuccin-macchiato-dark-cursors
+
+Xft.dpi: 96
+Xft.antialias: true
+Xft.hinting: true
+Xft.autohint: false
+Xft.hintstyle: hintfull
+Xft.rgba: rgb
+Xft.lcdfilter: lcddefault

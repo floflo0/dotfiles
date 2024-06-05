@@ -32,7 +32,7 @@ return function()
     pickers.new({}, {
         prompt_title = 'Change Directory',
         finder = finders.new_oneshot_job({
-            'fdfind',
+            'fd',
             '--type',
             'directory',
             '--strip-cwd-prefix',

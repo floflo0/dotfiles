@@ -4,7 +4,7 @@ local PLUGIN_DEPENDENCIES = {
 
 local EXTERNAL_DEPENDENCIES = {
     'exa',
-    'fdfind'
+    'fd'
 }
 
 local function check_plugin_dependencies()

@@ -122,16 +122,21 @@ return {
                 pylsp = {
                     plugins = {
                         pylint = {
-                            enabled = false,
+                            enabled = true,
                             executable = 'pylint'
                         },
                         pycodestyle = { enabled = false },
+                        pylsp_mypy = {
+                            enabled = true,
+                            report_progress = true
+                        }
                     }
                 }
             }
         }))
 
         lspconfig.bashls.setup(config())
+        lspconfig.fish_lsp.setup(config())
 
         lspconfig.tsserver.setup(config())
         lspconfig.html.setup(config())

@@ -1,0 +1,5 @@
+#!/usr/bin/sh
+
+# Open a new terminal in the same directory
+
+exec $TERMINAL &> /dev/null &

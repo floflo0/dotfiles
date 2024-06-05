@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Notes
+Exec=neovide --x11-wm-class notes --x11-wm-class-instance notes notes.md
+Terminal=false
+Type=Application
+Icon=text-editor
+StartupNotify=true

@@ -1,0 +1,12 @@
+[manager]
+prepend_keymap = [
+    { on = [ "l" ],       run = 'plugin --sync smart-enter', desc = "Enter the child directory, or open the file" },
+    { on = [ "<Enter>" ], run = 'plugin --sync smart-enter', desc = "Enter the child directory, or open the file" },
+    { on = [ "<C-c>" ] ,  run = 'escape --all',              desc = "Use Ctrl+c to escape" },
+    { on = [ "g", "d" ],  run = "cd ~/Téléchargements/",     desc = "Go to the downloads directory" },
+]
+
+[input]
+prepend_keymap = [
+    { on = [ "<C-c>" ] , run = 'close', desc = "Use Ctrl+c to escape" },
+]

@@ -1,4 +1,19 @@
-no-multigrid = false
+fork = true
 frame = "none"
 idle = true
+maximized = false
+# found dynamically
+# neovim-bin = "/usr/bin/nvim"
+no-multigrid = false
+srgb = false
+tabs = true
+theme = "dark"
+# Only for macOs
+title-hidden = true
 vsync = true
+wsl = false
+
+
+[font]
+normal = ["RobotoMono Nerd Font Mono", "Noto Color Emoji"]
+size = 9.2

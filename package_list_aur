@@ -1,8 +1,30 @@
-# nvim
-python-pylsp-mypy
+# AUR packages
 
-dracula-cursors-git
-dracula-icons-git
-matcha-gtk-theme
-nerd-fonts-complete
-polybar-git
+# Image in the terminal
+ueberzugpp
+
+cava
+
+# Apps
+brave-bin
+skypeforlinux-bin
+parabolic
+amberol
+
+# Games
+heroic-games-launcher-bin
+
+# Theme
+catppuccin-gtk-theme-macchiato
+catppuccin-cursors-macchiato
+
+# Neovim
+nodejs-neovim
+# Neovim LSP
+python-pylsp-mypy
+vscode-langservers-extracted
+glsl_analyzer-bin
+jdtls
+nodejs-intelephense
+
+system76-power

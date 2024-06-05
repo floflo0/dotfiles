@@ -1,85 +1,166 @@
+# Apps
 firefox
     firefox-i18n-fr
 
 chromium
 
+alacritty
+
 thunar
     gvfs  # trash support, mounting with udisk and remote filesystems
-        gvfs-afc  # AFC (mobile devices) support
-        gvfs-smb  # SMB/CIFS (Windows client) support
-        gvfs-gphoto2  # gphoto2 (PTP camera/MTP media player) support
-        gvfs-mtp  # MTP device support
-        gvfs-goa  # gnome-online-accounts (e.g. OwnCloud) support
-        gvfs-nfs  # NFS support
-        gvfs-google  # Google Drive support
-    tumbler  # thumbnail previews
+        gvfs-mtp       # MTP support (Android, media player)
+        gvfs-nfs       # NFS support
+        gvfs-smb       # SMB/CIFS support (Windows file sharing)
     thunar-volman  # removable device management
-    thunar-archive-plugin  # archive creation and extraction
     thunar-media-tags-plugin  # view/edit ID3/OGG tags
-
-xfce4-terminal
-    imagemagick   # resize the background image
+    tumbler  # thumbnail previews
 
 discord
+signal-desktop
+eog  # Image viewer
 gimp
 vlc
 scrcpy
-stow
-
-# i3-gaps
-scrot
-rofi
-nitrogen
-xfce4-notifyd
-xfce4-power-manager
-ttf-font-awesome  # polybar icons
-lxappearance-gtk3
-network-manager-applet
-archlinux-wallpaper
-polkit-gnome
-# lightdm
-# lightdm-gtk-greeter
-# lightdm-gtk-greeter-settings
-light-locker
-
-neovim
-    python-neovim  # for Python 3 plugin support (see :help python)
-    xclip  # for clipboard support on X11 (or xsel) (see :help clipboard)
-    # telescope
-    ripgrep
-    fd
-    # lsp
-    # pyright
-    # jedi-language-server
-    clang
-    python-lsp-server
-    bash-language-server
-    rust-analyzer
-    lua-language-server
-
-fish
-htop
-
-nodejs
-    npm
-    yarn
-    typescript
-
-python
-    python-pip
-    python-pygame
-    python-pylint
-    mypy
-
-rust
-
-# papirus-icon-theme
+easytag
+engrampa
+gnome-disk-utility
+baobab
+pdfarranger
 
 libreoffice-fresh
     libreoffice-fresh-fr
     hunspell
+    hunspell-en_us
     hunspell-fr
+    hyphen
+    hyphen-en
+    hyphen-fr
 
+# I3
+i3-wm
+    xorg
+    xorg-xinit
+i3lock                  # Lock screen
+xss-lock                # Launch lock screen
+rofi                    # Launcher/Window switcher
+maim                    # Screenshots
+feh                     # Background
+xfce4-notifyd           # Notifications
+xfce4-power-manager     # Power Management
+polybar                 # Status bar
+network-manager-applet  # Network management
+polkit-gnome            # UI password prompt
+picom                   # Transparency
+playerctl               # Play/Pause buttons
+touchegg                # touchpad gesture
+pavucontrol             # sounds settings
+xdg-desktop-portal
+xdg-desktop-portal-gtk
+xdotool
 
-grub-theme-vimix
+# Bluetooth
+bluez
+bluez-utils
+blueberry
 
+# Fonts
+ttf-dejavu
+ttf-font-awesome  # Polybar icons
+ttf-roboto-mono-nerd
+ttf-liberation
+cantarell-fonts
+noto-fonts-emoji
+
+# Printer
+# cups
+#     cups-pdf      # Print to pdf
+#     cups-browsed  # Search printer on network
+
+# Neovim
+neovim
+    python-pynvim         # for Python plugin support (see :help python)
+    tree-sitter-bash      # for the Bash grammar for tree-sitter
+    tree-sitter-c         # for the C grammar for tree-sitter
+    tree-sitter-markdown  # for the Markdown grammar for tree-sitter
+    tree-sitter-python    # for the Python grammar for tree-sitterpal
+    xsel                  # for clipboard support on X11 (or xclip) (see :help clipboard)
+    tree-sitter
+    tree-sitter-cli
+    neovide  # Neovim UI
+    # Telescope
+    fd
+    ripgrep
+    # LSP
+    python-lsp-server
+    bash-language-server
+ 	typescript-language-server
+    vue-language-server
+ 	tailwindcss-language-server
+    clang  # clangd
+    rust-analyzer
+    gopls
+ 	lua-language-server
+    marksman
+
+# Language
+nodejs
+    npm
+    yarn
+    pnpm
+    typescript
+
+python
+    python-pip
+    python-pylint
+    mypy
+
+rust
+go
+
+sdl2
+sdl2_ttf
+sdl2_image
+libadwaita
+gtk4
+glfw
+
+jdk-openjdk
+
+php
+    composer
+
+papirus-icon-theme
+sound-theme-freedesktop
+
+# Shell
+fish
+    fisher
+yazi
+    ffmpegthumbnailer  # For video thumbnails
+    poppler            # For PDF preview
+    unarchiver         # For archive preview
+eza
+zoxide
+htop
+git
+tmux
+fzf
+wget
+curl
+man-db
+jq
+openssh
+
+stow
+imagemagick
+xdg-user-dirs
+
+# Games
+dolphin-emu
+steam
+gamemode
+lib32-gamemode
+
+# Driver
+nvidia
+nvidia-settings

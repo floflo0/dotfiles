@@ -12,8 +12,8 @@ return {
         config = true
     },
     {
-        'floflo0/align.nvim',
-        branch = 'v2',
+        'Vonr/align.nvim',
+        lazy = true,
         init = function()
             local align = require('align')
             vim.keymap.set('x', '<leader>a', function()

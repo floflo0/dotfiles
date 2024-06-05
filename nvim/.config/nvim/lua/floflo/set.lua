@@ -102,3 +102,7 @@ vim.g.omni_sql_no_default_maps = true
 vim.diagnostic.config({
     severity_sort = true  -- Display error message first
 })
+
+vim.opt.makeprg = 'make -j10'
+
+vim.lsp.set_log_level('off')
