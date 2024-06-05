@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Scrcpy (Screen off)
+GenericName=Android Remote Control
+Comment=Display and control your Android device
+Exec=scrcpy --turn-screen-off --stay-awake
+Icon=scrcpy
+Terminal=false
+Type=Application
+Categories=Utility;RemoteAccess;
+StartupNotify=true
