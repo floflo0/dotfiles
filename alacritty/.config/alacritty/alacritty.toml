@@ -17,3 +17,15 @@ size = 9.0
 
 [colors]
 cursor = { text = "#000000", cursor = "#ffffff" }
+
+[selection]
+semantic_escape_chars = ",│`|:\"' ()[]{}<>\t/&*@%;#"
+
+[keyboard]
+bindings = [
+    { mods = "Control", key = "à", action = "ResetFontSize" },
+    { mods = "Control|Alt", key = "n", action = "SpawnNewInstance" },
+    { mods = "Shift", key = "/", mode = "Vi", action = "SearchBackward" },
+    { mods = "Shift", key = "?", mode = "Vi", action = "SearchForward" },
+    { mods= "Control", key = "o", mode = "Vi", action = "Open" },
+]
