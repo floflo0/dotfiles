@@ -28,4 +28,10 @@ bindings = [
     { mods = "Shift", key = "/", mode = "Vi", action = "SearchBackward" },
     { mods = "Shift", key = "?", mode = "Vi", action = "SearchForward" },
     { mods= "Control", key = "o", mode = "Vi", action = "Open" },
+
+    # Neovim: harpoon keybindings
+    { mods = "Alt", key = "é", chars = "\u001b[1;5P" },  # Control+F1
+    { mods = "Alt", key = "è", chars = "\u001b[1;5Q" },  # Control+F2
+    { mods = "Alt", key = "ç", chars = "\u001b[1;5R" },  # Control+F3
+    { mods = "Alt", key = "à", chars = "\u001b[1;5S" },  # Control+F4
 ]

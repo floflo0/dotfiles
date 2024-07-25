@@ -23,12 +23,24 @@ return {
             desc = 'Harpoon: toggle menu'
         })
 
-        -- BUG: Alt + é, è, ç and à doesn't work in the terminal
-        local keys = { '&', 'é', '"', "'", '(', '-', 'è', '_', 'ç', 'à' }
-        for i = 1, 9 do
-            vim.keymap.set('n', '<A-' .. keys[i] .. '>', function()
-                harpoon_ui.nav_file(i)
-            end, { desc = 'Harpoon: go to the ' .. i ..' marked file' })
+        local keys = {
+            { '<M-&>' },           -- Alt+1
+            { '<M-é>', '<F25>' },  -- Alt+2
+            { '<M-">' },           -- Alt+3
+            { "<M-'>" },           -- Alt+4
+            { '<M-(>' },           -- Alt+5
+            { '<M-->' },           -- Alt+6
+            { '<M-è>', '<F26>' },  -- Alt+7
+            { '<M-_>' },           -- Alt+8
+            { '<M-ç>', '<F27>' },  -- Alt+9
+            { '<M-à>', '<F28>' }   -- Alt+0
+        }
+        for i = 1, #keys do
+            for j = 1, #keys[i] do
+                vim.keymap.set('n', keys[i][j], function()
+                    harpoon_ui.nav_file(i)
+                end, { desc = 'Harpoon: go to the ' .. i ..' marked file' })
+            end
         end
     end
 }
