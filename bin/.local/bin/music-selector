@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-set -x
+set -e
 
 # Usage: music-selector [OPTIONS]
 #
@@ -23,6 +23,12 @@ if [ -z $XDG_CACHE_HOME ]; then
     XDG_CACHE_HOME="${HOME}/.cache"
 fi
 CACHE_DIR="${XDG_CACHE_HOME}/music-selector"
+
+PROGRAM_NAME=$(basename $0)
+
+log() {
+    echo "${PROGRAM_NAME}:" $@
+}
 
 list_albums() {
     fd --exact-depth 2 --color never --type directory . "$MUSIC_DIR"
@@ -50,17 +56,17 @@ rofi_input() {
 #   INPUT_FILE: The mp3 file that contains the image.
 #   OUTPUT_FILE: The output path for the image.
 extract_mp3_image() {
-    if ffmpeg                                  \
-           -i "$1"                             \
-           -an                                 \
-           -y                                  \
-           -vf scale=${ICON_SIZE}:${ICON_SIZE} \
-           -frames:v 1                         \
-           -map '0:v?'                         \
-           -loglevel 0                         \
+    if ffmpeg                                                                       \
+           -i "$1"                                                                  \
+           -an                                                                      \
+           -y                                                                       \
+           -vf scale=${ICON_SIZE}:${ICON_SIZE}:force_original_aspect_ratio=decrease \
+           -frames:v 1                                                              \
+           -map '0:v?'                                                              \
+           -loglevel 0                                                              \
            "$2"
     then
-        echo "Generated " $(basename "$2")
+        log "generated " $(basename "$2")
     fi
 }
 
@@ -75,7 +81,7 @@ elif [ $1 = "--generate-thumbs" -a -z $2 ]; then
         rm --recursive --verbose "$CACHE_DIR"
     fi
     mkdir --parents --verbose $CACHE_DIR
-    echo "Generating thumbnails..."
+    log "generating thumbnails..."
     IFS=$'\n'
     for album in $albums; do
         album_name=$(basename "$album")
