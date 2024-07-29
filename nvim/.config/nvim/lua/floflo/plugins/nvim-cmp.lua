@@ -138,7 +138,26 @@ return {
         lspconfig.bashls.setup(config())
         lspconfig.fish_lsp.setup(config())
 
-        lspconfig.tsserver.setup(config())
+        lspconfig.tsserver.setup(config({
+            init_options = {
+                plugins = {
+                    {
+                        name = '@vue/typescript-plugin',
+                        location = '/usr/lib/node_modules/@vue/typescript-plugin',
+                        languages = { 'vue' }
+                    }
+                }
+            },
+            filetypes = {
+                'javascript',
+                'javascriptreact',
+                'javascript.jsx',
+                'typescript',
+                'typescriptreact',
+                'typescript.tsx',
+                'vue'
+            }
+        }))
         lspconfig.html.setup(config())
         lspconfig.cssls.setup(config())
         lspconfig.jsonls.setup(config())
@@ -151,9 +170,25 @@ return {
                 -- 'typescriptreact',
                 'vue',
                 -- 'json'
+            },
+            init_options = {
+                typescript = {
+                    tsdk = '/usr/lib/node_modules/typescript/lib/'
+                }
             }
         }))
-        lspconfig.tailwindcss.setup(config())
+        lspconfig.tailwindcss.setup(config({
+            root_dir = lspconfig.util.root_pattern(
+            'tailwind.config.js',
+            'tailwind.config.cjs',
+            'tailwind.config.mjs',
+            'tailwind.config.ts',
+            'postcss.config.js',
+            'postcss.config.cjs',
+            'postcss.config.mjs',
+            'postcss.config.ts'
+            )
+        }))
 
         lspconfig.clangd.setup(config({
             cmd = { 'clangd', '--enable-config', '-header-insertion=never' }

@@ -30,6 +30,7 @@ DEFAULT_EDITOR_PACKAGE: str = 'neovim'
 
 PACKAGE_LIST: str = 'package_list'
 PACKAGE_LIST_AUR: str = 'package_list_aur'
+PACKAGE_LIST_NPM: str = 'package_list_npm'
 
 YAY_URL: str = 'https://aur.archlinux.org/yay-bin.git'
 
@@ -153,10 +154,12 @@ class Setup:
         print('Found text editor:', self.editor)
         self.stow_found: bool = False
         self.yay_found: bool = False
+        self.npm_found: bool = False
         self.xdg_user_dirs_found: bool = False
         self.configs: dict[str, Callable[[], None]] = {
             'packages': self.install_packages,
             'packages_aur': self.install_packages_aur,
+            'packages_npm': self.install_packages_npm,
             'alacritty': self.install_alacritty,
             'bin': self.install_bin,
             'bluetooth': self.install_bluetooth,
@@ -310,11 +313,31 @@ class Setup:
             return
         self.package_manager.install_packages(*packages)
 
+    def npm(self, packages: list[str]) -> None:
+        if not self.npm_found:
+            if which('npm'):
+                self.npm_found = True
+            else:
+                print('npm not found')
+                if not ask_yes_no('Install npm ?'):
+                    sys.exit(0)
+
+                self.package_manager.install_packages('npm')
+
+        run_command('sudo', 'npm', 'install', '--global', *packages)
+
     def install_packages_aur(self) -> None:
         packages: list[str] = self.ask_list_from_file(PACKAGE_LIST_AUR)
         if not packages:
             return
         self.yay(packages)
+
+    def install_packages_npm(self) -> None:
+        packages: list[str] = self.ask_list_from_file(PACKAGE_LIST_NPM)
+        if not packages:
+            return
+
+        self.npm(packages)
 
     def install_alacritty(self) -> None:
         self.stow_config('alacritty', [CONFIG_DIR + '/alacritty'])
