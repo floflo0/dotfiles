@@ -361,7 +361,8 @@ class Setup:
             'glfw3',
             'gl',
             'glew',
-            'freetype2'
+            'freetype2',
+            'libevdev'
         ]
         command: list[str] = ['pkg-config', '--cflags-only-I', *libs]
         print('$', *command)

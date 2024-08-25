@@ -30,8 +30,8 @@ vim.keymap.set('n', '<leader><A-CR>', function()
 end, { desc = 'Terminal: open a terminal in the current window' })
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Terminal: escape the terminal' })
 
-vim.keymap.set('n', '<C-k>', function() vim.cmd.move('-2<CR>') end, { silent = true, desc = 'Move line up' })
-vim.keymap.set('n', '<C-j>', function() vim.cmd.move('+1<CR>') end, { silent = true, desc = 'Move line down' })
+vim.keymap.set('n', '<C-k>', function() pcall(vim.cmd.move, '-2<CR>') end, { silent = true, desc = 'Move line up' })
+vim.keymap.set('n', '<C-j>', function() pcall(vim.cmd.move, '+1<CR>') end, { silent = true, desc = 'Move line down' })
 
 -- Display only the error message instead of the entire traceback
 local function safe_call(func)

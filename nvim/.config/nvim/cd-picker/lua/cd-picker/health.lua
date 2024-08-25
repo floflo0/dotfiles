@@ -3,7 +3,7 @@ local PLUGIN_DEPENDENCIES = {
 }
 
 local EXTERNAL_DEPENDENCIES = {
-    'exa',
+    'eza',
     'fd'
 }
 

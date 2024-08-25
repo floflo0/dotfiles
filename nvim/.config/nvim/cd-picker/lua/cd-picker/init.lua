@@ -18,7 +18,7 @@ return function()
     local previewer = previewers.new_termopen_previewer({
         get_command = function(entry)
             return {
-                'exa',
+                'eza',
                 '--tree',
                 '--group-directories-first',
                 '--icons',

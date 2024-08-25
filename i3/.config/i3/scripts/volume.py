@@ -86,11 +86,12 @@ def send_notification() -> None:
         f'Volume: {round(volume * 100)} %',
         '--icon', icon,
         '--expire-time', str(EXPIRE_TIME),
-        '--hint', f'int:value:{round(volume * 100)}',
+        '--hint', f'int:value:{min(round(volume * 100), 100)}',
         '--print-id',
         '--replace-id', get_previous_notification_id()
     ], check=True, capture_output=True)
     save_notification_id(process.stdout.decode('utf-8').strip())
+
 
 def play_sound() -> None:
     subprocess.run(['paplay', SOUND_INDICATOR], check=True,

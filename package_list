@@ -23,9 +23,11 @@ vlc
 scrcpy
 easytag
 engrampa
+    p7zip
 gnome-disk-utility
 baobab
 pdfarranger
+gnome-calendar
 
 libreoffice-fresh
     libreoffice-fresh-fr
@@ -40,6 +42,7 @@ libreoffice-fresh
 i3-wm
     xorg
     xorg-xinit
+autotiling
 i3lock                  # Lock screen
 xss-lock                # Launch lock screen
 rofi                    # Launcher/Window switcher
@@ -117,17 +120,22 @@ python
 rust
 go
 
+gdb
 sdl2
 sdl2_ttf
 sdl2_image
 libadwaita
 gtk4
 glfw
+libevdev
 
 jdk-openjdk
 
 php
     composer
+
+docker
+docker-compose
 
 papirus-icon-theme
 sound-theme-freedesktop
@@ -148,8 +156,11 @@ fzf
 wget
 curl
 man-db
+man-pages
 jq
 openssh
+bat
+tinyxxd
 
 stow
 imagemagick

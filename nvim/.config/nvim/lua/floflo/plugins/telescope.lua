@@ -47,7 +47,7 @@ return {
         vim.keymap.set('n', '<leader>h',   telescope_builtin.help_tags,                     { desc = 'Search help' })
         vim.keymap.set('n', '<leader>k',   telescope_builtin.keymaps,                       { desc = 'Search in keymaps' })
         vim.keymap.set('n', '<leader>b',   telescope_builtin.builtin,                       { desc = 'Telescope: search builtins pickers' })
-        vim.keymap.set('n', '<leader><Esc>',   telescope_builtin.resume,                        { desc = 'Telescope: open back the previous picker' })
+        vim.keymap.set('n', '<leader><Esc>',   telescope_builtin.resume,                    { desc = 'Telescope: open back the previous picker' })
 
         local icon_picker = require('icon-picker')
         icon_picker.setup({ disable_legacy_commands = true })
