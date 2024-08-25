@@ -64,11 +64,14 @@ default_floating_border normal
 set $border 2
 
 for_window [class="Alacritty"] border pixel $border
+for_window [class="steam"] border pixel $border
 for_window [class="neovide"] border pixel $border
+for_window [class="baobab"] border pixel $border
 for_window [class="note"] border pixel $border
 for_window [class="amberol"] border pixel $border
 for_window [class="org.nickvision.tubeconverter"] border pixel $border
 for_window [class="Xfce4-power-manager-settings"] border pixel $border
+for_window [class="gnome-calendar"] border pixel $border
 for_window [class="Blueberry.py"] border pixel $border
 
 hide_edge_borders smart
