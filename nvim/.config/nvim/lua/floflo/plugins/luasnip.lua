@@ -26,7 +26,7 @@ return {
         end, { silent = true, noremap = true, desc = 'Snippet choice' })
 
         require('luasnip.loaders.from_vscode').lazy_load({
-            include = { 'html', 'markdown' }
+            include = { 'html' }
         })
     end
 }
