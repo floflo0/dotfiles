@@ -4,13 +4,11 @@ set -e
 
 # Usage: music-selector [OPTIONS]
 #
-# Choose music album to play using rofi.
+# Choose music to play using rofi.
 #
 # Options:
-#   --generate-thumbs  Generate thumbnails for the albums.
-#   -h, --help         Print this help message.
-
-set -e
+#   --generate-cache  Generate thumbnails, songs list and albums list
+#   -h, --help        Print this help message.
 
 # Config
 ROFI_PARAM="-i -matching fuzzy"
@@ -23,6 +21,9 @@ if [ -z $XDG_CACHE_HOME ]; then
     XDG_CACHE_HOME="${HOME}/.cache"
 fi
 CACHE_DIR="${XDG_CACHE_HOME}/music-selector"
+ROFI_ALBUMS_INPUT="${CACHE_DIR}/albums"
+ROFI_SONGS_INPUT="${CACHE_DIR}/songs"
+THUMBS_CACHE_DIR="${XDG_CACHE_HOME}/music-selector/thumbs"
 
 PROGRAM_NAME=$(basename $0)
 
@@ -31,20 +32,50 @@ log() {
 }
 
 list_albums() {
-    fd --exact-depth 2 --color never --type directory . "$MUSIC_DIR"
+    find "$MUSIC_DIR" -maxdepth 2 -mindepth 2 -type d | sort
 }
 
-albums=$(list_albums)
+list_songs() {
+    find "$MUSIC_DIR" -mindepth 3 -type f -name "*.mp3" | sort
+}
 
-rofi_input() {
+generate_rofi_albums_input() {
     IFS=$'\n'
-    for album in $albums; do
+    if [ -f "$ROFI_ALBUMS_INPUT" ]; then
+        rm --verbose "$ROFI_ALBUMS_INPUT"
+    else
+        mkdir --parents --verbose "$CACHE_DIR"
+        touch "$ROFI_ALBUMS_INPUT"
+    fi
+    for album in $(list_albums); do
         album_name=$(basename "$album")
-        icon="${CACHE_DIR}/${album_name}.jpg"
+        fist_song_name=$(basename $(find "$album" -type f -name "01*"))
+        icon="${THUMBS_CACHE_DIR}/${fist_song_name}.jpg"
         if [ ! -f $icon ]; then
             icon="$DEFAULT_ICON"
         fi
-        echo -en "${album_name}\0icon\x1f${icon}\n"
+        echo -en "${album_name}\0icon\x1f${icon}\n" >> "$ROFI_ALBUMS_INPUT"
+    done
+}
+
+generate_rofi_songs_input() {
+    IFS=$'\n'
+    if [ -f "$ROFI_SONGS_INPUT" ]; then
+        rm --verbose "$ROFI_SONGS_INPUT"
+    else
+        mkdir --parents --verbose "$CACHE_DIR"
+        touch "$ROFI_SONGS_INPUT"
+    fi
+    for song in $(list_songs); do
+        song_name=$(basename "$song")
+        artist=$(basename $(dirname $(dirname "$song")))
+        displayed_song_name="${song_name#*- }"
+        displayed_song_name="${artist} | ${displayed_song_name%.mp3}"
+        icon="${THUMBS_CACHE_DIR}/${song_name}.jpg"
+        if [ ! -f $icon ]; then
+            icon="$DEFAULT_ICON"
+        fi
+        echo -en "${displayed_song_name}\0icon\x1f${icon}\n" >> "$ROFI_SONGS_INPUT"
     done
 }
 
@@ -70,31 +101,52 @@ extract_mp3_image() {
     fi
 }
 
-if [ -z $1 ]; then
-    selected_album=$(rofi_input | rofi -dmenu -no-custom $ROFI_PARAM)
-
-    selected_album_path=$(echo "$albums" | grep "$selected_album/\$")
-
-    exec $MUSIC_PLAYER "$selected_album_path" &> /dev/null &
-elif [ $1 = "--generate-thumbs" -a -z $2 ]; then
-    if [ -e "$CACHE_DIR" ]; then
-        rm --recursive --verbose "$CACHE_DIR"
+generate_thumbs() {
+    if [ -e "$THUMBS_CACHE_DIR" ]; then
+        rm --recursive --verbose "$THUMBS_CACHE_DIR"
     fi
-    mkdir --parents --verbose $CACHE_DIR
+    mkdir --parents --verbose $THUMBS_CACHE_DIR
     log "generating thumbnails..."
     IFS=$'\n'
-    for album in $albums; do
-        album_name=$(basename "$album")
-        fist_song_file=$(fd --type file '^01 - *' "$album")
-        extract_mp3_image "$fist_song_file" "${CACHE_DIR}/${album_name}.jpg" &
+    for song in $(list_songs); do
+        song_name=$(basename "$song")
+        extract_mp3_image "$song" "${THUMBS_CACHE_DIR}/${song_name}.jpg" &
     done
     wait
+}
+
+if [ -z $1 ]; then
+    albums=$(list_albums)
+
+    selected_album=$(cat "$ROFI_ALBUMS_INPUT" | rofi -dmenu -no-custom $ROFI_PARAM)
+    if [ -z "$selected_album" ]; then
+        exit 0
+    fi
+
+    selected_album_path=$(echo "$albums" | grep "$selected_album\$")
+
+    exec $MUSIC_PLAYER "$selected_album_path" &> /dev/null &
+elif [ $1 = "--songs" -a -z $2 ]; then
+    songs=$(list_songs)
+
+    selected_song=$(cat "$ROFI_SONGS_INPUT" | rofi -dmenu -no-custom $ROFI_PARAM | cut -d "|" -f 2)
+    if [ -z "$selected_song" ]; then
+        exit 0
+    fi
+
+    selected_song_path=$(echo "$songs" | grep "$selected_song.mp3\$")
+
+    exec $MUSIC_PLAYER "$selected_song_path" &> /dev/null &
+elif [ $1 = "--generate-cache" -a -z $2 ]; then
+    generate_rofi_albums_input
+    generate_rofi_songs_input
+    generate_thumbs
 else
     echo "Usage: music-selector [OPTIONS]"
     echo
-    echo "Choose music album to play using rofi."
+    echo "Choose music to play using rofi."
     echo
     echo "Options:"
-    echo "  --generate-thumbs  Generate thumbnails for the albums."
-    echo "  -h, --help         Print this help message."
+    echo "  --generate-cache  Generate thumbnails, songs list and albums list"
+    echo "  -h, --help        Print this help message."
 fi
