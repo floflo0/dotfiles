@@ -6,6 +6,6 @@ screenshot="${HOME}/Images/screenshots/$(date '+%Y-%m-%d-%H-%M-%S')-$(shuf -i10-
 
 mkdir --parents $(dirname $screenshot)
 
-maim --quality 1 $@ $screenshot
+maim --quality 1 --capturebackground --hidecursor $@ $screenshot
 
 exec notify-send --app-name Screenshot --icon image "Screenshot saved"
