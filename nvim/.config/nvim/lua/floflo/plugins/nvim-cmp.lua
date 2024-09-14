@@ -138,7 +138,7 @@ return {
         lspconfig.bashls.setup(config())
         lspconfig.fish_lsp.setup(config())
 
-        lspconfig.tsserver.setup(config({
+        lspconfig.ts_ls.setup(config({
             init_options = {
                 plugins = {
                     {
