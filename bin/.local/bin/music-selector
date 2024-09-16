@@ -11,7 +11,7 @@ set -e
 #   -h, --help        Print this help message.
 
 # Config
-ROFI_PARAM="-i -matching fuzzy"
+ROFI_PARAM="-i -matching normal"
 MUSIC_PLAYER="amberol"
 DEFAULT_ICON="folder-music"
 ICON_SIZE=24
@@ -50,7 +50,8 @@ generate_rofi_albums_input() {
     for album in $(list_albums); do
         album_name=$(basename "$album")
         fist_song_name=$(basename $(find "$album" -type f -name "01*"))
-        icon="${THUMBS_CACHE_DIR}/${fist_song_name}.jpg"
+        artist=$(basename $(dirname "${album}"))
+        icon="${THUMBS_CACHE_DIR}/${artist}-${album_name}-${fist_song_name}.jpg"
         if [ ! -f $icon ]; then
             icon="$DEFAULT_ICON"
         fi
@@ -68,10 +69,11 @@ generate_rofi_songs_input() {
     fi
     for song in $(list_songs); do
         song_name=$(basename "$song")
+        album_name=$(basename $(dirname "$song"))
         artist=$(basename $(dirname $(dirname "$song")))
         displayed_song_name="${song_name#*- }"
         displayed_song_name="${artist} | ${displayed_song_name%.mp3}"
-        icon="${THUMBS_CACHE_DIR}/${song_name}.jpg"
+        icon="${THUMBS_CACHE_DIR}/${artist}-${album_name}-${song_name}.jpg"
         if [ ! -f $icon ]; then
             icon="$DEFAULT_ICON"
         fi
@@ -110,7 +112,9 @@ generate_thumbs() {
     IFS=$'\n'
     for song in $(list_songs); do
         song_name=$(basename "$song")
-        extract_mp3_image "$song" "${THUMBS_CACHE_DIR}/${song_name}.jpg" &
+        album_name=$(basename $(dirname "$song"))
+        artist=$(basename $(dirname $(dirname "$song")))
+        extract_mp3_image "$song" "${THUMBS_CACHE_DIR}/${artist}-${album_name}-${song_name}.jpg" &
     done
     wait
 }
@@ -138,9 +142,9 @@ elif [ $1 = "--songs" -a -z $2 ]; then
 
     exec $MUSIC_PLAYER "$selected_song_path" &> /dev/null &
 elif [ $1 = "--generate-cache" -a -z $2 ]; then
+    generate_thumbs
     generate_rofi_albums_input
     generate_rofi_songs_input
-    generate_thumbs
 else
     echo "Usage: music-selector [OPTIONS]"
     echo

@@ -18,7 +18,7 @@ configuration {
     me-accept-entry: "MousePrimary";
 
     kb-accept-entry: "Control+m,Return";
-    kb-cancel: "Escape,Control+c,Super+d,Super+a,Super+A,Super+m";
+    kb-cancel: "Escape,Control+c,Super+d,Super+a,Super+A,Super+m,Super+M";
     ml-row-left: "ScrollUp";
     ml-row-up: "";
     ml-row-right: "ScrollDown";
