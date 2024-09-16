@@ -28,5 +28,6 @@ vscode-langservers-extracted
 glsl_analyzer-bin
 jdtls
 nodejs-intelephense
+cmake-language-server
 
 system76-power

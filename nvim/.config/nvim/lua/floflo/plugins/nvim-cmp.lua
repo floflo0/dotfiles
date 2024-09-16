@@ -193,6 +193,7 @@ return {
         lspconfig.clangd.setup(config({
             cmd = { 'clangd', '--enable-config', '-header-insertion=never' }
         }))
+        lspconfig.cmake.setup(config())
 
         lspconfig.glsl_analyzer.setup(config())
 
