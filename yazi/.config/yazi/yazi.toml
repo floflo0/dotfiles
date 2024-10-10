@@ -11,9 +11,12 @@ vlc = [
 amberol = [
     { run = 'amberol "$@"', orphan = true },
 ]
+mpv = [
+    { run = 'mpv "$@"', orphan = true },
+]
 
 [open]
 prepend_rules = [
     { mime = "inode/directory", use = ["edit", "open", "vlc", "reveal"] },
-    { mime = "audio/*", use = ["amberol", "vlc", "reveal"] },
+    { mime = "audio/*", use = ["amberol", "vlc", "mpv", "reveal"] },
 ]

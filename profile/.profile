@@ -3,7 +3,6 @@ export EDITOR="/usr/bin/nvim"
 export BROWSER="/usr/bin/firefox"
 
 export PATH="${HOME}/.local/bin:${PATH}"
-export PATH="${HOME}/.local/share/gem/ruby/3.2.0/bin:${PATH}"
 
 export QT_STYLE_OVERRIDE=kvantum
 export GTK_THEME="catppuccin-macchiato-blue-standard+default"

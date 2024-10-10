@@ -1,0 +1,182 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 32,
+    "modules-left": [
+        "custom/menu",
+        "hyprland/workspaces",
+        "hyprland/submap",
+        "hyprland/window"
+    ],
+    "modules-center": ["mpris"],
+    "modules-right": [
+        "cpu",
+        "memory",
+        "disk",
+        "hyprland/language",
+        "idle_inhibitor",
+        "tray",
+        "backlight",
+        "pulseaudio",
+        "battery",
+        "clock",
+        "custom/notification"
+    ],
+    "margin": 0,
+    "spacing": 0,
+    "reload_style_on_change": true,
+    "cpu": {
+        "interval": 1,
+        "format": "   {usage}%",
+        "on-click": "alacritty -e htop"
+    },
+    "clock": {
+        "interval": 1,
+        "format": "   {:%H:%M}",
+        "format-alt": "   {:%d/%m/%Y %H:%M:%S}",
+        "tooltip-format": "\n<span size='10pt' font='RobotoMono Nerd Font Mono'>{calendar}</span>",
+        "calendar": {
+            "mode"          : "month",
+            "mode-mon-col"  : 3,
+            "on-scroll"     : 1,
+            "format": {
+                "months":   "<span color='#8bd5ca'>{}</span>",
+                "days":     "<span color='#cad3f5'>{}</span>",
+                "weekdays": "<span color='#eed49f'>{}</span>",
+                "today":    "<span color='#ed8796'><b>{}</b></span>"
+            }
+        },
+        "actions":  {
+            "on-click-right": "mode"
+        },
+        "on-click-middle": "gnome-calendar"
+    },
+    "custom/menu": {
+        "format": "󰣇",
+        "on-click": "pkill rofi || rofi -show combi -combi-modi drun,window",
+        "on-click-right": "rofi -show window",
+        "tooltip": false
+    },
+    "disk": {
+        "format": "   {free}",
+        "tooltip-format": "{path}: {used} / {total} ({percentage_used}%)",
+        "path": "/home",
+        "on-click": "baobab"
+    },
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "1": "",
+            "2": "",
+            "3": "",
+            "4": "",
+            "5": "",
+            "magic": ""
+        },
+        "show-special": true,
+        "smooth-scrolling-threshold": 1.2,
+        "on-scroll-up": "hyprctl dispatch workspace r-1",
+        "on-scroll-down": "hyprctl dispatch workspace r+1"
+    },
+    "hyprland/window": {
+        "format": "{}",
+        "icon": true,
+        "icon-size": 20,
+        "separate-outputs": true,
+        "on-click-right": "hyprctl dispatch killactive"
+    },
+    "hyprland/language": {
+        "format": "   {}",
+        "format-fr": "fr",
+        "format-en": "us",
+        "on-click": "toggle-keyboard"
+    },
+    "hyprland/submap": {
+        "tooltip": false,
+        "on-click": "hyprctl dispatch submap reset"
+    },
+    "memory": {
+        "interval": 1,
+        "format": "   {percentage}%",
+        "on-click": "alacritty -e htop",
+        "tooltip-format": "Ram: {used} / {total} GiB | Swap: {swapUsed} / {swapTotal} GiB"
+    },
+    "tray": {
+        "spacing": 5
+    },
+    "battery": {
+        "format": "{icon}   {capacity}%",
+        "format-plugged": "<span foreground='#a6da95'>󰂄</span>   {capacity}%",
+        "format-charging": "<span foreground='#a6da95'>󰂄</span>   {capacity}%",
+        "format-discharging-warning": "<span foreground='#eed49f'>{icon}</span>   {capacity}%",
+        "format-discharging-critical": "<span foreground='#ed8796'>{icon}</span>   {capacity}%",
+        "format-icons": ["󰂃", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+        "states": {
+            "warning": 19,
+            "critical": 9
+        }
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        },
+        "tooltip-format-activated": "Mode présentation: Activé",
+        "tooltip-format-deactivated": "Mode présentation: Desactivé"
+    },
+    "backlight": {
+        "format": "   {percent}%",
+        "reverse-scrolling": true,
+        "smooth-scrolling-threshold": 1.5,
+        "scroll-step": 5.0,
+        "tooltip": false
+    },
+    "pulseaudio": {
+        "format": "{icon}   {volume}%",
+        "format-muted": "   {volume}%",
+        "format-bluetooth": "{icon}      {volume}%",
+        "format-bluetooth-muted": "      {volume}%",
+        "format-icons": {
+            "headphone": ["   ", "   ", "   "],
+            "default": ["", "", ""]
+        },
+        "smooth-scrolling-threshold": 1.0,
+        "reverse-scrolling": true,
+        "max-volume": 153.0,
+        "on-click": "sound-volume toggle_mute",
+        "on-click-right": "pavucontrol",
+        "on-click-middle": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+    },
+    "mpris": {
+        "format": "{player_icon}   {title}",
+        "title-len": 50,
+        "tooltip-format": "{dynamic}",
+        "dynamic-order": ["title", "artist", "album"],
+        "player-icons": {
+            "default": "",
+            "vlc": "󰕼",
+            "firefox": ""
+        }
+    },
+    "custom/notification": {
+        "tooltip": false,
+        "format": "{icon}",
+        "format-icons": {
+            "notification": "<span foreground='#ed8796'><sup></sup></span>",
+            "none": "",
+            "dnd-notification": "<span foreground='#ed8796'><sup></sup></span>",
+            "dnd-none": "",
+            "inhibited-notification": "<span foreground='#ed8796'><sup></sup></span>",
+            "inhibited-none": "",
+            "dnd-inhibited-notification": "<span foreground='#ed8796'><sup></sup></span>",
+            "dnd-inhibited-none": ""
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client --subscribe-waybar",
+        "on-click": "swaync-client --toggle-panel --skip-wait",
+        "on-click-right": "swaync-client --toggle-dnd --skip-wait",
+        "escape": true
+    }
+}

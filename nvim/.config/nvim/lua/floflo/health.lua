@@ -21,8 +21,7 @@ local EXTERNAL_DEPENDENCIES = {
     'marksman',
     'jdtls',
     'cmake-language-server',
-    'ocamllsp',
-    'solargraph',
+    'ansible-language-server'
 }
 
 local function check_external_dependencies()

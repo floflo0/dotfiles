@@ -1,0 +1,9 @@
+#!/usr/bin/sh
+
+set -x
+
+system76-power profile performance &
+brightnessctl set 100% &
+nmcli con up Hotspot &
+
+wait

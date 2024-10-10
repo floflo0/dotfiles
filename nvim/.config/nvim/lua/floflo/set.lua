@@ -86,6 +86,7 @@ vim.opt.winblend = blend
 vim.opt.termguicolors = true
 
 vim.g.mapleader = ' '
+vim.g.maplocalleader = '\\'
 
 vim.g.netrw_banner = 0
 

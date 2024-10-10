@@ -1,12 +1,24 @@
 #!/usr/bin/python3
 
-import contextlib
 import os
 import shutil
 import subprocess
 import sys
 import tempfile
-from typing import Callable, Generator, NoReturn
+from typing import Callable
+
+from package_manager import get_package_manager, PackageManager
+from utils import (
+    add_group,
+    ask_yes_no,
+    error,
+    gsettings_set,
+    is_archlinux,
+    mkdir,
+    pushd,
+    run_command,
+    which
+)
 
 
 EDITOR: str | None = os.getenv('EDITOR')
@@ -34,116 +46,10 @@ PACKAGE_LIST_NPM: str = 'package_list_npm'
 
 YAY_URL: str = 'https://aur.archlinux.org/yay-bin.git'
 
-I3_WALLPAPER_NAME: str = 'outset_island'
-I3_WALLPAPER_EXT: str = 'jpeg'
-I3_WALLPAPERS_DIR: str = HOME + '/dotfiles/i3/.config/i3/wallpapers'
-I3_TRANSITIONS_DIR: str = I3_WALLPAPERS_DIR + '/' + 'transitions'
-I3_WALLPAPERS_COUNT: int = 4
-
-
-def error(*args: str) -> NoReturn:
-    print(f'{sys.argv[0]}:', 'error:', *args, file=sys.stderr)
-    sys.exit(1)
-
-
-def mkdir(dir_path: str) -> None:
-    if os.path.exists(dir_path):
-        return
-
-    os.makedirs(dir_path, exist_ok=True)
-    print('Create directory:', dir_path)
-
-
-def run_command(*command: str, silent: bool = False) -> None:
-    assert command, 'command is empty'
-    if not silent:
-        print('$', ' '.join(command))
-    try:
-        subprocess.run(command, check=True)
-    except subprocess.CalledProcessError as err:
-        command_name: str = command[0] if command[0] == 'sudo' else command[0]
-        error(command_name, f'exit with {err.returncode} code')
-
-
-class PackageManager:
-
-    executable: str
-
-    def __init__(self) -> None:
-        self.repo_synced: bool = False
-
-    def sync_repo(self) -> None:
-        raise NotImplementedError('sync_repo')
-
-    def install_packages(self, *packages: str) -> None:
-        raise NotImplementedError('install_package')
-
-
-class AptPackageManager(PackageManager):
-
-    executable: str = 'apt'
-
-    def sync_repo(self) -> None:
-        print('Updating repo')
-        run_command('sudo', 'apt', 'update')
-        self.repo_synced = True
-
-    def install_packages(self, *packages: str) -> None:
-        if not self.repo_synced:
-            self.sync_repo()
-
-        run_command('sudo', 'apt', 'install', *packages)
-
-
-class PacmanPackageManager(PackageManager):
-
-    executable: str = 'pacman'
-
-    def sync_repo(self) -> None:
-        run_command('sudo', 'pacman', '-Sy')
-        self.repo_synced = True
-
-    def install_packages(self, *packages: str) -> None:
-        if not self.repo_synced:
-            self.sync_repo()
-
-        run_command('sudo', 'pacman', '-S', *packages)
-
-
-PACKAGE_MANAGERS: list[PackageManager] = [
-    AptPackageManager(),
-    PacmanPackageManager()
-]
-
-
-def which(executable: str) -> bool:
-    return shutil.which(executable) is not None
-
-
-def is_archlinux() -> bool:
-    return os.path.exists('/etc/arch-release')
-
-
-def get_package_manager() -> PackageManager:
-    for package_manager in PACKAGE_MANAGERS:
-        if which(package_manager.executable):
-            return package_manager
-
-    error('no package manager found')
-
-
-def ask_yes_no(message: str) -> bool:
-    return input(message + ' [y/N] ').lower() == 'y'
-
-
-@contextlib.contextmanager
-def pushd(new_dir: str) -> Generator[None, None, None]:
-    previous_dir: str = os.getcwd()
-    os.chdir(new_dir)
-    try:
-        yield
-    finally:
-        os.chdir(previous_dir)
+WALLPAPER_NAME: str = 'outset_island'
+WALLPAPER_EXT: str = 'jpeg'
+WALLPAPERS_DIR: str = HOME + '/dotfiles/i3/.config/i3/wallpapers'
+WALLPAPERS_COUNT: int = 4
 
 
 class Setup:
@@ -166,10 +72,11 @@ class Setup:
             'cava': self.install_cava,
             'clangd': self.install_clangd,
             'fd': self.install_fd,
-            'fish': self.insall_fish,
+            'fish': self.install_fish,
             'git': self.install_git,
             'gnome': self.install_gnome,
             'gtk': self.install_gtk,
+            'hypr': self.install_hypr,
             'i3': self.install_i3,
             'neovide': self.install_neovide,
             'nvim': self.install_neovim,
@@ -181,6 +88,9 @@ class Setup:
             'system76': self.install_system76,
             'tmux': self.install_tmux,
             'touchegg': self.install_touchegg,
+            'swaync': self.install_swaync,
+            'swayosd': self.install_swayosd,
+            'waybar': self.install_waybar,
             'xinit': self.install_xinit,
             'xresources': self.install_xresources,
             'yazi': self.install_yazi
@@ -380,7 +290,7 @@ class Setup:
     def install_fd(self) -> None:
         self.stow_config('fd', [CONFIG_DIR + '/fd'])
 
-    def insall_fish(self) -> None:
+    def install_fish(self) -> None:
         print(CONFIG_DIR + '/fish')
         self.stow_config('fish', [CONFIG_DIR + '/fish'])
 
@@ -419,49 +329,22 @@ class Setup:
     def install_gtk(self) -> None:
         self.stow_config('gtk', [CONFIG_DIR + '/gtk-3.0',
                                  CONFIG_DIR + '/gtk-4.0'])
-        run_command('gsettings', 'set', 'org.gnome.desktop.interface',
-                    'color-scheme', "'prefer-dark'")
+        gsettings_set('org.gnome.desktop.interface', 'color-scheme',
+                      "'prefer-dark'")
+        gsettings_set('org.gnome.desktop.interface', 'gtk-theme',
+                      'catppuccin-macchiato-blue-standard+default')
+        gsettings_set('org.gnome.desktop.interface', 'icon-theme',
+                      'Papirus-Dark')
+        gsettings_set('org.gnome.desktop.interface', 'cursor-theme',
+                      'catppuccin-macchiato-dark-cursors')
+        gsettings_set('org.gnome.desktop.interface', 'font-name',
+                      'Cantarell 10')
 
-    def i3_make_wallpapers_transitions(self) -> None:
-        print('Making wallpapers transitions for i3')
-        if os.path.exists(I3_TRANSITIONS_DIR):
-            print('Removing existing transitions')
-            shutil.rmtree(I3_TRANSITIONS_DIR)
-
-        mkdir(I3_TRANSITIONS_DIR)
-
-        for i in range(I3_WALLPAPERS_COUNT):
-            print(f'Generating transition for {I3_WALLPAPER_NAME}_{i}')
-            wallpaper_path: str = (
-                I3_WALLPAPERS_DIR + '/' +
-                I3_WALLPAPER_NAME + '_' +
-                f'{i}.{I3_WALLPAPER_EXT}'
-            )
-            prev_i: int = (i - 1) % I3_WALLPAPERS_COUNT
-            prev_wallpaper_path: str = (
-                f'{I3_WALLPAPERS_DIR}/'
-                f'{I3_WALLPAPER_NAME}_'
-                f'{prev_i}.{I3_WALLPAPER_EXT}'
-            )
-
-            print('[' + ' ' * 20 + ']   0%', end='\r', flush=True)
-            for j in range(5, 100, 5):
-                frame_path: str = (
-                    I3_TRANSITIONS_DIR + '/' +
-                    I3_WALLPAPER_NAME + '_' +
-                    f'{i}_{j}.{I3_WALLPAPER_EXT}'
-                )
-                run_command('composite', '-dissolve', str(j), '-gravity',
-                            'Center', wallpaper_path, prev_wallpaper_path,
-                            '-alpha', 'Set', frame_path,
-                            silent=True)
-                print(
-                    '[' + '#' * (j // 5) + ' ' * ((100 - j) // 5) + ']',
-                    f'{j:3}%',
-                    end='\r',
-                    flush=True
-                )
-            print('[' + '#' * 20 + '] 100%')
+    def install_hypr(self) -> None:
+        self.stow_config('hypr', [CONFIG_DIR + '/hypr'])
+        add_group(USER, 'input')
+        run_command('systemctl', 'disable', '--user',
+                    'libinput-gestures.service')
 
     def install_i3(self) -> None:
         if not which('convert') or not which('composite'):
@@ -474,13 +357,11 @@ class Setup:
         print('Making lockscreen background image')
         run_command(
             'convert',
-            f'{I3_WALLPAPERS_DIR}/{I3_WALLPAPER_NAME}_2.{I3_WALLPAPER_EXT}',
+            f'{WALLPAPERS_DIR}/{WALLPAPER_NAME}_2.{WALLPAPER_EXT}',
             '-resize',
             SCREEN_RESOLUTION,
-            f'{I3_WALLPAPERS_DIR}/lockscreen.png'
+            f'{WALLPAPERS_DIR}/lockscreen.png'
         )
-
-        self.i3_make_wallpapers_transitions()
 
         self.stow_config('i3', [CONFIG_DIR + '/i3'])
 
@@ -508,7 +389,7 @@ class Setup:
     def install_system76(self) -> None:
         run_command('sudo', 'systemctl', 'enable',
                     'com.system76.PowerDaemon.service')
-        run_command('sudo', 'gpasswd', '-a', USER, 'adm')
+        add_group(USER, 'adm')
 
     def install_tmux(self) -> None:
         self.stow_config('tmux', [CONFIG_DIR + '/tmux'])
@@ -522,6 +403,16 @@ class Setup:
     def install_touchegg(self) -> None:
         self.stow_config('touchegg', [CONFIG_DIR + '/touchegg'])
         run_command('sudo', 'systemctl', 'enable', 'touchegg')
+
+    def install_swaync(self) -> None:
+        self.stow_config('swaync', [CONFIG_DIR + '/swaync'])
+
+    def install_swayosd(self) -> None:
+        run_command('sudo', 'systemctl', 'enable', '--now',
+                    'swayosd-libinput-backend.service')
+
+    def install_waybar(self) -> None:
+        self.stow_config('waybar', [CONFIG_DIR + '/waybar'])
 
     def install_xinit(self) -> None:
         self.stow_config('xinit', [HOME + '/xinitrc'])

@@ -93,7 +93,12 @@ return {
         }
     },
     config = function()
+        local extra_groups = {}
+        if not vim.g.neovide then
+            extra_groups[#extra_groups + 1] = 'NormalFloat'
+        end
         require('transparent').setup({
+            extra_groups = extra_groups,
             exclude_groups = { 'CursorLine' }
         })
 

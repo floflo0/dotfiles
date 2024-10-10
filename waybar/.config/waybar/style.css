@@ -1,0 +1,283 @@
+@import "/home/floris/dotfiles/extern/catppuccin/waybar/themes/macchiato.css";
+
+@define-color primary @blue;
+@define-color background @base;
+@define-color background9 rgba(36, 39, 58, 0.9);
+@define-color background81 rgba(36, 39, 58, 0.81);
+@define-color background6 rgba(36, 39, 58, 0.6);
+
+* {
+    background: transparent;
+}
+
+button:hover {
+    box-shadow: none; /* Remove predefined box-shadow. */
+}
+
+window#waybar {
+    font-family: 'Cantarell', 'Font Awesome 6 Free', 'Font Awesome 6 Brands';
+    font-size: 14px;
+    background: @background81;
+    transition: all 0.3s ease-in-out;
+}
+
+window#waybar.empty {
+    background: @background6;
+}
+
+window#waybar.solo {
+    background: @background;
+}
+
+window#waybar.Alacritty,
+window#waybar.neovide,
+window#waybar.notes,
+window#waybar.Code,
+window#waybar.thunar,
+window#waybar.io\.bassi\.Amberol,
+window#waybar.discord
+{
+    background: @background9;
+}
+
+window#waybar.org\.gnome\.baobab,
+window#waybar.gnome-disks
+{
+    background: rgba(30, 32, 48, 0.9);
+
+}
+
+window#waybar.blueberry\.py,
+window#waybar.dolphin-emu,
+window#waybar.vlc
+{
+    background: @mantle;
+}
+
+window#waybar.firefox,
+window#waybar.jetbrains-clion,
+window#waybar.jetbrains-idea
+{
+    background: @crust;
+}
+
+window#waybar.Brave-browser,
+window#waybar.Chromium
+{
+    background: #1d1f2e;
+}
+
+tooltip {
+    background: @background9;
+    border: 2px solid @primary;
+}
+
+tooltip label {
+    color: @text;
+    padding: 5px;
+}
+
+#submap,
+#window,
+#mpris,
+#cpu,
+#memory,
+#disk,
+#battery,
+#language,
+#backlight,
+#pulseaudio,
+#clock,
+#custom-notification
+{
+    padding: 0 5px;
+}
+
+#custom-menu,
+#workspaces,
+#submap,
+#window,
+#mpris,
+#cpu,
+#memory,
+#disk,
+#battery,
+#idle_inhibitor,
+#language,
+#backlight,
+#pulseaudio,
+#clock,
+#custom-notification
+{
+    color: @text;
+    font-weight: bold;
+    transition: background 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+#custom-menu,
+#workspaces button,
+#submap,
+#window,
+#mpris,
+#cpu,
+#memory,
+#disk,
+#battery,
+#idle_inhibitor,
+#language,
+#tray > *,
+#backlight,
+#pulseaudio,
+#clock,
+#custom-notification
+{
+    border-radius: 5px;
+    border: 1px solid transparent;
+}
+
+#custom-menu,
+#submap,
+#window,
+#mpris,
+#cpu,
+#memory,
+#disk,
+#battery,
+#idle_inhibitor,
+#language,
+#tray,
+#backlight,
+#pulseaudio,
+#clock,
+#custom-notification
+{
+    margin: 3px 5px 3px 0;
+}
+
+#custom-menu:hover,
+#workspaces button:hover,
+#workspaces button.urgent:hover,
+#workspaces button.active:hover,
+#submap:hover,
+#window:hover,
+#mpris:hover,
+#cpu:hover,
+#memory:hover,
+#disk:hover,
+#battery:hover,
+#battery.warning:hover,
+#battery.critical:hover,
+#idle_inhibitor:hover,
+#language:hover,
+#tray > :hover,
+#backlight:hover,
+#pulseaudio:hover,
+#clock:hover,
+#custom-notification:hover
+{
+    background: @surface0;
+    border: 1px solid @primary;
+}
+
+#custom-menu {
+    margin-left: 5px;
+    font-size: 15px;
+    padding: 0 6px 0 4px;
+    min-width: 16px;
+}
+
+#workspaces {
+    margin: 3px 0;
+}
+
+#workspaces button {
+    margin-right: 5px;
+    min-width: 18px;
+    padding: 0 4px;
+    transition: all 0.3s ease-in-out;
+}
+
+#workspaces button:hover {
+    min-width: 30px;
+}
+
+#workspaces button.urgent {
+    color: @background;
+    background: @red;
+}
+
+#workspaces button.urgent:hover {
+    color: @red;
+    border-color: @red;
+}
+
+#workspaces button.active {
+    color: @background;
+    background: @primary;
+    min-width: 40px;
+}
+
+#workspaces button.active:hover {
+    min-width: 40px;
+    color: @primary;
+}
+
+#submap {
+    color: @background;
+    background: @primary;
+}
+
+#submap:hover {
+    color: @primary;
+}
+
+window#waybar.empty #window {
+    background: transparent;
+    padding: 0;
+    border: 0;
+}
+
+#idle_inhibitor {
+    min-width: 26px;
+    transition: color 0.3s ease-in-out;
+}
+
+#idle_inhibitor.deactivated {
+    color: @overlay1;
+}
+
+#tray * {
+    min-width: 26px;
+    margin: 0;
+    transition: background 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+#tray menu {
+    border: 2px solid @primary;
+    background: @background9;
+}
+
+#tray menu * {
+    transition-duration: 0s;
+}
+
+#tray menu *:hover {
+    background: @primary;
+    color: @background;
+}
+
+#pulseaudio {
+    transition: color 0.3s ease-in-out;
+}
+
+#pulseaudio.muted {
+    color: @overlay1;
+}
+
+#custom-notification.dnd-notification,
+#custom-notification.dnd-none,
+#custom-notification.dnd-inhibited-notification,
+#custom-notification.dnd-inhibited-none
+{
+    color: @overlay1;
+}

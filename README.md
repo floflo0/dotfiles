@@ -83,6 +83,27 @@ Section "InputClass"
 EndSection
 ```
 
+## Autologin
+
+In `/etc/systemd/system/getty@tty1.service.d/autologin.conf`:
+
+```
+[Service]
+ExecStart=
+ExecStart=-/usr/bin/agetty --autologin floris --noclear %I $TERM
+```
+
+## I3 touchpad gesture
+
+In `/etc/sudoers.d/00_floris`:
+
+```
+floris ALL=(ALL) ALL
+
+# Launch touchegg in i3
+floris ALL=(ALL) NOPASSWD: /usr/bin/touchegg
+```
+
 ## Credits
 
 - [Outset Island Wallpapers](https://steamcommunity.com/workshop/filedetails/?id=2197078124)

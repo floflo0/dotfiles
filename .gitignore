@@ -11,3 +11,4 @@ i3/.config/i3/wallpapers/lockscreen.png
 i3/.config/i3/wallpapers/transitions
 tmux/.config/tmux/plugins
 touchegg/.config/touchegg/.touchegg:*.lock
+__pycache__

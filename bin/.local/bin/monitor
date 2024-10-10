@@ -1,0 +1,63 @@
+#!/usr/bin/bash
+
+polybar_hdmi() {
+    # wait for the monitor to be connected
+    sleep 1
+    polybar hdmi --quiet 2>&1 > /dev/null &
+}
+
+quit_polybar() {
+    pkill -f "polybar hdmi"
+}
+
+monitor_i3() {
+    HDMI=$(xrandr | grep HDMI | cut -d " " -f 1)
+    EDP=$(xrandr | grep eDP | cut -d " " -f 1)
+
+    if [ "$1" = left ]; then
+        quit_polybar
+        xrandr --output "$HDMI" --auto --left-of "$EDP"
+        polybar_hdmi
+    elif [ "$1" = right ]; then
+        quit_polybar
+        xrandr --output "$HDMI" --auto --right-of "$EDP"
+        polybar_hdmi
+    elif [ "$1" = clone ]; then
+        quit_polybar
+        xrandr --output "$HDMI" --auto --same-as "$EDP"
+    elif [ "$1" = stop ]; then
+        quit_polybar
+        xrandr --output "$HDMI" --off
+    else
+        echo "unknow arguments: $@"
+    fi
+}
+
+hyprland_disable() {
+    hyprctl keyword monitor "${HDMI},disable"
+}
+
+monitor_hyprland() {
+    HDMI=$(hyprctl monitors all | grep HDMI | cut -d " " -f 2)
+    EDP=$(hyprctl monitors all | grep eDP | cut -d " " -f 2)
+
+    if [ "$1" = left ]; then
+        hyprctl keyword monitor "${HDMI},prefered,-1920x0,1"
+    elif [ "$1" = right ]; then
+        hyprctl keyword monitor "${HDMI},prefered,1920x0,1"
+    elif [ "$1" = up ]; then
+        hyprctl keyword monitor "${HDMI},prefered,0x-1200,1"
+    elif [ "$1" = clone ]; then
+        hyprctl keyword monitor "${HDMI},prefered,auto,1,mirror,${EDP}"
+    elif [ "$1" = stop ]; then
+        hyprland_disable
+    else
+        echo "unknow arguments: $@"
+    fi
+}
+
+if [[ -z $WAYLAND_DISPLAY ]]; then
+    monitor_i3 $@
+else
+    monitor_hyprland $@
+fi

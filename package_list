@@ -20,6 +20,7 @@ signal-desktop
 eog  # Image viewer
 gimp
 vlc
+mpv
 scrcpy
 easytag
 engrampa
@@ -45,26 +46,39 @@ i3-wm
 autotiling
 i3lock                  # Lock screen
 xss-lock                # Launch lock screen
-rofi                    # Launcher/Window switcher
-maim                    # Screenshots
 feh                     # Background
+polybar                 # Status bar
+picom                   # Transparency
+touchegg                # touchpad gesture
 xfce4-notifyd           # Notifications
 xfce4-power-manager     # Power Management
-polybar                 # Status bar
-network-manager-applet  # Network management
-polkit-gnome            # UI password prompt
-picom                   # Transparency
-playerctl               # Play/Pause buttons
-touchegg                # touchpad gesture
-pavucontrol             # sounds settings
-xdg-desktop-portal
-xdg-desktop-portal-gtk
+maim                    # Screenshots
 xdotool
+
+# Hyprland
+hyprland
+hyprpaper
+hypridle
+hyprlock
+xdg-desktop-portal-hyprland
+waybar
+wl-clipboard
+brightnessctl
+swaync
+qt5-wayland
+
+rofi-wayland            # Launcher/Window switcher
+network-manager-applet  # Network management
+playerctl               # Play/Pause buttons
+pavucontrol             # sounds settings
+polkit-gnome            # UI password prompt
+xdg-desktop-portal-gtk
+xdg-desktop-portal
 
 # Bluetooth
 bluez
 bluez-utils
-blueberry
+blueman
 
 # Fonts
 ttf-dejavu
@@ -104,6 +118,9 @@ neovim
     gopls
  	lua-language-server
     marksman
+    # ansible-language-server
+
+# ansible
 
 # Language
 nodejs

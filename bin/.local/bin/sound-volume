@@ -7,7 +7,7 @@ import sys
 
 STEP: int = 3
 MAX_VOLUME: float = 1.5
-EXPIRE_TIME: int = 50  # ms
+EXPIRE_TIME: int = 1000  # ms
 ICON_MUTE: str = 'audio-volume-muted'
 ICONS: list[str] = [
     'audio-volume-low',
@@ -20,23 +20,22 @@ SOUND_INDICATOR: str = \
 CACHE_DIR: str = os.getenv('XDG_CACHE_DIR', os.environ['HOME'] + '/.cache')
 PREVIOUS_NOTIFICATION_FILE: str = CACHE_DIR + '/volume-notification-id'
 
+
 def is_mute() -> bool:
-    env: dict[str, str] = dict(os.environ)
-    # The output of pact change depending on the lang.
-    env['LANG'] = 'en'
-    process = subprocess.run(['pactl', 'get-sink-mute', '@DEFAULT_SINK@'],
-                             check=True, capture_output=True, env=env)
-    return process.stdout.decode('utf-8').split()[1] == 'yes'
+    process = subprocess.run(['wpctl', 'get-volume', '@DEFAULT_AUDIO_SINK@'],
+                             check=True, capture_output=True)
+    output: list[str] = process.stdout.decode('utf-8').split()
+    return len(output) >= 3 and output[2] == '[MUTED]'
 
 
 def get_volume() -> float:
-    process = subprocess.run(['pactl', 'get-sink-volume', '@DEFAULT_SINK@'],
+    process = subprocess.run(['wpctl', 'get-volume', '@DEFAULT_AUDIO_SINK@'],
                              check=True, capture_output=True)
-    return float(process.stdout.decode('utf-8').split()[4][:-1]) / 100.0
+    return float(process.stdout.decode('utf-8').split()[1])
 
 
 def toggle_mute() -> None:
-    subprocess.run(['pactl', 'set-sink-mute', '@DEFAULT_SINK@', 'toggle'],
+    subprocess.run(['wpctl', 'set-mute', '@DEFAULT_AUDIO_SINK@', 'toggle'],
                    check=True)
 
 
@@ -48,7 +47,7 @@ def inc_volume() -> None:
     volume: float = get_volume()
     if volume >= MAX_VOLUME:
         return
-    subprocess.run(['pactl', 'set-sink-volume', '@DEFAULT_SINK@', f'+{STEP}%'],
+    subprocess.run(['wpctl', 'set-volume', '@DEFAULT_AUDIO_SINK@', f'{STEP}%+'],
                    check=True)
 
 
@@ -57,7 +56,7 @@ def dec_volume() -> None:
         toggle_mute()
         return
 
-    subprocess.run(['pactl', 'set-sink-volume', '@DEFAULT_SINK@', f'-{STEP}%'],
+    subprocess.run(['wpctl', 'set-volume', '@DEFAULT_AUDIO_SINK@', f'{STEP}%-'],
                    check=True)
 
 

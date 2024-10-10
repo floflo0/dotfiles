@@ -54,7 +54,7 @@ return {
             sources = cmp.config.sources({
                 { name = 'nvim_lua' },
                 { name = 'nvim_lsp' },
-                { name = 'luasnip' },
+                { name = 'luasnip', keyword_length = 3 },
                 { name = 'path' }
             }, {
                 { name = 'buffer', keyword_length = 2 }
@@ -165,6 +165,22 @@ return {
             }
         }))
         lspconfig.html.setup(config())
+        lspconfig.emmet_language_server.setup(config({
+            filetypes = {
+                'css',
+                'eruby',
+                'html',
+                'htmldjango',
+                'javascriptreact',
+                'less',
+                'pug',
+                'sass',
+                'scss',
+                'typescriptreact',
+                'htmlangular',
+                'php'
+            }
+        }))
         lspconfig.cssls.setup(config())
         lspconfig.jsonls.setup(config())
         lspconfig.eslint.setup(config())
@@ -203,7 +219,15 @@ return {
 
         lspconfig.glsl_analyzer.setup(config())
 
-        lspconfig.rust_analyzer.setup(config())
+        lspconfig.rust_analyzer.setup(config({
+            textDocument = {
+                completion = {
+                    completionItem = {
+                        snippetSupport = false,
+                    },
+                },
+            }
+        }))
 
         lspconfig.gopls.setup(config({
             cmd = { HOME .. '/go/bin/gopls' }
@@ -246,8 +270,7 @@ return {
             }
         }))
 
-        lspconfig.ocamllsp.setup(config())
-
-        lspconfig.solargraph.setup(config())
+        -- TODO health
+        lspconfig.ansiblels.setup(config())
     end
 }

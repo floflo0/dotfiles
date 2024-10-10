@@ -1,16 +1,19 @@
 #!/usr/bin/python3 -OO
 
+import argparse
 import datetime
 import os
 import subprocess
+import sys
 import time
 
 
 HOME: str = os.getenv('HOME', '/home/floris')
+WAYLAND_DISPLAY: str | None = os.getenv('WAYLAND_DISPLAY')
 
 WALLPAPER_NAME: str = 'outset_island'
 WALLPAPER_EXT: str = 'jpeg'
-WALLPAPERS_DIR: str = HOME + '/dotfiles/i3/.config/i3/wallpapers'
+WALLPAPERS_DIR: str = HOME + '/dotfiles/wallpapers'
 TRANSITIONS_DIR: str = WALLPAPERS_DIR + '/' + 'transitions'
 
 SLEEP_TIME: float = 300.0  # s
@@ -22,8 +25,10 @@ INTERVALS: list[datetime.time] = [
     datetime.time(hour=8)
 ]
 
+EXIT_SUCCESS: int = 0
 
-def set_wallpaper(wallpaper_path: str) -> None:
+
+def set_wallpaper_i3(wallpaper_path: str) -> None:
     subprocess.run([
         'feh',
         '--no-fehbg',
@@ -32,19 +37,40 @@ def set_wallpaper(wallpaper_path: str) -> None:
     ], check=False)
 
 
+def set_wallpaper_hyprland(wallpaper_path: str) -> None:
+    while True:
+        process = subprocess.run([
+            'hyprctl',
+            'hyprpaper',
+            'wallpaper',
+            f',{wallpaper_path}'
+        ], check=False)
+
+        if process.returncode == 0:
+            break
+
+        time.sleep(0.1)
+
+
+def set_wallpaper(wallpaper_path: str) -> None:
+    if WAYLAND_DISPLAY is None:
+        set_wallpaper_i3(wallpaper_path)
+        return
+
+    set_wallpaper_hyprland(wallpaper_path)
+
+
 def get_wallpaper_path(wallpaper: int) -> str:
     return f'{WALLPAPERS_DIR}/{WALLPAPER_NAME}_{wallpaper}.{WALLPAPER_EXT}'
 
 
 def change_wallpaper(wallpaper: int) -> None:
-    transition_path: str = f'{TRANSITIONS_DIR}/{WALLPAPER_NAME}_{wallpaper}_'
-    for i in range(5, 100, 5):
-        set_wallpaper(f'{transition_path}{i}.{WALLPAPER_EXT}')
     set_wallpaper(get_wallpaper_path(wallpaper))
 
 
 def next_index(wallpaper: int) -> int:
     return (wallpaper + 1) % len(INTERVALS)
+
 
 def get_current_interval() -> int:
     now: datetime.time = datetime.datetime.now().time()
@@ -71,9 +97,22 @@ def get_next_change(next_interval: int) -> float:
 
 
 def main() -> None:
+    prog: str = os.path.basename(sys.argv[0])
+    parser = argparse.ArgumentParser(
+        prog=prog,
+    )
+    parser.add_argument('-r', '--reset', action='store_true',
+                        help='reset the current wallpaper')
+    args: argparse.Namespace = parser.parse_args(sys.argv[1:])
+    reset: bool = args.reset
+
     current_interval: int = get_current_interval()
-    previous_interval: int = current_interval
     set_wallpaper(get_wallpaper_path(current_interval))
+
+    if reset:
+        sys.exit(EXIT_SUCCESS)
+
+    previous_interval: int = current_interval
     next_interval: int = next_index(current_interval)
 
     while True:
@@ -86,7 +125,6 @@ def main() -> None:
         time.sleep(sleep_time)
         current_interval = get_current_interval()
         while current_interval != previous_interval:
-            print('change', next_interval)
             change_wallpaper(next_interval)
             previous_interval = next_interval
             next_interval = next_index(next_interval)

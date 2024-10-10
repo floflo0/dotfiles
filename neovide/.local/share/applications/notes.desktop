@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Notes
-Exec=neovide --x11-wm-class notes --x11-wm-class-instance notes notes.md
+Exec=neovide --x11-wm-class notes --x11-wm-class-instance notes --wayland_app_id notes notes.md
 Terminal=false
 Type=Application
 Icon=text-editor

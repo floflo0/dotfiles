@@ -5,16 +5,21 @@ ueberzugpp
 
 cava
 
+# Hyprland
+hyprshot
+swayosd-git
+hyprland-qtutils-git
+
 # Apps
 brave-bin
 skypeforlinux-bin
 parabolic
-amberol
+# amberol
 
 betterdiscord-installer-bin
 
 # Games
-heroic-games-launcher-bin
+# heroic-games-launcher-bin
 
 # Theme
 catppuccin-gtk-theme-macchiato
