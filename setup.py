@@ -65,6 +65,10 @@ def run_command(*command: str, silent: bool = False) -> None:
         error(command_name, f'exit with {err.returncode} code')
 
 
+def gsettings_set(schema_dir: str, schema: str, value: str) -> None:
+    run_command('gsettings', 'set', schema_dir, schema, value)
+
+
 class PackageManager:
 
     executable: str
@@ -166,10 +170,11 @@ class Setup:
             'cava': self.install_cava,
             'clangd': self.install_clangd,
             'fd': self.install_fd,
-            'fish': self.insall_fish,
+            'fish': self.install_fish,
             'git': self.install_git,
             'gnome': self.install_gnome,
             'gtk': self.install_gtk,
+            'hypr': self.install_hypr,
             'i3': self.install_i3,
             'neovide': self.install_neovide,
             'nvim': self.install_neovim,
@@ -181,6 +186,7 @@ class Setup:
             'system76': self.install_system76,
             'tmux': self.install_tmux,
             'touchegg': self.install_touchegg,
+            'waybar': self.install_waybar,
             'xinit': self.install_xinit,
             'xresources': self.install_xresources,
             'yazi': self.install_yazi
@@ -380,7 +386,7 @@ class Setup:
     def install_fd(self) -> None:
         self.stow_config('fd', [CONFIG_DIR + '/fd'])
 
-    def insall_fish(self) -> None:
+    def install_fish(self) -> None:
         print(CONFIG_DIR + '/fish')
         self.stow_config('fish', [CONFIG_DIR + '/fish'])
 
@@ -419,8 +425,19 @@ class Setup:
     def install_gtk(self) -> None:
         self.stow_config('gtk', [CONFIG_DIR + '/gtk-3.0',
                                  CONFIG_DIR + '/gtk-4.0'])
-        run_command('gsettings', 'set', 'org.gnome.desktop.interface',
-                    'color-scheme', "'prefer-dark'")
+        gsettings_set('org.gnome.desktop.interface', 'color-scheme',
+                      "'prefer-dark'")
+        gsettings_set('org.gnome.desktop.interface', 'gtk-theme',
+                      'catppuccin-macchiato-blue-standard+default')
+        gsettings_set('org.gnome.desktop.interface', 'icon-theme',
+                      'Papirus-Dark')
+        gsettings_set('org.gnome.desktop.interface', 'cursor-theme',
+                      'catppuccin-macchiato-dark-cursors')
+        gsettings_set('org.gnome.desktop.interface', 'font-name',
+                      'Cantarell 10')
+
+    def install_hypr(self) -> None:
+        self.stow_config('hypr', [CONFIG_DIR + '/hypr'])
 
     def i3_make_wallpapers_transitions(self) -> None:
         print('Making wallpapers transitions for i3')
@@ -522,6 +539,9 @@ class Setup:
     def install_touchegg(self) -> None:
         self.stow_config('touchegg', [CONFIG_DIR + '/touchegg'])
         run_command('sudo', 'systemctl', 'enable', 'touchegg')
+
+    def install_waybar(self) -> None:
+        self.stow_config('waybar', [CONFIG_DIR + '/waybar'])
 
     def install_xinit(self) -> None:
         self.stow_config('xinit', [HOME + '/xinitrc'])

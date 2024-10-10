@@ -45,21 +45,29 @@ i3-wm
 autotiling
 i3lock                  # Lock screen
 xss-lock                # Launch lock screen
-rofi                    # Launcher/Window switcher
-maim                    # Screenshots
 feh                     # Background
-xfce4-notifyd           # Notifications
-xfce4-power-manager     # Power Management
 polybar                 # Status bar
-network-manager-applet  # Network management
-polkit-gnome            # UI password prompt
 picom                   # Transparency
-playerctl               # Play/Pause buttons
 touchegg                # touchpad gesture
+xdotool
+
+# Hyprland
+hyprland
+hyprpaper
+xdg-desktop-portal-hyprland
+waybar
+wl-clipboard
+
+rofi-wayland            # Launcher/Window switcher
+maim                    # Screenshots
+xfce4-notifyd           # Notifications
+network-manager-applet  # Network management
+xfce4-power-manager     # Power Management
 pavucontrol             # sounds settings
 xdg-desktop-portal
 xdg-desktop-portal-gtk
-xdotool
+polkit-gnome            # UI password prompt
+playerctl               # Play/Pause buttons
 
 # Bluetooth
 bluez

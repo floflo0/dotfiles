@@ -1,0 +1,94 @@
+@import "/home/floris/dotfiles/extern/catppuccin/waybar/themes/macchiato.css";
+
+button:hover {
+    box-shadow: none; /* Remove predefined box-shadow. */
+}
+
+window#waybar {
+    font-family: 'Cantarell', 'Font Awesome 6 Free', 'Font Awesome 6 Brands';
+    font-size: 14px;
+    background: transparent;
+    color: @text;
+}
+
+tooltip {
+    background: @base;
+    border: 1px solid @blue;
+}
+
+tooltip label {
+    color: @text;
+    padding: 5px;
+}
+
+#submap,
+#window
+{
+    padding: 0 10px;
+}
+
+#custom-menu,
+#workspaces,
+#submap,
+#window
+{
+    background: @base;
+    border-radius: 26px;
+    transition: all 0.3s ease-in-out;
+}
+
+#custom-menu {
+    font-size: 16px;
+    padding: 0 9px 0 7px;
+    color: @blue;
+}
+
+#custom-menu:hover {
+    background: @surface0;
+}
+
+#workspaces {
+    border-radius: 26px;
+    background: @base;
+}
+
+#workspaces button {
+    color: @blue;
+    border-radius: 26px;
+    min-width: 26px;
+    padding: 0 4px;
+    transition: all 0.3s ease-in-out;
+}
+
+#workspaces button.active {
+    background: @surface0;
+    color: @teal;
+    min-width: 50px;
+}
+
+#workspaces button.urgent {
+    color: @red;
+}
+
+#workspaces button:hover {
+    background: @surface0;
+    min-width: 40px;
+}
+
+#workspaces button.active:hover {
+    min-width: 50px;
+}
+
+#window:hover {
+    background: @surface0;
+}
+
+window#waybar.empty #window {
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+}
+
+#clock {
+    background: @base;
+}

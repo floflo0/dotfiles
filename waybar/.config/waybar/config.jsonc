@@ -1,0 +1,114 @@
+{
+    "layer": "top",
+    "output": "eDP-1",
+    "position": "top",
+    "height": 26,
+    "modules-left": [
+        "custom/menu",
+        "hyprland/workspaces",
+        "hyprland/submap",
+        "hyprland/window"
+    ],
+    "modules-center": [],
+    "modules-right": [
+        "cpu",
+        "memory",
+        "disk",
+        "hyprland/language",
+        "tray",
+        "wireplumber",
+        "clock"
+    ],
+    "margin": 3,
+    "spacing": 10,
+    "reload_style_on_change": true,
+    "cpu": {
+        "interval": 1,
+        "format": " {usage}%",
+        "on-click": "alacritty -e htop"
+    },
+    "clock": {
+        "interval": 1,
+        "format": " {:%H:%M}",
+        "format-alt": " {:%d/%m/%Y %H:%M:%S}",
+        "tooltip-format": "\n<span size='10pt' font='RobotoMono Nerd Font Mono'>{calendar}</span>",
+        "calendar": {
+            "mode"          : "month",
+            "mode-mon-col"  : 3,
+            "on-scroll"     : 1,
+            "format": {
+                "months":   "<span color='#8bd5ca'>{}</span>",
+                "days":     "<span color='#cad3f5'>{}</span>",
+                "weekdays": "<span color='#eed49f'>{}</span>",
+                "today":    "<span color='#ed8796'><b>{}</b></span>"
+            }
+        },
+        "actions":  {
+            "on-click-right": "mode",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        },
+        "on-click-middle": "gnome-calendar"
+    },
+    "custom/menu": {
+        "format": "󰣇",
+        "on-click": "rofi -show combi -combi-modi drun,window",
+        "on-click-right": "rofi -show window",
+        "tooltip": false
+    },
+    "disk": {
+        "format": " {free}",
+        "tooltip-format": "{path}: {used} / {total} ({percentage_used}%)",
+        "path": "/home",
+        "on-click": "baobab"
+    },
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "1": "",
+            "2": "",
+            "3": "",
+            "4": "",
+            "5": "",
+            "magic": ""
+        },
+        "show-special": true,
+        "on-scroll-up": "hyprctl dispatch workspace r-1",
+        "on-scroll-down": "hyprctl dispatch workspace r+1"
+
+    },
+    "hyprland/window": {
+        "format": "{}",
+        "icon": true,
+        "icon-size": 20,
+        "separate-outputs": true,
+        "on-click-right": "hyprctl dispatch killactive"
+    },
+    "hyprland/language": {
+        "format": " {}",
+        "format-fr": "fr",
+        "format-en": "us",
+        "on-click": "toggle-keyboard"
+    },
+    "hyprland/submap": {
+        "tooltip": false,
+        "on-click": "hyprctl dispatch submap reset"
+    },
+    "memory": {
+        "interval": 1,
+        "format": " {percentage}% | {swapPercentage}%",
+        "on-click": "alacritty -e htop",
+        "tooltip-format": "Ram: {used} / {total} GiB | Swap: {swapUsed} / {swapTotal} GiB"
+    },
+    "tray": {
+        "spacing": 5
+    },
+    "wireplumber": {
+        "format": "{icon} {volume}%",
+        "format-icons": ["", "", ""],
+        "format-muted": " muted",
+        "max-volume": 153.0,
+        "on-click": "sound-volume toggle_mute",
+        "on-click-right": "pavucontrol"
+    }
+}

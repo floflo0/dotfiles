@@ -2,6 +2,10 @@ if test -z "$DISPLAY" -a (tty) = "/dev/tty1"
     exec startx "$HOME/.config/xinitrc"
 end
 
+if test -z "$DISPLAY" -a (tty) = "/dev/tty2"
+    exec "$HOME/.config/hypr/launch.sh"
+end
+
 function e
     $argv &> /dev/null & disown
 end
@@ -34,3 +38,12 @@ function yy
 end
 
 zoxide init fish | source
+
+
+# BEGIN opam configuration
+# This is useful if you're using opam as it adds:
+#   - the correct directories to the PATH
+#   - auto-completion for the opam binary
+# This section can be safely removed at any time if needed.
+test -r '/home/floris/.opam/opam-init/init.fish' && source '/home/floris/.opam/opam-init/init.fish' > /dev/null 2> /dev/null; or true
+# END opam configuration

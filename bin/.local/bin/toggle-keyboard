@@ -2,19 +2,34 @@
 
 set -e
 
-set_keyboard() {
-    setxkbmap "$1"
+notify() {
     notify-send --icon keyboard --app-name "Keyboard" "Switched keyboard to ${1}."
 }
 
-main() {
-    current_layout=$(setxkbmap -query | grep layout | awk '{print $2}')
+set_keyboard_x11() {
+    setxkbmap "$1"
+    notify $1
+}
 
-    if [ "$current_layout" == "us" ]; then
-        set_keyboard fr
-    else
-        set_keyboard us
+get_current_keyboard_hyperland() {
+    hyprctl devices -j | jq -r '.keyboards[] | select(.name == "at-translated-set-2-keyboard") | .active_keymap' | sed s/French/fr/ | sed 's/English (US)/us/'
+}
+
+main() {
+    if [[ -z $HYPRLAND_INSTANCE_SIGNATURE ]]; then
+        current_layout=$(setxkbmap -query | grep layout | awk '{print $2}')
+
+        if [ "$current_layout" == "us" ]; then
+            set_keyboard_x11 fr
+        else
+            set_keyboard_x11 us
+        fi
+        exit 0
     fi
+
+    hyprctl switchxkblayout at-translated-set-2-keyboard next
+    notify $(get_current_keyboard_hyperland)
+    exit 0
 }
 
 main

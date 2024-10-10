@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 
+# TODO: wpctl
+
 import os
 import subprocess
 import sys

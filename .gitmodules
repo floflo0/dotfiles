@@ -16,3 +16,9 @@
 [submodule "extern/catppuccin/Kvantum"]
 	path = extern/catppuccin/Kvantum
 	url = https://github.com/catppuccin/Kvantum
+[submodule "extern/catppuccin/waybar"]
+	path = extern/catppuccin/waybar
+	url = https://github.com/catppuccin/waybar
+[submodule "extern/catppuccin/hyprland"]
+	path = extern/catppuccin/hyprland
+	url = https://github.com/catppuccin/hyprland
