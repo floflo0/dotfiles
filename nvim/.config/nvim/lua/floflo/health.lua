@@ -19,7 +19,10 @@ local EXTERNAL_DEPENDENCIES = {
     'lua-language-server',
     'intelephense',
     'marksman',
-    'jdtls'
+    'jdtls',
+    'cmake-language-server',
+    'ocamllsp',
+    'solargraph',
 }
 
 local function check_external_dependencies()

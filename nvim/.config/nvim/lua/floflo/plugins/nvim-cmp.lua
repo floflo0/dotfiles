@@ -57,7 +57,7 @@ return {
                 { name = 'luasnip' },
                 { name = 'path' }
             }, {
-                { name = 'buffer', keyword_length = 5 }
+                { name = 'buffer', keyword_length = 2 }
             }),
 
             experimental = {
@@ -121,6 +121,8 @@ return {
             settings = {
                 pylsp = {
                     plugins = {
+                        autopep8 = { enabled = false },
+                        pyflakes = { enabled = false },
                         pylint = {
                             enabled = true,
                             executable = 'pylint'
@@ -129,9 +131,13 @@ return {
                         pylsp_mypy = {
                             enabled = true,
                             report_progress = true
-                        }
+                        },
+                        mccabe = { enabled = false }
                     }
                 }
+            },
+            flags = {
+                debounce_text_changes = 200
             }
         }))
 
@@ -239,5 +245,9 @@ return {
                 '-data', HOME .. '/.cache/jdtls/workspace'
             }
         }))
+
+        lspconfig.ocamllsp.setup(config())
+
+        lspconfig.solargraph.setup(config())
     end
 }
