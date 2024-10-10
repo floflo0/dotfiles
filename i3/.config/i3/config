@@ -5,7 +5,7 @@ include $HOME/.config/i3/keybings.conf
 include $HOME/.config/i3/autostart.conf
 include $HOME/.config/i3/colors.conf
 
-focus_follows_mouse no
+focus_follows_mouse yes
 
 set $main_monitor "eDP"
 set $second_monitor "HDMI-1-0"
@@ -34,6 +34,9 @@ workspace $ws10 output $main_monitor
 
 # Open applications on specific workspaces
 assign [class="neovide"] $ws1
+assign [class="Code"] $ws1
+assign [class="jetbrains-clion"] $ws1
+assign [class="jetbrains-idea"] $ws1
 assign [class="dolphin-emu"] $ws1
 assign [class="steam"] $ws1
 assign [class="heroic"] $ws1
@@ -67,6 +70,7 @@ for_window [class="Alacritty"] border pixel $border
 for_window [class="steam"] border pixel $border
 for_window [class="neovide"] border pixel $border
 for_window [class="baobab"] border pixel $border
+for_window [class="Gnome-disk"] border pixel $border
 for_window [class="note"] border pixel $border
 for_window [class="amberol"] border pixel $border
 for_window [class="org.nickvision.tubeconverter"] border pixel $border
