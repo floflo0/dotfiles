@@ -33,5 +33,5 @@ vim.g.neovide_padding_left = PADDING
 
 vim.g.neovide_hide_mouse_when_typing = true
 
-vim.keymap.set({ 'i', 'c' }, '<C-v>', '<C-r>+')
+-- vim.keymap.set({ 'i', 'c' }, '<C-v>', '<C-r>+')
 vim.keymap.set({ 'i', 'c' }, '<C-S-v>', '<C-r>+')

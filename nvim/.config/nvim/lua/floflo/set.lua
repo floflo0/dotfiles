@@ -103,6 +103,9 @@ vim.diagnostic.config({
     severity_sort = true  -- Display error message first
 })
 
-vim.opt.makeprg = 'make -j10'
+vim.opt.makeprg = 'make -j16'
 
 vim.lsp.set_log_level('off')
+
+vim.g.loaded_perl_provider = false
+vim.g.loaded_ruby_provider = false
