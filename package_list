@@ -164,6 +164,7 @@ yazi
     ffmpegthumbnailer  # For video thumbnails
     poppler            # For PDF preview
     unarchiver         # For archive preview
+    perl-image-exiftool
 eza
 zoxide
 htop

@@ -2,21 +2,33 @@
 show_hidden = true
 
 [opener]
-play = [
-    { run = 'vlc "$@"', orphan = true },
+open = [
+    { run = 'xdg-open "$@"', orphan = true, desc = " Open", for = "linux" },
 ]
 vlc = [
-    { run = 'vlc "$@"', orphan = true },
+    { run = 'vlc "$@"', orphan = true, desc = " Vlc" },
 ]
 amberol = [
-    { run = 'amberol "$@"', orphan = true },
+    { run = 'amberol "$@"', orphan = true, desc = " Amberol" },
 ]
 mpv = [
-    { run = 'mpv "$@"', orphan = true },
+    { run = 'mpv "$@"', orphan = true, desc = " Mpv" },
 ]
+gimp = [
+    { run = 'gimp "$@"', orphan = true, desc = " Gimp" },
+]
+reveal = [
+    { run = 'xdg-open "$(dirname "$1")"', desc = " Reveal", for = "linux" },
+]
+edit = [
+    { run = '${EDITOR:-vi} "$@"', desc = " $EDITOR", block = true, for = "unix" },
+]
+play = []
 
 [open]
 prepend_rules = [
-    { mime = "inode/directory", use = ["edit", "open", "vlc", "reveal"] },
+    { mime = "inode/directory", use = ["edit", "open", "amberol", "vlc", "reveal"] },
     { mime = "audio/*", use = ["amberol", "vlc", "mpv", "reveal"] },
+    { mime = "image/*", use = ["open", "gimp", "reveal"] },
+    { mime = "video/*", use = ["mpv", "vlc", "reveal"] },
 ]
