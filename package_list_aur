@@ -26,6 +26,7 @@ betterdiscord-installer-bin
 
 # Theme
 catppuccin-gtk-theme-macchiato
+libadwaita-without-adwaita-git
 catppuccin-cursors-macchiato
 
 # Neovim

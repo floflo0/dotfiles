@@ -6,7 +6,6 @@ export PATH="${HOME}/.local/bin:${PATH}"
 
 export QT_STYLE_OVERRIDE=kvantum
 export GTK_THEME="catppuccin-macchiato-blue-standard+default"
-export ADW_DISABLE_PORTAL=1
 
 export MYPY_CACHE_DIR="${HOME}/.cache/mypy"
 export MANPAGER="nvim +Man!"
