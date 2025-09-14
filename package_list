@@ -67,7 +67,7 @@ brightnessctl
 swaync
 qt5-wayland
 
-rofi-wayland            # Launcher/Window switcher
+rofi                    # Launcher/Window switcher
 network-manager-applet  # Network management
 playerctl               # Play/Pause buttons
 pavucontrol             # sounds settings
