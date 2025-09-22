@@ -8,19 +8,17 @@ hide_when_typing = true
 
 [window]
 padding = { x = 3, y = 3 }
+dynamic_padding = true
 decorations = "None"
 opacity = 0.9
 decorations_theme_variant = "Dark"
 
 [scrolling]
-history = 100000
+history = 10000
 
 [font]
 normal = { family = "RobotoMono Nerd Font Mono", style = "Regular" }
 size = 9.0
-
-[colors]
-cursor = { text = "#000000", cursor = "#ffffff" }
 
 [selection]
 semantic_escape_chars = ",│`|:\"' ()[]{}<>\t/&*@%;#"
