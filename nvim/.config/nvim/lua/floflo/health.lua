@@ -1,5 +1,6 @@
 local EXTERNAL_DEPENDENCIES = {
     'fd',
+    'ktlint',
 
     -- Lsp
     'pylsp',
@@ -7,6 +8,7 @@ local EXTERNAL_DEPENDENCIES = {
     'fish-lsp',
     'tsserver',
     'vscode-html-language-server',
+    'emmet-language-server',
     'vscode-css-language-server',
     'vscode-json-language-server',
     'vscode-eslint-language-server',
@@ -18,9 +20,10 @@ local EXTERNAL_DEPENDENCIES = {
     'gopls',
     'lua-language-server',
     'intelephense',
-    'marksman',
+    -- 'marksman',
     'jdtls',
     'cmake-language-server',
+    'kotlin-language-server',
     'ansible-language-server'
 }
 

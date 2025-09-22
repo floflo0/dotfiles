@@ -2,10 +2,21 @@ return {
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
         'nvim-treesitter/nvim-treesitter-textobjects',
+        {
+            'nvim-treesitter/nvim-treesitter-context',
+            opts = {
+                multiwindow = true,
+                max_lines = 5,
+                min_window_height = 25,
+                multiline_threshold = 3,
+            },
+        },
+        'hiphish/rainbow-delimiters.nvim',
     },
     build = function()
         require('nvim-treesitter.install').update({ with_sync = true })()
     end,
+    event = 'VeryLazy',
     config = function()
         require('nvim-treesitter.configs').setup({
             ensure_installed = {
@@ -52,7 +63,7 @@ return {
                 'vimdoc',
                 'vue',
                 'xml',
-                'yaml'
+                'yaml',
             },
             ignore_install = {},
 
@@ -69,7 +80,7 @@ return {
                 enable = true,
                 keymaps = {
                     init_selection = '<C-space>',
-                    node_incremental = '<C-space>'
+                    node_incremental = '<C-space>',
                 },
             },
 
@@ -77,26 +88,26 @@ return {
                 swap = {
                     enable = true,
                     swap_next = {
-                        ['<C-l>'] = '@parameter.inner'
+                        ['<C-l>'] = '@parameter.inner',
                     },
                     swap_previous = {
-                        ['<C-h>'] = '@parameter.inner'
-                    }
+                        ['<C-h>'] = '@parameter.inner',
+                    },
                 },
 
                 move = {
                     enable = true,
                     set_jumps = true,
                     goto_next_start = {
-                        ['<leader>e'] = '@function.outer'
+                        ['<leader>e'] = '@function.outer',
                     },
                     goto_previous_start = {
-                        ['<leader>y'] = '@function.outer'
-                    }
-                }
+                        ['<leader>y'] = '@function.outer',
+                    },
+                },
             },
 
-            modules = {}
+            modules = {},
         })
-    end
+    end,
 }

@@ -9,12 +9,24 @@ return {
         'hrsh7th/cmp-path',
         'hrsh7th/cmp-nvim-lua',
         'hrsh7th/cmp-cmdline',
+        'hrsh7th/cmp-emoji',
         'hrsh7th/cmp-nvim-lsp-document-symbol',
         'ray-x/lsp_signature.nvim',
         'L3MON4D3/LuaSnip',
         'saadparwaiz1/cmp_luasnip',
-        'onsails/lspkind.nvim'
+        'onsails/lspkind.nvim',
+        {
+            'folke/lazydev.nvim',
+            opts = {
+                library = {
+                    -- See the configuration section for more details
+                    -- Load luvit types when the `vim.uv` word is found
+                    { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+                }
+            }
+        }
     },
+    lazy = false,
     config = function()
         local cmp = require('cmp')
 
@@ -25,14 +37,17 @@ return {
                 end,
             },
 
-            window = {},
+            window = {
+                completion = cmp.config.window.bordered(),
+                documentation = cmp.config.window.bordered(),
+            },
 
             mapping = cmp.mapping.preset.insert({
                 ['<C-b>'] = cmp.mapping.scroll_docs(-4),
                 ['<C-f>'] = cmp.mapping.scroll_docs(4),
                 ['<C-Space>'] = cmp.mapping.complete(),
                 ['<C-e>'] = cmp.mapping.abort(),
-                ['<CR>'] = cmp.mapping.confirm({ select = true })
+                ['<CR>'] = cmp.mapping.confirm({ select = true }),
             }),
 
             formatting = {
@@ -46,7 +61,8 @@ return {
                         luasnip = '[LuaSnip]',
                         path = '[Path]',
                         buffer = '[Buffer]',
-                        cmdline = '[Cmd]'
+                        cmdline = '[Cmd]',
+                        emoji = '[Emoji]'
                     }
                 })
             },
@@ -55,7 +71,8 @@ return {
                 { name = 'nvim_lua' },
                 { name = 'nvim_lsp' },
                 { name = 'luasnip', keyword_length = 3 },
-                { name = 'path' }
+                { name = 'path' },
+                { name = 'emoji' }
             }, {
                 { name = 'buffer', keyword_length = 2 }
             }),
@@ -98,19 +115,11 @@ return {
         capabilities.textDocument.completion.completionItem.snippetSupport = true
         local cmp_nvim_lsp = require('cmp_nvim_lsp')
 
-        local lsp_signature = require('lsp_signature')
-
-        vim.keymap.set({ 'n', 'i' }, '<C-b>', lsp_signature.toggle_float_win, {
-            silent = true,
-            noremap = true,
-            desc = 'Lsp: toggle signature'
-        })
-
         local function config(_config)
             return vim.tbl_deep_extend('force', {
                 capabilities = cmp_nvim_lsp.default_capabilities(),
                 on_attach = function(_, bufnr)
-                    lsp_signature.on_attach({}, bufnr)
+                    require('lsp_signature').on_attach({}, bufnr)
                 end
             }, _config or {})
         end
@@ -142,7 +151,7 @@ return {
         }))
 
         lspconfig.bashls.setup(config())
-        lspconfig.fish_lsp.setup(config())
+        -- lspconfig.fish_lsp.setup(config())
 
         lspconfig.ts_ls.setup(config({
             init_options = {
@@ -211,6 +220,8 @@ return {
             'postcss.config.ts'
             )
         }))
+        vim.lsp.enable('angularls')
+        vim.lsp.config('angularls', config())
 
         lspconfig.clangd.setup(config({
             cmd = { 'clangd', '--enable-config', '-header-insertion=never' }
@@ -233,34 +244,19 @@ return {
             cmd = { HOME .. '/go/bin/gopls' }
         }))
 
-        lspconfig.lua_ls.setup {
+        lspconfig.lua_ls.setup(config({
             settings = {
                 Lua = {
-                    runtime = {
-                        version = 'LuaJIT',
-                    },
                     diagnostics = {
-                        disable = { 'missing-fields' },
-                        globals = { 'vim' }
-                    },
-                    workspace = {
-                        checkThirdParty = false,
-                        library = {
-                            '${3rd}/luv/library',
-                            '${3rd}/busted/library',
-                            unpack(vim.api.nvim_get_runtime_file('', true))
-                        }
-                    },
-                    telemetry = {
-                        enable = false
+                        disable = { 'missing-fields' }
                     }
                 }
             }
-        }
+        }))
 
         lspconfig.intelephense.setup(config())
 
-        lspconfig.marksman.setup(config())
+        -- lspconfig.marksman.setup(config())
 
         lspconfig.jdtls.setup(config({
             cmd = {
@@ -270,7 +266,19 @@ return {
             }
         }))
 
-        -- TODO health
+        lspconfig.kotlin_language_server.setup(config())
+
+        lspconfig.gradle_ls.setup(config())
+
         lspconfig.ansiblels.setup(config())
+
+        vim.lsp.enable('tinymist')
+        vim.lsp.config('tinymist', config())
+
+        local signs = { Error = ' ', Warn = '󰀪 ', Hint = '󰌶 ', Info = ' ' }
+        for type, icon in pairs(signs) do
+            local hl = 'DiagnosticSign' .. type
+            vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+        end
     end
 }

@@ -1,5 +1,6 @@
 return {
-    'NvChad/nvim-colorizer.lua',
+    'catgoose/nvim-colorizer.lua',
+    event = 'BufReadPre',
     opts = {
         filetypes = { 'html', 'css', 'scss', 'js', 'jsx', 'ts', 'tsx', 'vue' },
         user_default_options = {
@@ -16,9 +17,9 @@ return {
             tailwind = true,
             sass = { enable = false, parsers = { 'css' } },
             virtualtext = ' ■',
-            always_update = false
+            always_update = false,
         },
 
-        buftypes = {}
+        buftypes = {},
     },
 }

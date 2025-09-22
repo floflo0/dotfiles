@@ -79,9 +79,8 @@ vim.opt.formatoptions = vim.opt.formatoptions
     + '/'
 
 -- Floating window transparency
-local blend = 20
-vim.opt.pumblend = blend
-vim.opt.winblend = blend
+vim.opt.pumblend = 0
+vim.opt.winblend = 0
 
 vim.opt.termguicolors = true
 
@@ -97,16 +96,25 @@ vim.opt.shortmess:append('I')
 
 vim.opt.spelllang = 'fr'
 
--- Don't change my keymaps in sdl files
+-- Don't change my keymaps in sql files
 vim.g.omni_sql_no_default_maps = true
 
+-- TODO: uncomment when https://github.com/folke/noice.nvim/issues/1082 is fixed
+vim.o.winborder = 'rounded'
+
 vim.diagnostic.config({
+    virtual_lines = false,
+    virtual_text = true,
     severity_sort = true  -- Display error message first
 })
 
-vim.opt.makeprg = 'make -j16'
+vim.opt.makeprg = 'make -j $(nproc)'
 
 vim.lsp.set_log_level('off')
 
-vim.g.loaded_perl_provider = false
-vim.g.loaded_ruby_provider = false
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+
+vim.opt.updatetime = 300
+
+vim.opt.timeoutlen = 300

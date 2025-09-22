@@ -13,5 +13,28 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
     spec = { import = 'floflo.plugins' },
-    rocks = { enabled = false }
+    rocks = { enabled = false },
+    defaults = { lazy = true },
+    install = {
+        colorscheme = { 'catppuccin-macchiato', 'default' },
+    },
+    performance = {
+        rtp = {
+            disabled_plugins = {
+                'gzip',
+                'matchit',
+                'netrwPlugin',
+                'osc52',
+                'tarPlugin',
+                'tohtml',
+                'tutor',
+                'zipPlugin',
+            },
+        },
+    },
+    ui = {
+        title = ' Lazy ',
+        border = 'rounded',
+        backdrop = 100,
+    },
 })
