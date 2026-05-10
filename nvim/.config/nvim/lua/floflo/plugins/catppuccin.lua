@@ -8,10 +8,8 @@ return {
             integrations = {
                 fidget = true,
                 harpoon = true,
-                neogit = true,
                 noice = true,
                 notify = true,
-                which_key = true,
                 blink_cmp = {
                     style = 'bordered',
                 },

@@ -64,7 +64,8 @@ return {
             ghost_text = { enabled = true },
         },
         sources = {
-            default = { 'lsp', 'path', 'snippets', 'buffer', 'emoji' },
+            -- default = { 'lsp', 'path', 'snippets', 'buffer', 'emoji' },
+            default = { 'lsp', 'path', 'buffer', 'emoji' },
             per_filetype = {
                 lua = { inherit_defaults = true, 'lazydev' }
             },
@@ -78,6 +79,7 @@ return {
                     module = 'blink-emoji',
                     name = 'Emoji',
                     score_offset = 15,
+                    min_keyword_length = 1,
                     opts = {
                         insert = true,
                         ---@type string|table|fun():table

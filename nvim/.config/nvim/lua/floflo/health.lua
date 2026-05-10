@@ -11,6 +11,7 @@ local EXTERNAL_DEPENDENCIES = {
     'emmet-language-server',
     'vscode-css-language-server',
     'vscode-json-language-server',
+    'yaml-language-server',
     'vscode-eslint-language-server',
     'vtsls',
     'vue-language-server',

@@ -15,10 +15,11 @@ button:hover {
 }
 
 window#waybar {
-    font-family: 'Cantarell', 'Font Awesome 6 Free', 'Font Awesome 6 Brands';
+    font-family: 'Cantarell', 'Font Awesome 6 Pro', 'Font Awesome 6 Brands';
     font-size: 14px;
     background: @background81;
-    transition: all 0.3s ease-in-out;
+    /* transition: all 0.3s ease-in-out; */
+    /* transition: background 75ms ease-in-out; */
 }
 
 window#waybar.empty {
@@ -35,21 +36,23 @@ window#waybar.notes,
 window#waybar.Code,
 window#waybar.thunar,
 window#waybar.io\.bassi\.Amberol,
-window#waybar.discord
+window#waybar.org\.nickvision\.tubeconverter
 {
     background: @background9;
 }
 
 window#waybar.org\.gnome\.baobab,
-window#waybar.gnome-disks
+window#waybar.gnome-disks,
+window#waybar.com\.transmissionbt\.transmission_66312_14168696
 {
     background: rgba(30, 32, 48, 0.9);
 
 }
 
-window#waybar.blueberry\.py,
 window#waybar.dolphin-emu,
-window#waybar.vlc
+window#waybar.blueberry\.py,
+window#waybar.vlc,
+window#waybar.gimp
 {
     background: @mantle;
 }
@@ -61,7 +64,12 @@ window#waybar.jetbrains-idea
     background: @crust;
 }
 
+window#waybar.discord {
+    background: rgba(24, 25, 38, 0.9);
+}
+
 window#waybar.Brave-browser,
+window#waybar.brave-browser,
 window#waybar.Chromium
 {
     background: #1d1f2e;

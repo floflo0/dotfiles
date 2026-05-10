@@ -13,11 +13,11 @@
         "cpu",
         "memory",
         "disk",
-        "hyprland/language",
         "idle_inhibitor",
         "tray",
         "backlight",
         "pulseaudio",
+        "privacy",
         "battery",
         "clock",
         "custom/notification"
@@ -27,8 +27,7 @@
     "reload_style_on_change": true,
     "cpu": {
         "interval": 1,
-        "format": "   {usage}%",
-        "on-click": "alacritty -e htop"
+        "format": "   {usage}%"
     },
     "clock": {
         "interval": 1,
@@ -48,20 +47,17 @@
         },
         "actions":  {
             "on-click-right": "mode"
-        },
-        "on-click-middle": "gnome-calendar"
+        }
     },
     "custom/menu": {
         "format": "󰣇",
-        "on-click": "pkill rofi || rofi -show combi -combi-modi drun,window",
-        "on-click-right": "rofi -show window",
+        "on-click": "pkill rofi || rofi -show drun",
         "tooltip": false
     },
     "disk": {
         "format": "   {free}",
         "tooltip-format": "{path}: {used} / {total} ({percentage_used}%)",
-        "path": "/home",
-        "on-click": "baobab"
+        "path": "/home"
     },
     "hyprland/workspaces": {
         "format": "{icon}",
@@ -85,12 +81,6 @@
         "separate-outputs": true,
         "on-click-right": "hyprctl dispatch killactive"
     },
-    "hyprland/language": {
-        "format": "   {}",
-        "format-fr": "fr",
-        "format-en": "us",
-        "on-click": "toggle-keyboard"
-    },
     "hyprland/submap": {
         "tooltip": false,
         "on-click": "hyprctl dispatch submap reset"
@@ -98,7 +88,6 @@
     "memory": {
         "interval": 1,
         "format": "   {percentage}%",
-        "on-click": "alacritty -e htop",
         "tooltip-format": "Ram: {used} / {total} GiB | Swap: {swapUsed} / {swapTotal} GiB"
     },
     "tray": {
@@ -130,27 +119,29 @@
         "reverse-scrolling": true,
         "smooth-scrolling-threshold": 1.5,
         "scroll-step": 5.0,
+        "on-click": "swayosd-client --brightness 100",
+        "on-click-right": "swayosd-client --brightness 5",
         "tooltip": false
     },
     "pulseaudio": {
-        "format": "{icon}   {volume}%",
-        "format-muted": "   {volume}%",
-        "format-bluetooth": "{icon}      {volume}%",
-        "format-bluetooth-muted": "      {volume}%",
+        "format": "{icon}   {volume}%{format_source}",
+        "format-muted": "   {volume}%{format_source}",
+        "format-bluetooth": "{icon}      {volume}%{format_source}",
+        "format-bluetooth-muted": "      {volume}%{format_source}",
+        "format-source": "   <span foreground='#ed8796'></span>",
+        "format-source-muted": "",
         "format-icons": {
-            "headphone": ["   ", "   ", "   "],
-            "default": ["", "", ""]
+            "headphone": ["   ", "   ", "   ", "   "],
+            "default": ["", "", "", ""]
         },
         "smooth-scrolling-threshold": 1.0,
         "reverse-scrolling": true,
         "max-volume": 153.0,
-        "on-click": "sound-volume toggle_mute",
-        "on-click-right": "pavucontrol",
-        "on-click-middle": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+        "on-click": "swayosd-client --output-volume mute-toggle"
     },
     "mpris": {
         "format": "{player_icon}   {title}",
-        "title-len": 50,
+        "title-len": 45,
         "tooltip-format": "{dynamic}",
         "dynamic-order": ["title", "artist", "album"],
         "player-icons": {
@@ -163,20 +154,19 @@
         "tooltip": false,
         "format": "{icon}",
         "format-icons": {
-            "notification": "<span foreground='#ed8796'><sup></sup></span>",
+            "notification": "<span foreground='#ed8796'><sup></sup></span>",
             "none": "",
-            "dnd-notification": "<span foreground='#ed8796'><sup></sup></span>",
+            "dnd-notification": "<span foreground='#ed8796'><sup></sup></span>",
             "dnd-none": "",
-            "inhibited-notification": "<span foreground='#ed8796'><sup></sup></span>",
+            "inhibited-notification": "<span foreground='#ed8796'><sup></sup></span>",
             "inhibited-none": "",
-            "dnd-inhibited-notification": "<span foreground='#ed8796'><sup></sup></span>",
+            "dnd-inhibited-notification": "<span foreground='#ed8796'><sup></sup></span>",
             "dnd-inhibited-none": ""
         },
         "return-type": "json",
         "exec-if": "which swaync-client",
         "exec": "swaync-client --subscribe-waybar",
         "on-click": "swaync-client --toggle-panel --skip-wait",
-        "on-click-right": "swaync-client --toggle-dnd --skip-wait",
         "escape": true
     }
 }

@@ -19,32 +19,41 @@ return {
 
         vim.lsp.enable('clangd')
         vim.lsp.config('clangd', {
-            cmd = { 'clangd', '--enable-config', '-header-insertion=never' },
+            cmd = {
+                'clangd',
+                '--enable-config',
+                '--header-insertion=iwyu',
+                '--completion-style=detailed',
+                '--clang-tidy',
+                '--background-index',
+            },
         })
+
         vim.lsp.enable('cmake')
 
         vim.lsp.enable('glsl_analyzer')
 
         vim.lsp.enable('html')
-        vim.lsp.enable('emmet_language_server')
-        vim.lsp.config('emmet_language_server', {
-            filetypes = {
-                'css',
-                'eruby',
-                'html',
-                'htmldjango',
-                'javascriptreact',
-                'less',
-                'pug',
-                'sass',
-                'scss',
-                'typescriptreact',
-                'htmlangular',
-                'php'
-            }
-        })
+        -- vim.lsp.enable('emmet_language_server')
+        -- vim.lsp.config('emmet_language_server', {
+        --     filetypes = {
+        --         'css',
+        --         'eruby',
+        --         'html',
+        --         'htmldjango',
+        --         'javascriptreact',
+        --         'less',
+        --         'pug',
+        --         'sass',
+        --         'scss',
+        --         'typescriptreact',
+        --         'htmlangular',
+        --         'php'
+        --     },
+        -- })
         vim.lsp.enable('cssls')
         vim.lsp.enable('jsonls')
+        vim.lsp.enable('yamlls')
         vim.lsp.enable('eslint')
         vim.lsp.enable('vtsls')
         local vue_plugin = {
@@ -97,7 +106,7 @@ return {
         })
         vim.lsp.enable('angularls')
 
-        vim.lsp.enable('pylsp')
+        -- vim.lsp.enable('pylsp')
         vim.lsp.config('pylsp', {
             settings = {
                 pylsp = {
@@ -128,6 +137,8 @@ return {
                 debounce_text_changes = 200
             }
         })
+        vim.lsp.enable('ty')
+        vim.lsp.enable('ruff')
 
         vim.lsp.enable('bashls')
         vim.lsp.enable('fish_lsp')
@@ -161,5 +172,7 @@ return {
         vim.lsp.enable('ansiblels')
 
         vim.lsp.enable('tinymist')
+
+        vim.lsp.enable('ocamllsp')
     end,
 }

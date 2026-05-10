@@ -1,5 +1,5 @@
 configuration {
-    modi: "window,combi";
+    modi: "drun,window";
     icon-theme: "Catppuccin-SE";
     show-icons: true;
     terminal: "alacritty";

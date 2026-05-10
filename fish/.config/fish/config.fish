@@ -1,9 +1,5 @@
-if test -z "$DISPLAY" -a (tty) = "/dev/tty1"
+if test -z "$DOTFILES_SETUP" -a -z "$WAYLAND_DISPLAY" -a (tty) = "/dev/tty1"
     exec "$HOME/.config/hypr/launch.sh"
-end
-
-if test -z "$DISPLAY" -a (tty) = "/dev/tty2"
-    exec startx "$HOME/.config/xinitrc"
 end
 
 function e
@@ -15,21 +11,18 @@ function nvide
     neovide . $argv
 end
 
-function ls
-    eza $argv
-end
-
-function cd..
-    cd ..
-end
-
-function rm
-    /usr/bin/rm -I $argv
+if status is-interactive
+    function ls
+        eza $argv
+    end
 end
 
 function macro-expand
-    gcc -E -P -nostdinc -I- -C -dI $argv 2> /dev/null| clang-format --style="{BasedOnStyle: Google, IndentWidth: 4, SeparateDefinitionBlocks: Always}"  | bat --language c --style numbers,grid
+    gcc -E -P -nostdinc -I- -C -dI $argv 2> /dev/null | clang-format --style="{BasedOnStyle: Google, IndentWidth: 4, SeparateDefinitionBlocks: Always}" | bat --language c --style numbers,grid
 end
+
+bind ctrl-z --erase
+bind ctrl-z "jobs > /dev/null && echo -e '\n' && fg 2> /dev/null"
 
 set -x FZF_DEFAULT_OPTS "\
 --color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 \

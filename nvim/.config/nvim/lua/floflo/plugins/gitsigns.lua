@@ -1,7 +1,12 @@
 return {
     'lewis6991/gitsigns.nvim',
     event = 'VeryLazy',
-    opts = { numhl = true },
+    ---@module 'gitsigns'
+    ---@type Gitsigns.Config
+    opts = {
+        numhl = true,
+        linehl = false,
+    },
     keys = {
         {
             '<leader>gd',

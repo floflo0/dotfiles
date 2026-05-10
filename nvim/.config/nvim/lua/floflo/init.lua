@@ -1,4 +1,4 @@
-require('floflo.set')
+require('floflo.options')
 require('floflo.keymap')
 require('floflo.neovide')
 require('floflo.autocmd')

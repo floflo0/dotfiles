@@ -41,12 +41,28 @@ monitor_hyprland() {
     HDMI=$(hyprctl monitors all | grep HDMI | cut -d " " -f 2)
     EDP=$(hyprctl monitors all | grep eDP | cut -d " " -f 2)
 
+    # if [ "$1" = left ]; then
+    #     hyprctl keyword monitor "${HDMI},prefered,-1920x0,1"
+    # elif [ "$1" = right ]; then
+    #     hyprctl keyword monitor "${HDMI},prefered,1920x0,1"
+    # elif [ "$1" = up ]; then
+    #     hyprctl keyword monitor "${HDMI},prefered,0x-1200,1"
+    # elif [ "$1" = clone ]; then
+    #     hyprctl keyword monitor "${HDMI},prefered,auto,1,mirror,${EDP}"
+    # elif [ "$1" = stop ]; then
+    #     hyprland_disable
+    # else
+    #     echo "unknow arguments: $@"
+    # fi
+
     if [ "$1" = left ]; then
-        hyprctl keyword monitor "${HDMI},prefered,-1920x0,1"
+        hyprctl keyword monitor "${HDMI},prefered,auto-left,1"
     elif [ "$1" = right ]; then
-        hyprctl keyword monitor "${HDMI},prefered,1920x0,1"
+        hyprctl keyword monitor "${HDMI},prefered,auto-right,1"
     elif [ "$1" = up ]; then
-        hyprctl keyword monitor "${HDMI},prefered,0x-1200,1"
+        hyprctl keyword monitor "${HDMI},prefered,auto-up,1"
+    elif [ "$1" = down ]; then
+        hyprctl keyword monitor "${HDMI},prefered,auto-down,1"
     elif [ "$1" = clone ]; then
         hyprctl keyword monitor "${HDMI},prefered,auto,1,mirror,${EDP}"
     elif [ "$1" = stop ]; then

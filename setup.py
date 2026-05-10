@@ -17,7 +17,8 @@ from utils import (
     mkdir,
     pushd,
     run_command,
-    which
+    systemctl_enable,
+    which,
 )
 
 
@@ -78,6 +79,8 @@ class Setup:
             'gtk': self.install_gtk,
             'hypr': self.install_hypr,
             'i3': self.install_i3,
+            'lazygit': self.install_lazygit,
+            'libinput-gestures': self.install_libinput_gestures,
             'neovide': self.install_neovide,
             'nvim': self.install_neovim,
             'picom': self.install_picom,
@@ -199,7 +202,7 @@ class Setup:
 
                 self.install_yay()
 
-        run_command('yay', '-S', *packages)
+        run_command('yay', '--editmenu', '-S', *packages)
 
     def stow_config(self, name: str, paths: list[str]) -> None:
         for path in paths:
@@ -224,6 +227,7 @@ class Setup:
         self.package_manager.install_packages(*packages)
 
     def npm(self, packages: list[str]) -> None:
+        assert packages, 'no package to install'
         if not self.npm_found:
             if which('npm'):
                 self.npm_found = True
@@ -256,7 +260,8 @@ class Setup:
         self.stow_config('bin', [])
 
     def install_bluetooth(self) -> None:
-        run_command('sudo', 'systemctl', 'enable', 'bluetooth.service')
+        systemctl_enable('bluetooth.service')
+        systemctl_enable('mpris-proxy.service', user=True)
 
     def install_cava(self) -> None:
         self.stow_config('cava', [CONFIG_DIR + '/cava'])
@@ -304,8 +309,10 @@ class Setup:
         print('Changing default shell to fish')
         run_command('chsh', '--shell', '/usr/bin/fish')
 
+        fish_env = dict(os.environ, DOTFILES_SETUP='1')
+
         process = subprocess.run(['fish', '-c', 'fisher --version'],
-                                 check=False)
+                                 check=False, env=fish_env)
         if process.returncode != 0:
             print('fisher not found')
             if not ask_yes_no('Install fisher ?'):
@@ -313,12 +320,15 @@ class Setup:
 
             self.package_manager.install_packages('fisher')
 
-        run_command('fish', '-c', 'fisher install pure-fish/pure')
-        run_command('fish', '-c', 'set --universal pure_show_jobs true')
+        run_command('fish', '-c', 'fisher install pure-fish/pure', env=fish_env)
+        run_command('fish', '-c', 'set --universal pure_show_jobs true',
+                    env=fish_env)
 
-        run_command('fish', '-c', 'fisher install catppuccin/fish')
+        run_command('fish', '-c', 'fisher install catppuccin/fish',
+                    env=fish_env)
         run_command('fish', '-c',
-                    'fish_config theme save "Catppuccin Macchiato"')
+                    'fish_config theme save "Catppuccin Macchiato"',
+                    env=fish_env)
 
     def install_git(self) -> None:
         self.stow_config('git', [CONFIG_DIR + '/git'])
@@ -342,9 +352,6 @@ class Setup:
 
     def install_hypr(self) -> None:
         self.stow_config('hypr', [CONFIG_DIR + '/hypr'])
-        add_group(USER, 'input')
-        run_command('systemctl', 'disable', '--user',
-                    'libinput-gestures.service')
 
     def install_i3(self) -> None:
         if not which('convert') or not which('composite'):
@@ -364,6 +371,14 @@ class Setup:
         )
 
         self.stow_config('i3', [CONFIG_DIR + '/i3'])
+
+    def install_lazygit(self) -> None:
+        self.stow_config('lazygit', [CONFIG_DIR + '/lazygit'])
+
+    def install_libinput_gestures(self) -> None:
+        self.stow_config('libinput-gestures',
+                         [CONFIG_DIR + '/libinput-gestures.conf'])
+        add_group(USER, 'input')
 
     def install_neovide(self) -> None:
         self.stow_config('neovide', [CONFIG_DIR + '/neovide'])
@@ -387,8 +402,7 @@ class Setup:
         self.stow_config('scrcpy', [])
 
     def install_system76(self) -> None:
-        run_command('sudo', 'systemctl', 'enable',
-                    'com.system76.PowerDaemon.service')
+        systemctl_enable('com.system76.PowerDaemon.service')
         add_group(USER, 'adm')
 
     def install_tmux(self) -> None:
@@ -402,14 +416,14 @@ class Setup:
 
     def install_touchegg(self) -> None:
         self.stow_config('touchegg', [CONFIG_DIR + '/touchegg'])
-        run_command('sudo', 'systemctl', 'enable', 'touchegg')
+        systemctl_enable('touchegg')
 
     def install_swaync(self) -> None:
         self.stow_config('swaync', [CONFIG_DIR + '/swaync'])
 
     def install_swayosd(self) -> None:
-        run_command('sudo', 'systemctl', 'enable', '--now',
-                    'swayosd-libinput-backend.service')
+        systemctl_enable('swayosd-libinput-backend.service')
+        self.stow_config('swayosd', [CONFIG_DIR + '/swayosd'])
 
     def install_waybar(self) -> None:
         self.stow_config('waybar', [CONFIG_DIR + '/waybar'])

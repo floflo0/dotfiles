@@ -12,4 +12,4 @@ if [ -f "$USER_RESOURCES" ]; then
     xrdb -merge "$USER_RESOURCES"
 fi
 
-exec Hyprland
+exec start-hyprland

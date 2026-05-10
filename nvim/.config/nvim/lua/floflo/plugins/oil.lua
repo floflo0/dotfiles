@@ -9,13 +9,16 @@ return {
     'stevearc/oil.nvim',
     dependencies = {
         {
-            'echasnovski/mini.icons',
+            'nvim-mini/mini.icons',
             opts = {},
         },
     },
     lazy = false,
+    ---@module 'oil'
     ---@type oil.SetupOpts
     opts = {
+        columns = { 'icon' },
+        delete_to_trash = true,
         win_options = {
             number = false,
             relativenumber = false,

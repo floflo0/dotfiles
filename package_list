@@ -30,6 +30,9 @@ baobab
 pdfarranger
 gnome-calendar
 
+kvantum
+kvantum-qt5
+
 libreoffice-fresh
     libreoffice-fresh-fr
     hunspell
@@ -39,21 +42,23 @@ libreoffice-fresh
     hyphen-en
     hyphen-fr
 
+pacman-contrib
+
 # I3
-i3-wm
-    xorg
-    xorg-xinit
-autotiling
-i3lock                  # Lock screen
-xss-lock                # Launch lock screen
-feh                     # Background
-polybar                 # Status bar
-picom                   # Transparency
-touchegg                # touchpad gesture
-xfce4-notifyd           # Notifications
-xfce4-power-manager     # Power Management
-maim                    # Screenshots
-xdotool
+# i3-wm
+#     xorg
+#     xorg-xinit
+# autotiling
+# i3lock                  # Lock screen
+# xss-lock                # Launch lock screen
+# feh                     # Background
+# polybar                 # Status bar
+# picom                   # Transparency
+# touchegg                # touchpad gesture
+# xfce4-notifyd           # Notifications
+# xfce4-power-manager     # Power Management
+# maim                    # Screenshots
+# xdotool
 
 # Hyprland
 hyprland
@@ -66,9 +71,16 @@ wl-clipboard
 brightnessctl
 swaync
 qt5-wayland
+xorg-xrdb
+
+# Hyprpm
+cpio
+glaze
+hyprland-protocols
 
 rofi                    # Launcher/Window switcher
 network-manager-applet  # Network management
+    dnsmasq             # Wifi Hotspot
 playerctl               # Play/Pause buttons
 pavucontrol             # sounds settings
 polkit-gnome            # UI password prompt
@@ -84,6 +96,7 @@ blueman
 ttf-dejavu
 ttf-font-awesome  # Polybar icons
 ttf-roboto-mono-nerd
+ttf-ubuntu-nerd
 ttf-liberation
 cantarell-fonts
 noto-fonts-emoji
@@ -110,7 +123,6 @@ neovim
     # LSP
     python-lsp-server
     bash-language-server
- 	typescript-language-server
     vue-language-server
  	tailwindcss-language-server
     clang  # clangd
@@ -138,7 +150,7 @@ rust
 go
 
 gdb
-sdl2
+sdl2-compat
 sdl2_ttf
 sdl2_image
 libadwaita
@@ -147,6 +159,7 @@ glfw
 libevdev
 
 jdk-openjdk
+    maven
 
 php
     composer
@@ -179,10 +192,21 @@ jq
 openssh
 bat
 tinyxxd
+rlwrap
+
+lazygit
+github-cli
+
+cmake
+meson
+ninja
 
 stow
 imagemagick
 xdg-user-dirs
+
+# virtualbox
+#     virtualbox-host-modules-arch
 
 # Games
 dolphin-emu

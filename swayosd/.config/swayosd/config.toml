@@ -1,0 +1,5 @@
+[server]
+max_volume = 150
+show_percentage = false
+
+[client]

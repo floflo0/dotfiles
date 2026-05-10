@@ -13,101 +13,93 @@ return {
         },
         'hiphish/rainbow-delimiters.nvim',
     },
-    build = function()
-        require('nvim-treesitter.install').update({ with_sync = true })()
-    end,
-    event = 'VeryLazy',
+    branch = 'main',
+    lazy = false,
+    build = ':TSUpdate',
     config = function()
-        require('nvim-treesitter.configs').setup({
-            ensure_installed = {
-                'bash',
-                'c',
-                'cmake',
-                'comment',
-                'cpp',
-                'css',
-                'dockerfile',
-                'fish',
-                'gitignore',
-                'glsl',
-                'go',
-                'gomod',
-                'html',
-                'htmldjango',
-                'ini',
-                'java',
-                'javascript',
-                'jsdoc',
-                'json',
-                'json5',
-                'jsonc',
-                'lua',
-                'luadoc',
-                'luap',
-                'make',
-                'markdown',
-                'markdown_inline',
-                'nasm',
-                'ocaml',
-                'php',
-                'phpdoc',
-                'query',
-                'regex',
-                'requirements',
-                'ruby',
-                'rust',
-                'sql',
-                'toml',
-                'typescript',
-                'vim',
-                'vimdoc',
-                'vue',
-                'xml',
-                'yaml',
-            },
-            ignore_install = {},
-
-            sync_install = false,
-
-            auto_install = true,
-
-            highlight = {
-                enable = true,
-                additional_vim_regex_highlighting = false,
-            },
-
-            incremental_selection = {
-                enable = true,
-                keymaps = {
-                    init_selection = '<C-space>',
-                    node_incremental = '<C-space>',
-                },
-            },
-
-            textobjects = {
-                swap = {
-                    enable = true,
-                    swap_next = {
-                        ['<C-l>'] = '@parameter.inner',
-                    },
-                    swap_previous = {
-                        ['<C-h>'] = '@parameter.inner',
-                    },
-                },
-
-                move = {
-                    enable = true,
-                    set_jumps = true,
-                    goto_next_start = {
-                        ['<leader>e'] = '@function.outer',
-                    },
-                    goto_previous_start = {
-                        ['<leader>y'] = '@function.outer',
-                    },
-                },
-            },
-
-            modules = {},
+        local treesitter = require('nvim-treesitter')
+        treesitter.setup()
+        treesitter.install({
+            'bash',
+            'c',
+            'cmake',
+            'comment',
+            'cpp',
+            'css',
+            'dockerfile',
+            'fish',
+            'gitignore',
+            'glsl',
+            'go',
+            'gomod',
+            'html',
+            'htmldjango',
+            'ini',
+            'java',
+            'javascript',
+            'jsdoc',
+            'json',
+            'json5',
+            'jsonc',
+            'lua',
+            'luadoc',
+            'luap',
+            'make',
+            'markdown',
+            'markdown_inline',
+            'nasm',
+            'ocaml',
+            'php',
+            'phpdoc',
+            'query',
+            'regex',
+            'requirements',
+            'ruby',
+            'rust',
+            'sql',
+            'toml',
+            'typescript',
+            'vim',
+            'vimdoc',
+            'vue',
+            'xml',
+            'yaml',
+        })
+        vim.api.nvim_create_autocmd('FileType', {
+            group = vim.api.nvim_create_augroup('treesitter', { clear = true }),
+            callback = function(args)
+               pcall(vim.treesitter.start, args.buf)
+            end
         })
     end,
+    keys = {
+        {
+            '<C-l>',
+            function()
+                require('nvim-treesitter-textobjects.swap').swap_next('@parameter.inner')
+            end,
+            mode = 'n',
+        },
+        {
+            '<C-h>',
+            function()
+                require('nvim-treesitter-textobjects.swap').swap_previous('@parameter.inner')
+            end,
+            mode = 'n',
+        },
+        {
+            '<leader>e',
+            function()
+                require('nvim-treesitter-textobjects.move').goto_next_start('@function.outer')
+            end,
+            mode = { 'n', 'x', 'o' },
+        },
+        {
+            '<leader>y',
+            function()
+                require('nvim-treesitter-textobjects.move').goto_previous_start('@function.outer')
+            end,
+            mode = { 'n', 'x', 'o' },
+        },
+    },
 }

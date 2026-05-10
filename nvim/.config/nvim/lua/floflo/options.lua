@@ -16,9 +16,6 @@ vim.opt.hlsearch = true
 vim.opt.ignorecase = true  -- Ignore case when searching...
 vim.opt.smartcase = true   -- ... unless there is a capital letter in the query
 
-vim.opt.splitright = true
-vim.opt.splitbelow = true
-
 -- Recursive search for :find
 vim.opt.path:append('**')
 vim.opt.path:append('/usr/include')
@@ -99,18 +96,28 @@ vim.opt.spelllang = 'fr'
 -- Don't change my keymaps in sql files
 vim.g.omni_sql_no_default_maps = true
 
--- TODO: uncomment when https://github.com/folke/noice.nvim/issues/1082 is fixed
 vim.o.winborder = 'rounded'
 
 vim.diagnostic.config({
-    virtual_lines = false,
     virtual_text = true,
-    severity_sort = true  -- Display error message first
+    virtual_lines = false,
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = '',
+            [vim.diagnostic.severity.WARN] = '',
+            [vim.diagnostic.severity.INFO] = '',
+            [vim.diagnostic.severity.HINT] = '',
+        },
+    },
+    severity_sort = true
 })
 
 vim.opt.makeprg = 'make -j $(nproc)'
 
-vim.lsp.set_log_level('off')
+vim.lsp.log.set_level(vim.log.levels.OFF)
+vim.lsp.document_color.enable(true, {}, {
+    style = 'virtual',
+})
 
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
@@ -118,9 +125,3 @@ vim.g.loaded_ruby_provider = 0
 vim.opt.updatetime = 300
 
 vim.opt.timeoutlen = 300
-
-local signs = { Error = ' ', Warn = '󰀪 ', Hint = '󰌶 ', Info = ' ' }
-for type, icon in pairs(signs) do
-    local hl = 'DiagnosticSign' .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
