@@ -71,6 +71,18 @@ return {
                         },
                     },
                 },
+                javascript = {
+                    preferences = {
+                        importModuleSpecifier = 'non-relative',
+                        quoteStyle = 'single',
+                    },
+                },
+                typescript = {
+                    preferences = {
+                        importModuleSpecifier = 'non-relative',
+                        quoteStyle = 'single',
+                    },
+                },
             },
             filetypes = {
                 'typescript',
