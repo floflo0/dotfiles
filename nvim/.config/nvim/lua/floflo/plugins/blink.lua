@@ -62,6 +62,11 @@ return {
                 },
             },
             ghost_text = { enabled = true },
+            accept = {
+                auto_brackets = {
+                    blocked_filetypes = { "kotlin" },
+                };
+            },
         },
         sources = {
             -- default = { 'lsp', 'path', 'snippets', 'buffer', 'emoji' },

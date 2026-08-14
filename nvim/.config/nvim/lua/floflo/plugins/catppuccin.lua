@@ -5,14 +5,31 @@ return {
     priority = 1000,
     config = function()
         require('catppuccin').setup({
+            default_integrations = true,
+            auto_integrations = true,
             integrations = {
+                blink_cmp = {
+                    enabled = true,
+                    style = 'bordered',
+                },
+                gitsigns = true,
+                rainbow_delimiters = true,
+                telescope = true,
+                treesitter_context = true,
+                illuminate = {
+                    enabled = true,
+                    lsp = true,
+                },
+                indent_blankline = {
+                    enabled = true,
+                    scope_color = "",
+                    colored_indent_levels = false,
+                },
+
                 fidget = true,
                 harpoon = true,
                 noice = true,
                 notify = true,
-                blink_cmp = {
-                    style = 'bordered',
-                },
             },
         })
 

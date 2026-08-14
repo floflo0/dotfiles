@@ -1,21 +1,21 @@
 -- Use control+C to escape insert mode
 vim.keymap.set('i', '<C-c>', '<esc>')
 
-vim.keymap.set({ 'n', 't' }, '<A-k>', function() vim.cmd.wincmd('k') end, { silent = true, desc = 'Window: focus up' })
-vim.keymap.set({ 'n', 't' }, '<A-j>', function() vim.cmd.wincmd('j') end, { silent = true, desc = 'Window: focus down' })
-vim.keymap.set({ 'n', 't' }, '<A-h>', function() vim.cmd.wincmd('h') end, { silent = true, desc = 'Window: focus left' })
-vim.keymap.set({ 'n', 't' }, '<A-l>', function() vim.cmd.wincmd('l') end, { silent = true, desc = 'Window: focus right' })
-
-vim.keymap.set('n', '<A-K>', function() vim.cmd.wincmd('K') end, { silent = true, desc = 'Window: move up' })
-vim.keymap.set('n', '<A-J>', function() vim.cmd.wincmd('J') end, { silent = true, desc = 'Window: move down' })
-vim.keymap.set('n', '<A-H>', function() vim.cmd.wincmd('H') end, { silent = true, desc = 'Window: move left' })
-vim.keymap.set('n', '<A-L>', function() vim.cmd.wincmd('L') end, { silent = true, desc = 'Window: move right' })
+-- vim.keymap.set({ 'n', 't' }, '<A-k>', function() vim.cmd.wincmd('k') end, { silent = true, desc = 'Window: focus up' })
+-- vim.keymap.set({ 'n', 't' }, '<A-j>', function() vim.cmd.wincmd('j') end, { silent = true, desc = 'Window: focus down' })
+-- vim.keymap.set({ 'n', 't' }, '<A-h>', function() vim.cmd.wincmd('h') end, { silent = true, desc = 'Window: focus left' })
+-- vim.keymap.set({ 'n', 't' }, '<A-l>', function() vim.cmd.wincmd('l') end, { silent = true, desc = 'Window: focus right' })
+--
+-- vim.keymap.set('n', '<A-K>', function() vim.cmd.wincmd('K') end, { silent = true, desc = 'Window: move up' })
+-- vim.keymap.set('n', '<A-J>', function() vim.cmd.wincmd('J') end, { silent = true, desc = 'Window: move down' })
+-- vim.keymap.set('n', '<A-H>', function() vim.cmd.wincmd('H') end, { silent = true, desc = 'Window: move left' })
+-- vim.keymap.set('n', '<A-L>', function() vim.cmd.wincmd('L') end, { silent = true, desc = 'Window: move right' })
 
 -- Resize window
 vim.keymap.set('n', '<C-A-K>', function() vim.cmd.wincmd('+') end, { silent = true, desc = 'Window: grow height' })
 vim.keymap.set('n', '<C-A-J>', function() vim.cmd.wincmd('-') end, { silent = true, desc = 'Window: shrink height' })
 vim.keymap.set('n', '<C-A-H>', function() vim.cmd.wincmd('<') end, { silent = true, desc = 'Window: shrink width' })
-vim.keymap.set('n', '<C-A-L>', function() vim.cmd.wincmd('>') end, { silent = true, desc = 'Window: grow widtg' })
+vim.keymap.set('n', '<C-A-L>', function() vim.cmd.wincmd('>') end, { silent = true, desc = 'Window: grow width' })
 
 vim.keymap.set('n', '<A-space>', vim.cmd.vsplit, { silent = true, desc = 'Vertical split' })
 

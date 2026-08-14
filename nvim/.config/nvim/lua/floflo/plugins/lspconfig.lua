@@ -178,7 +178,7 @@ return {
                 '-data', HOME .. '/.cache/jdtls/workspace'
             }
         })
-        vim.lsp.enable('kotlin_language_server')
+        -- vim.lsp.enable('kotlin_language_server')
         vim.lsp.enable('gradle_ls')
 
         vim.lsp.enable('ansiblels')

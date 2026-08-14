@@ -40,7 +40,7 @@ return {
             'jsdoc',
             'json',
             'json5',
-            'jsonc',
+            'kotlin',
             'lua',
             'luadoc',
             'luap',
